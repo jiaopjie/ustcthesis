@@ -1,0 +1,104 @@
+%% USTC thesis template ------------------------------------------
+\documentclass[doctor,twoside,openright]{ustcthesis}
+%% bachelor|master|doctor
+%% 学位论文选项默认是 doctor
+%% 本科默认 oneside; 研究生默认 twoside, openright
+
+\usepackage{amsmath,amssymb}
+\usepackage{longtable,booktabs}
+\bibliographystyle{plainnat}       % 参考文献格式
+%\ctexset{chapter/fixskip=true} % ctex 宏包 2016.06.03 引入的新选项, 修正章标题前的空白
+
+%% Theorems ------------------------------------------------------
+\usepackage{amsthm}
+\def\proofname{\upshape\sffamily 证.}
+\newtheoremstyle{ustctheorem}
+  {\topsep}{\topsep}{\itshape}{}{\sffamily}{}{1em}{}
+\newtheoremstyle{ustcdefinition}
+  {\topsep}{\topsep}{}{}{\sffamily}{}{1em}{}
+
+\theoremstyle{ustctheorem}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{proposition}[theorem]{命题}
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem{corollary}[theorem]{推论}
+
+\theoremstyle{ustcdefinition}
+\newtheorem{definition}[theorem]{定义}
+\newtheorem{example}[theorem]{例}
+\newtheorem{remark}[theorem]{注}
+
+%% Title ---------------------------------------------------------
+\title{中国科学技术大学\\ 本硕博毕业论文模板示例文档}
+\author{赵钱孙}
+\major{某}
+\advisor{周吴郑~教授}
+%\coadvisor{冯陈褚~教授}
+\date{\ctexset{today=big}\today}
+%\secrettext{机密\quad 小于等于20年}   % 内部|秘密|机密，注释本行则不保密
+
+\entitle{An Example of USTC Thesis Template for Bachelor, Master and Doctor}
+\enauthor{Qiansun Zhao}
+\enmajor{Whatever}
+\enadvisor{Prof.~Wuzheng Zhou}
+%\encoadvisor{Prof.~Chenchu Feng}
+\endate{\ctexset{today=old}\today}
+%\ensecrettext{Confidential\quad Less than or equal to 20 years}  % Internal|Secret|Confidential
+
+%% ---------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%% ---------------------------------------------------------------
+%%
+%% 本科生论文文档顺序:
+%%   frontmatter: 致谢、目录、中文摘要、英文摘要
+%%   mainmatter:  正文章节、参考文献
+%%   appendix:    附录
+%%
+%% 研究生论文文档顺序:
+%%   frontmatter: 中文摘要、英文摘要、目录、符号说明
+%%   mainmatter:  正文、参考文献
+%%   appendix:    附录
+%%   backmatter:  致谢、发表论文
+%%
+%% ---------------------------------------------------------------
+%%
+%% 这里是按研究生论文的顺序安排的
+%% 本科生论文请自行调整顺序
+%%
+%% ---------------------------------------------------------------
+
+\frontmatter
+
+\input{chapter/abstract}
+\tableofcontents
+\listoffigures
+\listoftables
+\input{chapter/notation}
+
+\mainmatter
+
+\input{chapter/introduction}
+\input{chapter/readme}
+\input{chapter/test}
+\input{chapter/table}
+\input{chapter/theorem}
+\input{chapter/citation}
+
+\setcitestyle{numbers}
+\bibliography{bib/latex}
+
+\appendix
+
+\input{chapter/standard}
+
+\backmatter
+
+\input{chapter/acknowledgements}
+\input{chapter/publications}
+
+\end{document}
+%% ---------------------------------------------------------------

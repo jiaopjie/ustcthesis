@@ -1,0 +1,105 @@
+\chapter{图片和表格}
+
+\section{图片}
+
+图~\ref{fig:test} 是个小图片. 因此尽管它在浮动环境中, 却很有可能就在下面.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=4cm]{logo/ustc_logo_fig}
+\caption{测试图片}
+\label{fig:test}
+\captionnote{这是个小图片}
+\end{figure}
+
+图~\ref{fig:bigfigure} 是一张尺寸比较大的图片. 再加上这个图片是在一个浮动环境中, 因此它很有可能会跑到其他地方去.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=10cm]{logo/ustc_logo_fig}
+\caption{这是个比较大的图片}
+\label{fig:bigfigure}
+\captionnote{This is a long caption note. This is a long caption note. This is a long caption note. This is a long caption note. This is a long caption note. This is a long caption note.}
+\end{figure}
+
+\section{普通表格}
+
+表~\ref{tab:test} 是个小表格. 因此尽管它在浮动环境中, 却很有可能就在下面.
+
+\begin{table}[!htb]
+  \caption{普通表格}
+  \label{tab:test}
+  \centering
+  \begin{tabular}{ccc}
+    \toprule
+    左 & 中 & 右\\
+    \midrule
+    1  & a  & b\\
+    2  & a  & b\\
+    3  & a  & b\\
+    4  & a  & b\\
+    5  & a  & b\\
+    \bottomrule
+  \end{tabular}
+  \captionnote{这是个普通表格}
+\end{table}
+
+\section{长表格}
+
+表~\ref{tab:longtable} 是一个长表格. 长表格似乎不能放在浮动环境中. 因此, 它的位置会是准确的.
+
+\begin{center}
+  \begin{longtable}{cccc}
+    \caption{长表格}\label{tab:longtable}\\ % 首页的表序
+    \toprule
+    左 & 中 & 中 & 右\\
+    \midrule
+    \endfirsthead  % 到这里为止是首页的表头
+    \caption[]{长表格 (续)}\\ % 后续页的表序
+    \toprule
+    左 & 中 & 中 & 右\\
+    \midrule
+    \endhead  % 到这里为止是后续页的表头
+    \hline
+    \multicolumn{4}{r}{\small 续下页}
+    \endfoot  % 到这里为止是首页的表尾
+    \bottomrule
+    \captionnote{这是个长表格}
+    \endlastfoot  % 到这里为止是后续页的表尾
+    1  &  abc  &  def  &  xyz \\
+    2  &  abc  &  def  &  xyz \\
+    3  &  abc  &  def  &  xyz \\
+    4  &  abc  &  def  &  xyz \\
+    5  &  abc  &  def  &  xyz \\
+    6  &  abc  &  def  &  xyz \\
+    7  &  abc  &  def  &  xyz \\
+    8  &  abc  &  def  &  xyz \\
+    9  &  abc  &  def  &  xyz \\
+    10 &  abc  &  def  &  xyz \\
+    11 &  abc  &  def  &  xyz \\
+    12 &  abc  &  def  &  xyz \\
+    13 &  abc  &  def  &  xyz \\
+    14 &  abc  &  def  &  xyz \\
+    15 &  abc  &  def  &  xyz \\
+    16 &  abc  &  def  &  xyz \\
+    17 &  abc  &  def  &  xyz \\
+    18 &  abc  &  def  &  xyz \\
+    19 &  abc  &  def  &  xyz \\
+    20 &  abc  &  def  &  xyz \\
+    21 &  abc  &  def  &  xyz \\
+    22 &  abc  &  def  &  xyz \\
+    23 &  abc  &  def  &  xyz \\
+    24 &  abc  &  def  &  xyz \\
+    25 &  abc  &  def  &  xyz \\
+    26 &  abc  &  def  &  xyz \\
+    27 &  abc  &  def  &  xyz \\
+    28 &  abc  &  def  &  xyz \\
+    29 &  abc  &  def  &  xyz \\
+    30 &  abc  &  def  &  xyz \\
+    31 &  abc  &  def  &  xyz \\
+    32 &  abc  &  def  &  xyz \\
+    33 &  abc  &  def  &  xyz \\
+    34 &  abc  &  def  &  xyz \\
+    35 &  abc  &  def  &  xyz \\
+  \end{longtable}
+\end{center}

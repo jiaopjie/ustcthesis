@@ -1,0 +1,144 @@
+\chapter{定理环境}
+
+\section{定理设置}
+
+关于定理环境, 模板里也没有做特殊的设置. 用户可以自行决定使用 \LaTeX{} 本身的定理环境还是 \verb|amsthm| 增强的定理环境.
+
+为了适配中文习惯. 可以使用 \verb|amsthm| 宏包提供的 \verb|\newtheoremstyle| 命令来新定义一种定理样式. 该命令有 9 个参数. 这里给出 ``定理'' 和 ``定义'' 两种定理样式.
+\begin{verbatim}
+\newtheoremstyle{ustctheorem}
+  {\topsep}{\topsep}{\itshape}{}{\sffamily}{}{1em}{}
+\newtheoremstyle{ustcdefinition}
+  {\topsep}{\topsep}{}{}{\sffamily}{}{1em}{}
+\end{verbatim}
+
+下面的代码给出了常用的一些定理环境的定义.
+\begin{verbatim}
+\theoremstyle{ustctheorem}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{proposition}[theorem]{命题}
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem{corollary}[theorem]{推论}
+\theoremstyle{ustcdefinition}
+\newtheorem{definition}[theorem]{定义}
+\newtheorem{example}[theorem]{例}
+\newtheorem{remark}[theorem]{注}
+\end{verbatim}
+
+\section{定理测试}
+
+\begin{definition}[option]\label{def:test}
+  这个定义用于测试. It is used for testing. 这个定义用于测试. It is used for testing. 这个定义用于测试. It is used for testing. 这个定义用于测试. It is used for testing. $f(x)=\sin x + \cos x$.
+\end{definition}
+
+\begin{lemma}\label{lem:test}
+  这个引理用于测试. It is used for testing. 这个引理用于测试. It is used for testing. 这个引理用于测试. It is used for testing. 这个引理用于测试. It is used for testing. $f(x)=\sin x + \cos x$.
+\end{lemma}
+
+\begin{proposition}\label{prop:test}
+  这个命题用于测试. It is used for testing. 这个命题用于测试. It is used for testing. 这个命题用于测试. It is used for testing. 这个命题用于测试. It is used for testing. $f(x)=\sin x + \cos x$.
+\end{proposition}
+
+\begin{theorem}[option]\label{thm:test}
+  这个定理用于测试. It is used for testing. 这个定理用于测试. It is used for testing. 这个定理用于测试. It is used for testing. 这个定理用于测试. It is used for testing. $f(x)=\sin x + \cos x$.
+\end{theorem}
+
+\begin{proof}
+  这个证明用于测试. It is used for testing. 这个证明用于测试. It is used for testing. 这个证明用于测试. It is used for testing. 这个证明用于测试. It is used for testing. $f(x)=\sin x + \cos x$.
+\end{proof}
+
+\begin{remark}\label{rem:test}
+  这个注用于测试. It is used for testing. 这个注用于测试. It is used for testing. 这个注用于测试. It is used for testing. 这个注用于测试. It is used for testing. $f(x)=\sin x + \cos x$.
+\end{remark}
+
+\begin{example}\label{ex:test}
+  这个例子用于测试. It is used for testing. 这个例子用于测试. It is used for testing. 这个例子用于测试. It is used for testing. 这个例子用于测试. It is used for testing. $f(x)=\sin x + \cos x$.
+\end{example}
+
+\begin{corollary}\label{cor:test}
+  这个推论用于测试. It is used for testing. 这个推论用于测试. It is used for testing. 这个推论用于测试. It is used for testing. 这个推论用于测试. It is used for testing. $f(x)=\sin x + \cos x$.
+\end{corollary}
+
+\section{Theorem}
+
+\begin{definition}
+  If the integral of function $f$ is measurable and non-negative, we define
+  its (extended) \textbf{Lebesgue integral} by
+  \begin{equation}\label{eq:test}
+    \int f = \sup_g \int g,
+  \end{equation}
+  where the supremum is taken over all measurable functions $g$ such that
+  $0 \leq g \leq f$, and where $g$ is bounded and supported on a set of
+  finite measure.
+\end{definition}
+
+\begin{example}
+  Simple examples of functions on $\mathbb{R}^d$ that are integrable
+  (or non-integrable) are given by
+  \begin{equation}
+    f_a(x) =
+    \begin{cases}
+      |x|^{-a}, & \text{if } |x| \leq 1,\\
+      0, & \text{if } x > 1.
+    \end{cases}
+  \end{equation}
+  \begin{equation}
+    F_a(x) = \frac{1}{1 + |x|^a}, \qquad \text{all } x \in \mathbb{R}^d.
+  \end{equation}
+  Then $f_a$ is integrable exactly when $a < d$, while $F_a$ is integrable
+  exactly when $a > d$.
+\end{example}
+
+\begin{lemma}[Fatou]
+  Suppose $\{f_n\}$ is a sequence of measurable functions with $f_n \geq 0$.
+  If $\lim_{n \to \infty} f_n(x) = f(x)$ for a.e. $x$, then
+  \begin{equation}
+    \int f \leq \liminf_{n \to \infty} \int f_n.
+  \end{equation}
+\end{lemma}
+
+\begin{remark}
+  We do not exclude the cases $\int f = \infty$,
+  or $\liminf_{n \to \infty} f_n = \infty$.
+\end{remark}
+
+\begin{corollary}
+  Suppose $f$ is a non-negative measurable function, and $\{f_n\}$ a sequence
+  of non-negative measurable functions with
+  $f_n(x) \leq f(x)$ and $f_n(x) \to f(x)$ for almost every $x$. Then
+  \begin{equation}
+    \lim_{n \to \infty} \int f_n = \int f.
+  \end{equation}
+\end{corollary}
+
+\begin{proposition}
+  Suppose $f$ is integrable on $\mathbb{R}^d$. Then for every $\epsilon > 0$:
+  \begin{enumerate}
+    \renewcommand{\theenumi}{\roman{enumi}}
+    \item There exists a set of finite measure $B$ (a ball, for example) such that
+    \begin{equation}
+      \int_{B^c} |f| < \epsilon.
+    \end{equation}
+    \item There is a $\delta > 0$ such that
+    \begin{equation}
+      \int_E |f| < \epsilon \qquad \text{whenever } m(E) < \delta.
+    \end{equation}
+  \end{enumerate}
+\end{proposition}
+
+\begin{theorem}
+  Suppose $\{f_n\}$ is a sequence of measurable functions such that
+  $f_n(x) \to f(x)$ a.e. $x$, as $n$ tends to infinity.
+  If $|f_n(x)| \leq g(x)$, where $g$ is integrable, then
+  \begin{equation}
+    \int |f_n - f| \to 0 \qquad \text{as } n \to \infty,
+  \end{equation}
+  and consequently
+  \begin{equation}
+    \int f_n \to \int f \qquad \text{as } n \to \infty.
+  \end{equation}
+\end{theorem}
+
+\begin{proof}
+  Trivial.
+\end{proof}

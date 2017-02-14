@@ -1,0 +1,105 @@
+﻿\chapter{说明}
+
+首先说明几点. 由于一些个人喜好, 本模板并没有完全遵循研究生学位论文规范和本科毕业论文格式要求. 比如: ``目录'', ``附录'', ``摘要'', ``致谢'' 这些环境的两字标题中间并没有空一个汉字的空白. 不过前两个环境都有对应的 \verb|*name| 命令来记录环境的标题. 这里也对后面两个环境设置了对应的 \verb|*name| 命令. 用户可自定义它们的标题.
+
+另外, 编译方式应该选用 XeLaTeX. 宏包 \verb|ctex| 应该升级到 2.0 版本以上.
+
+\section{文档选项}
+
+本模板新设置了三个文档选项 \verb|bachelor|, \verb|master|, \verb|doctor| 用于区分学士、硕士、博士学位论文.
+
+\begin{center}
+  \begin{tabular}{ll}
+    \toprule
+    选项        & 说明\\
+    \midrule
+    \verb|bachelor|  & 学士论文\\
+    \verb|master|    & 硕士论文\\
+    \verb|doctor|    & 博士论文 (默认)\\
+    \bottomrule
+  \end{tabular}
+\end{center}
+
+另外, \verb|book| 文档类提供的文档选项仍然可以使用. 下面是常用的选项.
+
+\begin{center}
+  \begin{tabular}{lp{0.5\textwidth}l}
+    \toprule
+    选项        & 说明\\
+    \midrule
+    \verb|oneside|   & 单面格式 (\verb|bachelor| 默认)\\
+    \verb|twoside|   & 双面格式 (\verb|master|, \verb|doctor| 默认)\\
+    \midrule
+    \verb|openright| & 双面格式下新一章总是从奇数页开始
+                       (\verb|master|, \verb|doctor| 默认)\\
+    \verb|openany|   & 双面格式下新一章总是从新一页开始\\
+    \bottomrule
+  \end{tabular}
+\end{center}
+
+\section{字体设置}
+
+可以使用 \verb|ctex| 宏包提供的命令 \verb|\setCJKmainfont|, \verb|\setCJKsansfont| 自定义主文档字体.
+\begin{verbatim}
+\setCJKmainfont
+  [BoldFont={STZhongsong}, ItalicFont={KaiTi}]{SimSun}
+\setCJKsansfont
+  [BoldFont={FandolHei-Bold}, ItalicFont={KaiTi}]{SimHei}
+\end{verbatim}
+
+\section{扉页}
+
+扉页的安排并没有完全遵循规范的要求. 尤其是规范里单独为扉页设置了页面边距. 但考虑到扉页不显示页眉页脚, 并且扉页里的各信息也都规定了距离页面边缘的距离. 因此, 这里扉页使用了正文的页面边距设置.
+
+这里把扉页和原创性声明页的页码格式改为 \verb|Alph| 的样式, 用以和后面的正文的页码
+区分. 另外, 由于 \verb|hyperref| 宏包的作用, 这里的页码虽然不会打印在 PDF 页面上,
+但会显示在 PDF 阅读器的页码栏中.
+
+扉页中的个人信息由下述命令提供.
+
+\begin{center}
+  \begin{tabular}{lll}
+    \toprule
+    命令          & 命令 (英文)     & 说明\\
+    \midrule
+    \verb|\title|      & \verb|\entitle|      & 论文标题\\
+    \verb|\author|     & \verb|\enauthor|     & 作者姓名\\
+    \verb|\major|      & \verb|\enmajor|      & 学科专业\\
+    \verb|\advisor|    & \verb|\enadvisor|    & 导师姓名\\
+    \verb|\coadvisor|  & \verb|\encoadvisor|  & 合作导师 (不设置则不显示该项)\\
+    \verb|\date|       & \verb|\endate|       & 完成日期\\
+    \verb|\secrettext| & \verb|\ensecrettext| & 密级信息 (不设置则不显示该项)\\
+    \bottomrule
+  \end{tabular}
+\end{center}
+
+这些命令都有一个必选参数用于提供相应的个人信息. 个人信息用于制作扉页. 扉页由命令 \verb|\maketitle| 生成. 该命令应该作为正文开始后的第一个命令. 个人信息应该在 \verb|\maketitle| 命令之前提供, 最好是放在导言区.
+
+其中的日期项可以手工填入日期, 也可以使用 \verb|\today| 命令自动生成. \verb|ctex| 宏包对该命令进行了汉化, 并提供了 \verb|small|, \verb|big|, \verb|old| 三种样式供选择. 前两种样式是中文的日期样式, 最后一种是原本的英文日期样式. 两种中文日期样式的区别是, \verb|small| 使用阿拉伯数字而 \verb|big| 则全部为汉字. \verb|ctex| 默认的是 \verb|small| 样式. \verb|\ctexset{today=old}| 则切换到英文日期样式.
+
+\section{摘要等环境}
+
+本模板提供了如下的一些环境和命令. 主要是由于这些环境的标题格式跟普通的章标题格式略有不同. 如果不在意这种区别的话, 完全可以用 \verb|\chapter| 命令或者 \verb|\chapter*| 命令来代替. 例如 \verb|\chapter{摘要}|, \verb|\chapter{符号说明}|.
+
+\begin{center}
+  \begin{tabular}{ll}
+    \toprule
+    环境或命令              & 说明\\
+    \midrule
+    \verb|abstract|         & 中文摘要\\
+    \verb|enabstract|       & 英文摘要\\
+    \verb|notation|         & 符号说明\\
+    \verb|acknowledgements| & 致谢\\
+    \verb|publications|     & 研究成果\\
+    \midrule
+    \verb|\keywords|        & 中文关键词 (该命令应该写在 \verb|abstract| 环境中)\\
+    \verb|\enkeywords|      & 英文关键词 (该命令应该写在 \verb|enabstract| 环境中)\\
+    \bottomrule
+  \end{tabular}
+\end{center}
+
+\section{章节标题设置}
+
+章节标题格式是用 \verb|ctex| 宏包来设置的. 该宏包在 2016 年 6 月 3 日的更新中引入了一个新的选项 \verb|fixskip| 用于修正章标题前的空白. 通过 \verb|ctex| 的选项设置命令把该选项的值设为真即可激活.\\
+\verb|\ctexset{chapter/fixskip=true}|\\
+这条命令被放在了导言区, 并且默认被注释掉. 如果把 \verb|ctex| 宏包升级到了 2016 年 6 月 3 日之后的版本, 可以开启该选项.
