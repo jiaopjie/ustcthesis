@@ -5,22 +5,22 @@
 %% The original source files were:
 %%
 %% ustcthesis.dtx  (with options: `class')
-%%
+%% 
 %% Copyright (C) 2017-2017 by jiaopjie
-%%
+%% 
 %% This file may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either
 %% version 1.3 of this license or (at your option) any later
 %% version. The latest version of this license is in:
-%%
+%% 
 %% http://www.latex-project.org/lppl.txt
-%%
+%% 
 %% and version 1.3 or later is part of all distributions of
 %% LaTeX version 2005/12/01 or later.
-%%
+%% 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{ustcthesis}
-  [2017/01/21 v1.0 USTC thesis template]
+  [2017/04/16 v1.0.1 USTC thesis template]
 \newif\if@ustc@bachelor
 \DeclareOption{bachelor}{%
   \@ustc@bachelortrue
@@ -130,13 +130,14 @@
 \ustc@def@term{major}
 \ustc@def@term{advisor}
 \ustc@def@term{coadvisor}
+\ustc@def@term{submitdate}
 \ustc@def@term{secrettext}
 \ustc@def@term{entitle}
 \ustc@def@term{enauthor}
 \ustc@def@term{enmajor}
 \ustc@def@term{enadvisor}
 \ustc@def@term{encoadvisor}
-\ustc@def@term{endate}
+\ustc@def@term{ensubmitdate}
 \ustc@def@term{ensecrettext}
 \newcommand\ustc@make@title{%
   \cleardoublepage
@@ -169,7 +170,7 @@
         \else
           &\textrm{\ustc@coadvisor}\\
         \fi
-        完成时间: &\textrm{\@date}
+        完成时间: &\textrm{\ustc@submitdate}
       \end{tabular}
     }%
   \end{center}
@@ -205,7 +206,7 @@
         \else
           &\textrm{\ustc@encoadvisor}\\
         \fi
-        Date: &\textrm{\ustc@endate}
+        Date: &\textrm{\ustc@ensubmitdate}
       \end{tabular}
     }%
   \end{center}
@@ -227,6 +228,7 @@
 \newcommand\ustc@make@declare{
   \cleardoublepage
   \begingroup
+    \normalsize
     \vspace*{0.5em}
     \begin{center}
       \sffamily\fontsize{16bp}{24bp}\selectfont
@@ -271,7 +273,7 @@
     \titlerule*[12bp]{$\cdot$}\contentspage
   }
 \titlecontents{section}[1em]
-  {\addvspace{6bp}}
+  {\addvspace{6bp}\normalsize}
   {\thecontentslabel\hspace{0.5em}}{}
   {\titlerule*[12bp]{$\cdot$}\contentspage}
 \titlecontents{subsection}[2em]
@@ -281,11 +283,11 @@
     \titlerule*[12bp]{$\cdot$}\contentspage
   }
 \titlecontents{figure}[1em]
-  {\addvspace{6bp}}
+  {\addvspace{6bp}\normalsize}
   {\thecontentslabel\hspace{0.5em}}{}
   {\titlerule*[12bp]{$\cdot$}\contentspage}
 \titlecontents{table}[1em]
-  {\addvspace{6bp}}
+  {\addvspace{6bp}\normalsize}
   {\thecontentslabel\hspace{0.5em}}{}
   {\titlerule*[12bp]{$\cdot$}\contentspage}
 \setcounter{secnumdepth}{3}
@@ -319,7 +321,7 @@
     afterindent=true,
     beforeskip=12bp,
     afterskip=6bp,
-    format=\sffamily,
+    format=\sffamily\normalsize,
   },
 }
 \if@ustc@bachelor
@@ -368,25 +370,17 @@
 \fi
 \RequirePackage{caption}
 \if@ustc@bachelor
-  \DeclareCaptionFont{captionfont}{}
+  \DeclareCaptionFont{captionfont}{\normalsize}
 \else
-  \DeclareCaptionFont{captionfont}{\fontsize{10.5bp}{16bp}\selectfont}
+  \DeclareCaptionFont{captionfont}
+    {\fontsize{10.5bp}{16bp}\selectfont}
 \fi
 \captionsetup{
   format = hang,
   labelsep = quad,
   font = captionfont,
-  labelfont+={bf},
-}
-\captionsetup[figure]{
-  position = bottom,
-  aboveskip = 6bp,
-  belowskip = 12bp,
-}
-\captionsetup[table]{
-  position = top,
-  aboveskip = 6bp,
-  belowskip = 6bp,
+  labelfont+ = {bf},
+  skip = 6bp,
 }
 \newcommand\captionnote[1]{%
   \captionsetup{position = bottom}%

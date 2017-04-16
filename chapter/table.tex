@@ -6,20 +6,20 @@
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=4cm]{logo/ustc_logo_fig}
+\includegraphics[height=4cm]{figure/test}
 \caption{测试图片}
 \label{fig:test}
-\captionnote{这是个小图片}
+\captionnote{这是个小图片. 该图片来自网络, 请勿用于商业用途.}
 \end{figure}
 
 图~\ref{fig:bigfigure} 是一张尺寸比较大的图片. 再加上这个图片是在一个浮动环境中, 因此它很有可能会跑到其他地方去.
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=10cm]{logo/ustc_logo_fig}
-\caption{这是个比较大的图片}
+\includegraphics[width=8cm]{figure/test}
+\caption{尺寸较大的图片}
 \label{fig:bigfigure}
-\captionnote{This is a long caption note. This is a long caption note. This is a long caption note. This is a long caption note. This is a long caption note. This is a long caption note.}
+\captionnote{这是个比较大的图片. 该图片来自网络, 请勿用于商业用途. 该图片来自网络, 请勿用于商业用途. 该图片来自网络, 请勿用于商业用途. 该图片来自网络, 请勿用于商业用途.}
 \end{figure}
 
 \section{普通表格}
@@ -41,7 +41,7 @@
     5  & a  & b\\
     \bottomrule
   \end{tabular}
-  \captionnote{这是个普通表格}
+  \captionnote{这是个普通表格.}
 \end{table}
 
 \section{长表格}
@@ -64,7 +64,7 @@
     \multicolumn{4}{r}{\small 续下页}
     \endfoot  % 到这里为止是首页的表尾
     \bottomrule
-    \captionnote{这是个长表格}
+    \captionnote{这是个长表格.}
     \endlastfoot  % 到这里为止是后续页的表尾
     1  &  abc  &  def  &  xyz \\
     2  &  abc  &  def  &  xyz \\
@@ -103,3 +103,14 @@
     35 &  abc  &  def  &  xyz \\
   \end{longtable}
 \end{center}
+
+\subsection{项目编号}
+
+\verb|book| 文档类默认的 \verb|itemize| 与 \verb|enumerate| 环境的各条项目之间的距离偏大. 可以通过宏包 \verb|enumitem| 来进行个性化设置. 相关使用方法请参阅该宏包的说明文档.
+
+下面给出的是一个例子. 其中第一行设置项目之间的距离就等于普通的行间距. 第二行表示对 \verb|enumerate| 环境的第一级进行设置. 第三行表示项目标号的缩进等于段落首行缩进, 并且标号使用直立字体, 标号格式是阿拉伯数字外加圆括号.
+\begin{verbatim}
+\setlist{nolistsep}
+\setlist[enumerate,1]
+  {labelindent=\parindent, leftmargin=*, label=\textup{(\arabic*)}}
+\end{verbatim}

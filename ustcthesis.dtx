@@ -13,6 +13,39 @@
 % LaTeX version 2005/12/01 or later.
 %
 %<*internal>
+\iffalse
+%</internal>
+%<*readme>
+# USTC Thesis
+
+本项目是中国科学技术大学的毕业论文 LaTeX 模板 ustcthesis \fileversion.
+
+### 说明
+
+* 编写时参考了
+  [ywgATustcbbs/ustcthesis](https://github.com/ywgATustcbbs/ustcthesis)
+  和 [ustctug/ustcthesis](https://github.com/ustctug/ustcthesis) 的代码
+
+* 编写按自己的喜好进行
+
+* 在论文规范的要求范围内对格式进行了一些优化
+
+* 说明文档也还比较详细
+
+### 注意事项
+
+* 使用指南请参考说明文档和预先给定的主文档内容
+
+* 请先升级宏包
+
+### 论文规范
+* [《中国科学技术大学研究生学位论文撰写规范》
+  ](http://gradschool.ustc.edu.cn/ylb/material/xw/wdxz/1.doc)
+* [《关于本科毕业论文（设计）格式和统一封面的通知》
+  ](http://www.teach.ustc.edu.cn/document/doc-administration/4032.html)
+%</readme>
+%<*internal>
+\fi
 \begingroup
 \def\nameoflatex{LaTeX2e}
 \expandafter\endgroup\ifx\nameoflatex\fmtname\else
@@ -39,6 +72,7 @@ LaTeX version 2005/12/01 or later.
 \keepsilent
 \askforoverwritefalse
 \generate{\file{\jobname.cls}{\from{\jobname.dtx}{class}}}
+\generate{\file{README.md}{\from{\jobname.dtx}{readme}}}
 \endbatchfile
 %</install>
 %
@@ -53,7 +87,7 @@ LaTeX version 2005/12/01 or later.
 %<class>\NeedsTeXFormat{LaTeX2e}
 %<class>\ProvidesClass{ustcthesis}
 %<*class>
-  [2017/02/14 v1.0 USTC thesis template]
+  [2017/04/16 v1.0.1 USTC thesis template]
 %</class>
 %
 %<*driver>
@@ -103,7 +137,7 @@ LaTeX version 2005/12/01 or later.
 %  Right brace   \}      Tilde        \~}
 %
 %
-% \changes{v1.0}{2017/01/21}{Initial version}
+% \changes{v1.0}{2017/02/14}{Initial version}
 %
 % \GetFileInfo{\jobname.dtx}
 %
@@ -133,7 +167,7 @@ LaTeX version 2005/12/01 or later.
 % \section{简介}
 %
 % \verb|ustcthesis| 是用于排版中国科学技术大学学位论文的 \LaTeX{} 模板. 适用于
-% 学士, 硕士和博士的学位论文编写. 由 jiaopjie 参照
+% 学士, 硕士和博士的学位论文编写. 模板参照
 % 《中国科学技术大学研究生学位论文撰写规范》
 % \footnote{\url{http://gradschool.ustc.edu.cn/ylb/material/xw/wdxz/1.doc}}
 % 和《关于本科毕业论文（设计）格式和统一封面的通知》
@@ -172,6 +206,7 @@ LaTeX version 2005/12/01 or later.
 %     \midrule
 %     目录     & |bib/|             & 放置 |.bib| 文件\\
 %              & |chapter/|         & 放置主文档的各个章节\\
+%              & |figure/|          & 放置图片\\
 %              & |logo/|            & 放置校名和校徽\\
 %     \midrule
 %     模板文件 & |ustcthesis.dtx|   & 模板代码文件 (普通用户无需使用)\\
@@ -182,6 +217,7 @@ LaTeX version 2005/12/01 or later.
 %     示例文档 & |main.tex|         & 主文档\\
 %              & |chapter/*.tex|    & 主文档的各个章节\\
 %              & |bib/latex.bib|    & \BibTeX 数据文件\\
+%              & |figure/test.jpg|  & 图片文件\\
 %     \midrule
 %     编译文件 & |.latexmkrc|       & latexmk 的配置文件\\
 %              & |Makefile|         & GNU make 的配置文件\\
@@ -190,8 +226,7 @@ LaTeX version 2005/12/01 or later.
 % \end{center}
 %
 % 其中的目录 |logo/| 以及目录下的两个 PDF 文件要在制作扉页时用到. 因此不能
-% 删除. 其他目录可以根据个人需要增删. 比如, 如果需要插入图片, 可以新建一个
-% |figure/| 目录用于放置图片.
+% 删除. 其他目录可以根据个人需要增删.
 %
 % 主文件 |main.tex| 是一个示例文档. 文档内对模板格式和书写注意事项作了一些
 % 说明. 写论文时在这个示例文档内进行相应的替换即可.
@@ -371,7 +406,7 @@ LaTeX version 2005/12/01 or later.
 %     |\major|      & |\enmajor|      & 学科专业\\
 %     |\advisor|    & |\enadvisor|    & 导师姓名\\
 %     |\coadvisor|  & |\encoadvisor|  & 合作导师 (不设置则不显示该项)\\
-%     |\date|       & |\endate|       & 完成日期\\
+%     |\submitdate| & |\ensubmitdate| & 完成日期\\
 %     |\secrettext| & |\ensecrettext| & 密级信息 (不设置则不显示该项)\\
 %     \bottomrule
 %   \end{tabular}
@@ -398,7 +433,7 @@ LaTeX version 2005/12/01 or later.
 %   August\or September\or October\or November\or December\fi, \the\year}
 % \newcommand{\zhmonth}{\zhdigits{\the\year}年\zhdigits{\the\month}月}
 % \end{verbatim}
-% 其中的 |\zhdigits| 命令时由 |zhnumber| 宏包提供的命令.
+% 其中的 |\zhdigits| 命令是由 |zhnumber| 宏包提供的命令.
 %
 % \subsection{章节标题}
 %
@@ -601,6 +636,22 @@ LaTeX version 2005/12/01 or later.
 %     35 &  abc  &  def  &  xyz \\
 %   \end{longtable}
 % \end{center}
+%
+% \subsection{项目编号}
+%
+% |book| 文档类默认的 |itemize| 与 |enumerate| 环境的各条项目之间的距离偏大.
+% 可以通过宏包 |enumitem| 来进行个性化设置. 相关使用方法请参阅该宏包的说明文档.
+%
+% 下面给出的是一个例子.
+% 其中第一行设置项目之间的距离就等于普通的行间距.
+% 第二行表示对 |enumerate| 环境的第一级进行设置.
+% 第三行表示项目标号的缩进等于段落首行缩进, 并且标号使用直立字体,
+% 标号格式是阿拉伯数字外加圆括号.
+% \begin{verbatim}
+% \setlist{nolistsep}
+% \setlist[enumerate,1]
+%   {labelindent=\parindent, leftmargin=*, label=\textup{(\arabic*)}}
+% \end{verbatim}
 %
 % \subsection{定理环境}
 %
@@ -1232,17 +1283,20 @@ LaTeX version 2005/12/01 or later.
 %
 % 声明 ``专业'' 等项目.
 %
+% \changes{v1.0.1}{2017/04/16}{修改日期的宏名}
+%
 %    \begin{macrocode}
 \ustc@def@term{major}
 \ustc@def@term{advisor}
 \ustc@def@term{coadvisor}
+\ustc@def@term{submitdate}
 \ustc@def@term{secrettext}
 \ustc@def@term{entitle}
 \ustc@def@term{enauthor}
 \ustc@def@term{enmajor}
 \ustc@def@term{enadvisor}
 \ustc@def@term{encoadvisor}
-\ustc@def@term{endate}
+\ustc@def@term{ensubmitdate}
 \ustc@def@term{ensecrettext}
 %    \end{macrocode}
 %
@@ -1287,7 +1341,7 @@ LaTeX version 2005/12/01 or later.
         \else
           &\textrm{\ustc@coadvisor}\\
         \fi
-        完成时间: &\textrm{\@date}
+        完成时间: &\textrm{\ustc@submitdate}
       \end{tabular}
     }%
   \end{center}
@@ -1332,7 +1386,7 @@ LaTeX version 2005/12/01 or later.
         \else
           &\textrm{\ustc@encoadvisor}\\
         \fi
-        Date: &\textrm{\ustc@endate}
+        Date: &\textrm{\ustc@ensubmitdate}
       \end{tabular}
     }%
   \end{center}
@@ -1373,10 +1427,14 @@ LaTeX version 2005/12/01 or later.
 % \begin{macro}{\ustc@make@declare}
 % 制作原创性声明页.
 %
+% \changes{v1.0.1}{2017/04/16}
+%   {在开始处添加命令 \texttt{\textbackslash normalsize}}
+%
 %    \begin{macrocode}
 \newcommand\ustc@make@declare{
   \cleardoublepage
   \begingroup
+    \normalsize
     \vspace*{0.5em}
     \begin{center}
       \sffamily\fontsize{16bp}{24bp}\selectfont
@@ -1436,6 +1494,8 @@ LaTeX version 2005/12/01 or later.
 %
 % 通过宏包 |titletoc| 来设置目录格式.
 %
+% \changes{v1.0.1}{2017/04/16}{一级标题目录添加字体尺寸命令}
+%
 %    \begin{macrocode}
 \RequirePackage{titletoc}
 \titlecontents{chapter}[0em]
@@ -1445,7 +1505,7 @@ LaTeX version 2005/12/01 or later.
     \titlerule*[12bp]{$\cdot$}\contentspage
   }
 \titlecontents{section}[1em]
-  {\addvspace{6bp}}
+  {\addvspace{6bp}\normalsize}
   {\thecontentslabel\hspace{0.5em}}{}
   {\titlerule*[12bp]{$\cdot$}\contentspage}
 \titlecontents{subsection}[2em]
@@ -1458,13 +1518,15 @@ LaTeX version 2005/12/01 or later.
 %
 % 设置图和表的索引格式.
 %
+% \changes{v1.0.1}{2017/04/16}{图和表的索引添加字体尺寸命令}
+%
 %    \begin{macrocode}
 \titlecontents{figure}[1em]
-  {\addvspace{6bp}}
+  {\addvspace{6bp}\normalsize}
   {\thecontentslabel\hspace{0.5em}}{}
   {\titlerule*[12bp]{$\cdot$}\contentspage}
 \titlecontents{table}[1em]
-  {\addvspace{6bp}}
+  {\addvspace{6bp}\normalsize}
   {\thecontentslabel\hspace{0.5em}}{}
   {\titlerule*[12bp]{$\cdot$}\contentspage}
 %    \end{macrocode}
@@ -1477,6 +1539,8 @@ LaTeX version 2005/12/01 or later.
 % 和 |titleformat| 的设置. 因为这两个选项是在 |format| 之后起作用, 他们的值会
 % 覆盖掉 |format| 的设置. 最新版的 |ctex| 似乎默认已经清空. 但如果直接使用
 % |ctexheading| 宏包的话, 还是需要手动清空.
+%
+% \changes{v1.0.1}{2017/04/16}{小小节标题添加字体尺寸命令}
 %
 %    \begin{macrocode}
 \setcounter{secnumdepth}{3}
@@ -1510,7 +1574,7 @@ LaTeX version 2005/12/01 or later.
     afterindent=true,
     beforeskip=12bp,
     afterskip=6bp,
-    format=\sffamily,
+    format=\sffamily\normalsize,
   },
 }
 \if@ustc@bachelor
@@ -1579,10 +1643,12 @@ LaTeX version 2005/12/01 or later.
 %
 % 设置表序和图序的格式.
 %
+% \changes{v1.0.1}{2017/04/16}{调整表序和图序的上下距离设置}
+%
 %    \begin{macrocode}
 \RequirePackage{caption}
 \if@ustc@bachelor
-  \DeclareCaptionFont{captionfont}{}
+  \DeclareCaptionFont{captionfont}{\normalsize}
 \else
   \DeclareCaptionFont{captionfont}
     {\fontsize{10.5bp}{16bp}\selectfont}
@@ -1591,18 +1657,19 @@ LaTeX version 2005/12/01 or later.
   format = hang,
   labelsep = quad,
   font = captionfont,
-  labelfont+={bf},
+  labelfont+ = {bf},
+  skip = 6bp,
 }
-\captionsetup[figure]{
-  position = bottom,
-  aboveskip = 6bp,
-  belowskip = 12bp,
-}
-\captionsetup[table]{
-  position = top,
-  aboveskip = 6bp,
-  belowskip = 6bp,
-}
+% \captionsetup[figure]{
+%   position = bottom,
+%   aboveskip = 6bp,
+%   belowskip = 12bp,
+% }
+% \captionsetup[table]{
+%   position = top,
+%   aboveskip = 6bp,
+%   belowskip = 6bp,
+% }
 %    \end{macrocode}
 %
 % \begin{macro}{\captionnote}
@@ -1628,7 +1695,6 @@ LaTeX version 2005/12/01 or later.
   \ctexset{chapter/format=\centering}%
   \chapter{\notationname}%
   \fontsize{10.5bp}{16bp}\selectfont
-%  \setlength{\parindent}{2em}%
 }{}
 %    \end{macrocode}
 % \end{environment}

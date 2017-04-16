@@ -4,6 +4,12 @@
 %% 学位论文选项默认是 doctor
 %% 本科默认 oneside; 研究生默认 twoside, openright
 
+%% Package -------------------------------------------------------
+\usepackage{enumitem}
+\setlist{nolistsep}
+\setlist[enumerate,1]
+  {labelindent=\parindent, leftmargin=*, label=\textup{(\arabic*)}}
+
 \usepackage{amsmath,amssymb}
 \usepackage{longtable,booktabs}
 \bibliographystyle{plainnat}       % 参考文献格式
@@ -29,12 +35,12 @@
 \newtheorem{remark}[theorem]{注}
 
 %% Title ---------------------------------------------------------
-\title{中国科学技术大学\\ 本硕博毕业论文模板示例文档}
+\title{中国科学技术大学\texorpdfstring{\\}{}本硕博毕业论文模板示例文档}
 \author{赵钱孙}
 \major{某}
 \advisor{周吴郑~教授}
 %\coadvisor{冯陈褚~教授}
-\date{\ctexset{today=big}\today}
+\submitdate{\ctexset{today=big}\today}
 %\secrettext{机密\quad 小于等于20年}   % 内部|秘密|机密，注释本行则不保密
 
 \entitle{An Example of USTC Thesis Template for Bachelor, Master and Doctor}
@@ -42,11 +48,12 @@
 \enmajor{Whatever}
 \enadvisor{Prof.~Wuzheng Zhou}
 %\encoadvisor{Prof.~Chenchu Feng}
-\endate{\ctexset{today=old}\today}
+\ensubmitdate{\ctexset{today=old}\today}
 %\ensecrettext{Confidential\quad Less than or equal to 20 years}  % Internal|Secret|Confidential
 
 %% ---------------------------------------------------------------
 
+%\overfullrule10pt
 \begin{document}
 
 \maketitle
