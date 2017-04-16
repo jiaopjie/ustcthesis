@@ -1,4 +1,9 @@
 # USTC Thesis
+[![GitHub release](https://img.shields.io/github/release/jiaopjie/ustcthesis.svg)
+  ](https://github.com/jiaopjie/ustcthesis/releases/latest)
+[![Github All Releases
+  ](https://img.shields.io/github/downloads/jiaopjie/ustcthesis/total.svg)
+  ](https://github.com/jiaopjie/ustcthesis/releases)
 
 本项目是中国科学技术大学的毕业论文 LaTeX 模板 ustcthesis v1.0.1
 
