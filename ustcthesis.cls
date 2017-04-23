@@ -22,6 +22,8 @@
 \ProvidesClass{ustcthesis}
   [2017/04/16 v1.0.1 USTC thesis template]
 \newif\if@ustc@bachelor
+\newif\if@ustc@chinese
+\newif\if@ustc@openright
 \DeclareOption{bachelor}{%
   \@ustc@bachelortrue
   \PassOptionsToClass{oneside}{book}
@@ -38,13 +40,25 @@
   \def\ustc@thesisname{博士学位论文}%
   \def\ustc@enthesisname{A dissertation for doctor's degree}%
 }
-\ExecuteOptions{doctor}
+\DeclareOption{chinese}{\@ustc@chinesetrue}
+\DeclareOption{english}{\@ustc@chinesefalse}
+\DeclareOption{openright}{\@ustc@openrighttrue}
+\ExecuteOptions{doctor, chinese}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
 \ProcessOptions
-\PassOptionsToClass{12pt}{book}
+\if@ustc@openright
+  \PassOptionsToClass{openright}{book}
+\else
+  \PassOptionsToClass{openany}{book}
+\fi
 \LoadClass{book}
 \PassOptionsToPackage{no-math}{fontspec}
-\RequirePackage[heading,zihao=-4,linespread=1]{ctex}[2014/03/06]
+\if@ustc@chinese
+  \PassOptionsToPackage{linespread=1}{ctex}
+\else
+  \PassOptionsToPackage{scheme=plain}{ctex}
+\fi
+\RequirePackage[heading, zihao=-4]{ctex}[2014/03/06]
 \AtBeginDocument{\ttfamily\rmfamily}
 \RequirePackage{fontspec}
 \setmainfont{Times New Roman}
@@ -53,6 +67,17 @@
   \renewcommand\normalsize{\fontsize{12bp}{22bp}\selectfont}
 \else
   \renewcommand\normalsize{\fontsize{12bp}{20bp}\selectfont}
+\fi
+\if@ustc@chinese
+  \newcommand\notationname{符号说明}
+  \newcommand\acknowledgementsname{致谢}
+  \newcommand\publicationsname{在读期间发表的学术论文与取得的研究成果}
+  \newcommand\captionnotename{注: }
+\else
+  \newcommand\notationname{Notation}
+  \newcommand\acknowledgementsname{Acknowledgements}
+  \newcommand\publicationsname{Publications}
+  \newcommand\captionnotename{Notes: }
 \fi
 \RequirePackage{geometry}
 \geometry{paper=a4paper,
@@ -260,11 +285,17 @@
   \endgroup
 }
 \let\ustc@save@tableofcontents\tableofcontents
+\let\ustc@save@listoffigures\listoffigures
+\let\ustc@save@listoftables\listoftables
 \renewcommand\tableofcontents{%
-  \if@openright\cleardoublepage\else\clearpage\fi
+  \cleardoublepage
   \pdfbookmark[0]{\contentsname}{contents}%
   \ustc@save@tableofcontents
 }
+\renewcommand\listoffigures
+  {\cleardoublepage\ustc@save@listoffigures}
+\renewcommand\listoftables
+  {\cleardoublepage\ustc@save@listoftables}
 \RequirePackage{titletoc}
 \titlecontents{chapter}[0em]
   {\addvspace{6bp}\fontsize{14bp}{21bp}\selectfont}
@@ -291,13 +322,11 @@
   {\thecontentslabel\hspace{0.5em}}{}
   {\titlerule*[12bp]{$\cdot$}\contentspage}
 \setcounter{secnumdepth}{3}
-\RequirePackage{ctexheading}
 \ctexset{
   chapter={
     pagestyle=main,
-    name={第 , 章},
     number=\arabic{chapter},
-    aftername={\quad},
+    aftername=\quad,
     afterindent=true,
     beforeskip=24bp,
     afterskip=18bp,
@@ -323,6 +352,14 @@
     afterskip=6bp,
     format=\sffamily\normalsize,
   },
+}
+\renewcommand\frontmatter{%
+  \cleardoublepage
+  \@mainmatterfalse
+  \pagenumbering{Roman}%
+  \if@ustc@bachelor
+    \renewcommand\ustc@header@foot{}%
+  \fi
 }
 \if@ustc@bachelor
   \ctexset{
@@ -352,12 +389,6 @@
       \ustc@save@tableofcontents
     \endgroup
   }
-  \renewcommand\frontmatter{%
-    \cleardoublepage
-    \@mainmatterfalse
-    \pagenumbering{roman}%
-    \renewcommand\ustc@header@foot{}%
-  }
   \renewcommand\mainmatter{%
     \cleardoublepage
     \@mainmattertrue
@@ -373,25 +404,20 @@
   \DeclareCaptionFont{captionfont}{\normalsize}
 \else
   \DeclareCaptionFont{captionfont}
-    {\fontsize{10.5bp}{16bp}\selectfont}
+    {\bfseries\fontsize{10.5bp}{16bp}\selectfont}
 \fi
 \captionsetup{
   format = hang,
   labelsep = quad,
   font = captionfont,
-  labelfont+ = {bf},
   skip = 6bp,
 }
 \newcommand\captionnote[1]{%
   \captionsetup{position = bottom}%
-  \caption*{\hangindent=2em\makebox[2em]{\textbf{注: }}#1}%
+  \caption*{\hangindent=2em\captionnotename\ \textmd{#1}}%
 }
-\newenvironment{notation}{%
-  \ctexset{chapter/format=\centering}%
-  \chapter{\notationname}%
-  \fontsize{10.5bp}{16bp}\selectfont
-}{}
-\newcommand\notationname{符号说明}
+\newenvironment{notation}
+  {\cleardoublepage\chapter{\notationname}}{}
 \RequirePackage[numbers,sort]{natbib}
 \renewcommand\bibfont{\fontsize{10.5bp}{16bp}\selectfont}
 \let\ustc@save@thebibliography\thebibliography
@@ -402,18 +428,22 @@
   \ustc@save@thebibliography{#1}%
   \addcontentsline{toc}{chapter}{\bibname}%
 }{\ustc@save@endthebibliography\clearpage}
-\def\chapterautorefname~#1\null{第#1章\null}
-\def\sectionautorefname~#1\null{第#1节\null}
-\def\subsectionautorefname~#1\null{第#1小节\null}
-\def\equationautorefname~#1\null{方程~(#1)\null}
-\renewcommand*\figureautorefname{图}
-\renewcommand*\tableautorefname{表}
-\renewcommand*\appendixautorefname{附录}
-\renewcommand*\footnoteautorefname{脚注}
-\renewcommand*\theoremautorefname{定理}
+\if@ustc@chinese
+  \def\chapterautorefname~#1\null{第#1章\null}
+  \def\sectionautorefname~#1\null{第#1节\null}
+  \def\subsectionautorefname~#1\null{第#1小节\null}
+  \def\equationautorefname~#1\null{方程~(#1)\null}
+  \renewcommand*\figureautorefname{图}
+  \renewcommand*\tableautorefname{表}
+  \renewcommand*\appendixautorefname{附录}
+  \renewcommand*\footnoteautorefname{脚注}
+  \renewcommand*\theoremautorefname{定理}
+\fi
 \newenvironment{abstract}{%
   \if@ustc@bachelor
     \ctexset{chapter/format+=\fontsize{18bp}{27bp}\selectfont}
+  \else
+    \cleardoublepage
   \fi
   \chapter{\abstractname}%
 }{}
@@ -423,6 +453,8 @@
 \newenvironment{enabstract}{%
   \if@ustc@bachelor
     \ctexset{chapter/format+=\fontsize{18bp}{27bp}\selectfont}
+  \else
+    \cleardoublepage
   \fi
   \chapter{\enabstractname}%
 }{}
@@ -438,9 +470,7 @@
     \chapter{\acknowledgementsname}%
   \fi
 }{}
-\newcommand\acknowledgementsname{致谢}
 \newenvironment{publications}{\chapter{\publicationsname}}{}
-\newcommand\publicationsname{在读期间发表的学术论文与取得的研究成果}
 \endinput
 %%
 %% End of file `ustcthesis.cls'.

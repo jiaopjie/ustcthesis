@@ -87,7 +87,7 @@ LaTeX version 2005/12/01 or later.
 %<class>\NeedsTeXFormat{LaTeX2e}
 %<class>\ProvidesClass{ustcthesis}
 %<*class>
-  [2017/04/16 v1.0.1 USTC thesis template]
+  [2017/04/23 v1.0.2 USTC thesis template]
 %</class>
 %
 %<*driver>
@@ -240,8 +240,8 @@ LaTeX version 2005/12/01 or later.
 %
 % \subsection{宏包要求}
 %
-% 本模板直接依赖的宏包有: |ctex|, |ctexheading|, |fontspec|, |geometry|,
-% |titleps|, |titletoc|, |hyperref|, |caption|, |natbib|.
+% 本模板直接依赖的宏包有: |ctex|, |fontspec|, |geometry|, |hyperref|,
+% |titleps|, |titletoc|, |caption|, |natbib|.
 %
 % 另外可能有一些间接依赖的宏包, 这里不一一提起. 编译运行前应该保证这些宏包已经
 % 安装到位. 并尽量更新到最新版.
@@ -332,6 +332,8 @@ LaTeX version 2005/12/01 or later.
 %     |bachelor|  & 学士论文\\
 %     |master|    & 硕士论文\\
 %     |doctor|    & 博士论文 (默认)\\
+%     |chinese|   & 中文论文 (默认)\\
+%     |english|   & 英文论文\\
 %     \bottomrule
 %   \end{tabular}
 % \end{center}
@@ -346,9 +348,9 @@ LaTeX version 2005/12/01 or later.
 %     |oneside|   & 单面格式 (|bachelor| 默认)\\
 %     |twoside|   & 双面格式 (|master|, |doctor| 默认)\\
 %     \midrule
-%     |openright| & 双面格式下新一章总是从奇数页开始
+%     |openright| & 双面格式下新一章总是从奇数页开始\\
+%     |openany|   & 双面格式下新一章总是从新一页开始
 %                   (|master|, |doctor| 默认)\\
-%     |openany|   & 双面格式下新一章总是从新一页开始\\
 %     \bottomrule
 %   \end{tabular}
 % \end{center}
@@ -1017,8 +1019,13 @@ LaTeX version 2005/12/01 or later.
 % |doctor|. 使用对应选项分别用于本科, 硕士, 博士学位论文. 这些选项不会被传递
 % 给 |book| 文档类.
 %
+% \changes{v1.0.2}{2017/04/23}
+%   {新增 \texttt{chinese} 与 \texttt{english} 文档选项以支持英文}
+%
 %    \begin{macrocode}
 \newif\if@ustc@bachelor
+\newif\if@ustc@chinese
+\newif\if@ustc@openright
 \DeclareOption{bachelor}{%
   \@ustc@bachelortrue
   \PassOptionsToClass{oneside}{book}
@@ -1035,22 +1042,29 @@ LaTeX version 2005/12/01 or later.
   \def\ustc@thesisname{博士学位论文}%
   \def\ustc@enthesisname{A dissertation for doctor's degree}%
 }
+\DeclareOption{chinese}{\@ustc@chinesetrue}
+\DeclareOption{english}{\@ustc@chinesefalse}
+\DeclareOption{openright}{\@ustc@openrighttrue}
 %    \end{macrocode}
 %
 % 默认激活 |doctor| 选项. 把其他文档选项传递给 |book| 文档类. 命令
 % |\ProcessOptions| 结束选项声明.
 %
+% 默认激活 |openany| 选项. 但此时的中英文摘要、目录、图和表的索引、符号说明等
+% 内容仍然需要从奇数页开始.
+%
+% 另外, 论文规范要求的主文档字体大小跟 12\,pt 很接近. 所以这里也可以激活
+% 12\,pt 文档选项并载入 |book| 文档类.
+%
 %    \begin{macrocode}
-\ExecuteOptions{doctor}
+\ExecuteOptions{doctor, chinese}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
 \ProcessOptions
-%    \end{macrocode}
-%
-% 论文规范要求的主文档字体大小跟 12\,pt 很接近. 所以这里可以激活 12\,pt 文档
-% 选项并载入 |book| 文档类.
-%
-%    \begin{macrocode}
-\PassOptionsToClass{12pt}{book}
+\if@ustc@openright
+  \PassOptionsToClass{openright}{book}
+\else
+  \PassOptionsToClass{openany}{book}
+\fi
 \LoadClass{book}
 %    \end{macrocode}
 %
@@ -1064,19 +1078,28 @@ LaTeX version 2005/12/01 or later.
 \PassOptionsToPackage{no-math}{fontspec}
 %    \end{macrocode}
 %
-% 载入 |ctex| 宏包. 这里使用了三个宏包选项. 其中 |heading| 表明使用汉化标题.
-% |zihao=-4| 设置主文档字体尺寸为小四 (12\,bp). 这覆盖了上面 12\,pt 的主文档
-% 字体尺寸设置. |linespread=1| 选项把 |\baselinestretch| 设置为 1 (|ctex| 宏包
-% 默认把该值设为 1.3).
+% 载入 |ctex| 宏包. 这里使用了两个宏包选项.
+%
+% |heading| 选项启用标题格式设置功能. 该选项默认设置 |scheme=chinese|
+% 来汉化标题. 此时还会把 |\baselinestretch| 设置为 1.3. 因此在 |english|
+% 文档选项下应该显式使用 |scheme=plain| 选项. 否则应显式使用
+% |linespread=1| 选项把 |\baselinestretch| 设置为 1.
+%
+% |zihao=-4| 选项设置主文档字体尺寸为小四 (12\,bp).
 %
 %    \begin{macrocode}
-\RequirePackage[heading,zihao=-4,linespread=1]{ctex}[2014/03/06]
+\if@ustc@chinese
+  \PassOptionsToPackage{linespread=1}{ctex}
+\else
+  \PassOptionsToPackage{scheme=plain}{ctex}
+\fi
+\RequirePackage[heading, zihao=-4]{ctex}[2014/03/06]
 \AtBeginDocument{\ttfamily\rmfamily}
 %    \end{macrocode}
 %
-% 这里是用 |ctex| 宏包提供中文支持, 并在下文中使用它的一个子包来设置章节标题
-% 的格式. 所以原则上可以使用各种编译方式. 但下文还要用到 |fontspec| 宏包.
-% 这个宏包要求使用 XeLaTeX 或者 LuaLaTeX 编译方式.
+% 这里是用 |ctex| 宏包提供中文支持. 原则上可以使用各种编译方式.
+% 但下文还要用到 |fontspec| 宏包.
+% 而该宏包要求使用 XeLaTeX 或者 LuaLaTeX 编译方式.
 %
 % 上面代码中的第二行是为了应对 LuaLaTeX 编译方式下使用 |ctex| 宏包的问题.
 % 如果文档中使用了 |\verb| 命令, 并且在该命令之前没有激活过等宽字体,
@@ -1085,10 +1108,10 @@ LaTeX version 2005/12/01 or later.
 % 这个问题或许是由于 |ctex| 调用的 |fontspec| 宏包的原因. 这里的解决办法是
 % 在文档开始的时候激活一次等宽字体族, 然后再切换回罗马字体族.
 %
-% 如果不调用 |ctex| 宏包, 也可以使用 |xecjk| 提供中文支持, 用 |ctexheading| 设置
-% 章节格式. 但此时需要手动设置中文字体. 并设置在文档开始时把行首缩进设置为两个
-% 字符. 并且修改字体尺寸时, 不会自动调整行首缩进. 中文扉页的密级的字体要求是仿宋
-% 字体. 这里还需要提供 |\fongsong| 命令, 以及一些汉化.
+% 如果不调用 |ctex| 宏包, 也可以使用 |xeCJK| 提供中文支持, 用 |ctexheading|
+% 设置章节格式. 但此时需要手动设置中文字体. 并设置在文档开始时把行首缩进设置
+% 为两个字符. 并且修改字体尺寸时, 不会自动调整行首缩进. 中文扉页的密级的字体
+% 要求是仿宋字体. 这里还需要提供 |\fongsong| 命令, 以及一些汉化.
 %
 %    \begin{macrocode}
 % \RequirePackage{xeCJK}
@@ -1127,6 +1150,34 @@ LaTeX version 2005/12/01 or later.
   \renewcommand\normalsize{\fontsize{12bp}{20bp}\selectfont}
 \fi
 %    \end{macrocode}
+%
+% \subsection{语言设置}
+%
+% \begin{macro}{\notationname}
+% \begin{macro}{\acknowledgementsname}
+% \begin{macro}{\publicationsname}
+% \begin{macro}{\captionnotename}
+% 这里设置了几个环境变量的名字.
+%
+% \changes{v1.0.2}{2017/04/23}{新增环境变量名}
+%
+%    \begin{macrocode}
+\if@ustc@chinese
+  \newcommand\notationname{符号说明}
+  \newcommand\acknowledgementsname{致谢}
+  \newcommand\publicationsname{在读期间发表的学术论文与取得的研究成果}
+  \newcommand\captionnotename{注: }
+\else
+  \newcommand\notationname{Notation}
+  \newcommand\acknowledgementsname{Acknowledgements}
+  \newcommand\publicationsname{Publications}
+  \newcommand\captionnotename{Notes: }
+\fi
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
 %
 % \subsection{页面设置}
 %
@@ -1482,13 +1533,21 @@ LaTeX version 2005/12/01 or later.
 % |\tableofcontents| 和 |thebibliography| 都允许在偶数页开始. 另外, 在文档
 % |oneside| 选项下, 命令 |\cleardoublepage| 和 |\clearpage| 效果相同.
 %
+% \changes{v1.0.2}{2017/04/23}{目录从奇数页开始}
+%
 %    \begin{macrocode}
 \let\ustc@save@tableofcontents\tableofcontents
+\let\ustc@save@listoffigures\listoffigures
+\let\ustc@save@listoftables\listoftables
 \renewcommand\tableofcontents{%
-  \if@openright\cleardoublepage\else\clearpage\fi
+  \cleardoublepage
   \pdfbookmark[0]{\contentsname}{contents}%
   \ustc@save@tableofcontents
 }
+\renewcommand\listoffigures
+  {\cleardoublepage\ustc@save@listoffigures}
+\renewcommand\listoftables
+  {\cleardoublepage\ustc@save@listoftables}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1541,16 +1600,17 @@ LaTeX version 2005/12/01 or later.
 % |ctexheading| 宏包的话, 还是需要手动清空.
 %
 % \changes{v1.0.1}{2017/04/16}{小小节标题添加字体尺寸命令}
+% \changes{v1.0.2}{2017/04/23}{front matter 的页码修改为大写罗马数字}
 %
 %    \begin{macrocode}
 \setcounter{secnumdepth}{3}
-\RequirePackage{ctexheading}
+%\RequirePackage{ctexheading}
 \ctexset{
   chapter={
     pagestyle=main,
-    name={第 , 章},
+%    name={第 , 章},
     number=\arabic{chapter},
-    aftername={\quad},
+    aftername=\quad,
     afterindent=true,
     beforeskip=24bp,
     afterskip=18bp,
@@ -1576,6 +1636,14 @@ LaTeX version 2005/12/01 or later.
     afterskip=6bp,
     format=\sffamily\normalsize,
   },
+}
+\renewcommand\frontmatter{%
+  \cleardoublepage
+  \@mainmatterfalse
+  \pagenumbering{Roman}%
+  \if@ustc@bachelor
+    \renewcommand\ustc@header@foot{}%
+  \fi
 }
 \if@ustc@bachelor
   \ctexset{
@@ -1621,12 +1689,6 @@ LaTeX version 2005/12/01 or later.
       \ustc@save@tableofcontents
     \endgroup
   }
-  \renewcommand\frontmatter{%
-    \cleardoublepage
-    \@mainmatterfalse
-    \pagenumbering{roman}%
-    \renewcommand\ustc@header@foot{}%
-  }
   \renewcommand\mainmatter{%
     \cleardoublepage
     \@mainmattertrue
@@ -1644,6 +1706,7 @@ LaTeX version 2005/12/01 or later.
 % 设置表序和图序的格式.
 %
 % \changes{v1.0.1}{2017/04/16}{调整表序和图序的上下距离设置}
+% \changes{v1.0.2}{2017/04/23}{图题加粗}
 %
 %    \begin{macrocode}
 \RequirePackage{caption}
@@ -1651,13 +1714,12 @@ LaTeX version 2005/12/01 or later.
   \DeclareCaptionFont{captionfont}{\normalsize}
 \else
   \DeclareCaptionFont{captionfont}
-    {\fontsize{10.5bp}{16bp}\selectfont}
+    {\bfseries\fontsize{10.5bp}{16bp}\selectfont}
 \fi
 \captionsetup{
   format = hang,
   labelsep = quad,
   font = captionfont,
-  labelfont+ = {bf},
   skip = 6bp,
 }
 % \captionsetup[figure]{
@@ -1678,7 +1740,7 @@ LaTeX version 2005/12/01 or later.
 %    \begin{macrocode}
 \newcommand\captionnote[1]{%
   \captionsetup{position = bottom}%
-  \caption*{\hangindent=2em\makebox[2em]{\textbf{注: }}#1}%
+  \caption*{\hangindent=2em\captionnotename\ \textmd{#1}}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1690,22 +1752,13 @@ LaTeX version 2005/12/01 or later.
 % 这里定义了一个符号说明的环境. 如果不严格要求标题格式的话, 直接用
 % |\chapter{符号说明}| 来搞定也是可以的.
 %
+% \changes{v1.0.2}{2017/04/23}{更改 ``符号说明'' 环境标题和正文格式}
+%
 %    \begin{macrocode}
-\newenvironment{notation}{%
-  \ctexset{chapter/format=\centering}%
-  \chapter{\notationname}%
-  \fontsize{10.5bp}{16bp}\selectfont
-}{}
+\newenvironment{notation}
+  {\cleardoublepage\chapter{\notationname}}{}
 %    \end{macrocode}
 % \end{environment}
-%
-% \begin{macro}{\notationname}
-% 环境 |notation| 的名字.
-%
-%    \begin{macrocode}
-\newcommand\notationname{符号说明}
-%    \end{macrocode}
-% \end{macro}
 %
 % \subsection{参考文献}
 %
@@ -1761,15 +1814,17 @@ LaTeX version 2005/12/01 or later.
 % |\null| 大概表示参数的结束. 定义里面的 |\null| 是为了补回, 似乎是可以丢弃的.
 %
 %    \begin{macrocode}
-\def\chapterautorefname~#1\null{第#1章\null}
-\def\sectionautorefname~#1\null{第#1节\null}
-\def\subsectionautorefname~#1\null{第#1小节\null}
-\def\equationautorefname~#1\null{方程~(#1)\null}
-\renewcommand*\figureautorefname{图}
-\renewcommand*\tableautorefname{表}
-\renewcommand*\appendixautorefname{附录}
-\renewcommand*\footnoteautorefname{脚注}
-\renewcommand*\theoremautorefname{定理}
+\if@ustc@chinese
+  \def\chapterautorefname~#1\null{第#1章\null}
+  \def\sectionautorefname~#1\null{第#1节\null}
+  \def\subsectionautorefname~#1\null{第#1小节\null}
+  \def\equationautorefname~#1\null{方程~(#1)\null}
+  \renewcommand*\figureautorefname{图}
+  \renewcommand*\tableautorefname{表}
+  \renewcommand*\appendixautorefname{附录}
+  \renewcommand*\footnoteautorefname{脚注}
+  \renewcommand*\theoremautorefname{定理}
+\fi
 %    \end{macrocode}
 %
 % 另外, 在数学中各种定理环境经常共用一个计数器. 此时这些定理环境对应的自动引用
@@ -1780,10 +1835,14 @@ LaTeX version 2005/12/01 or later.
 % \begin{environment}{abstract}
 % 我们知道 |article| 文档类有 |abstract| 环境. 这里定义中文 |abstract| 环境.
 %
+% \changes{v1.0.2}{2017/04/23}{摘要从奇数页开始}
+%
 %    \begin{macrocode}
 \newenvironment{abstract}{%
   \if@ustc@bachelor
     \ctexset{chapter/format+=\fontsize{18bp}{27bp}\selectfont}
+  \else
+    \cleardoublepage
   \fi
   \chapter{\abstractname}%
 }{}
@@ -1810,10 +1869,14 @@ LaTeX version 2005/12/01 or later.
 % \begin{environment}{enabstract}
 % 英文的 |enabstract| 环境以及英文的 |\enkeywords| 命令.
 %
+% \changes{v1.0.2}{2017/04/23}{英文摘要从奇数页开始}
+%
 %    \begin{macrocode}
 \newenvironment{enabstract}{%
   \if@ustc@bachelor
     \ctexset{chapter/format+=\fontsize{18bp}{27bp}\selectfont}
+  \else
+    \cleardoublepage
   \fi
   \chapter{\enabstractname}%
 }{}
@@ -1858,14 +1921,6 @@ LaTeX version 2005/12/01 or later.
 %    \end{macrocode}
 % \end{environment}
 %
-% \begin{macro}{\acknowledgementsname}
-% 环境 |acknowledgements| 的名字.
-%
-%    \begin{macrocode}
-\newcommand\acknowledgementsname{致谢}
-%    \end{macrocode}
-% \end{macro}
-%
 % \subsubsection{在读期间发表的学术论文与取得的研究成果}
 %
 % \begin{environment}{publications}
@@ -1876,14 +1931,6 @@ LaTeX version 2005/12/01 or later.
 \newenvironment{publications}{\chapter{\publicationsname}}{}
 %    \end{macrocode}
 % \end{environment}
-%
-% \begin{macro}{\publicationsname}
-% 环境 |publications| 的名字.
-%
-%    \begin{macrocode}
-\newcommand\publicationsname{在读期间发表的学术论文与取得的研究成果}
-%    \end{macrocode}
-% \end{macro}
 %
 %    \begin{macrocode}
 %</class>
