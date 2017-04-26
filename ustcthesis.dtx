@@ -87,7 +87,7 @@ LaTeX version 2005/12/01 or later.
 %<class>\NeedsTeXFormat{LaTeX2e}
 %<class>\ProvidesClass{ustcthesis}
 %<*class>
-  [2017/04/23 v1.0.2 USTC thesis template]
+  [2017/04/26 v1.0.3 USTC thesis template]
 %</class>
 %
 %<*driver>
@@ -189,6 +189,8 @@ LaTeX version 2005/12/01 or later.
 % zepinglee 写的模板中, 制作扉页时用了 |tikz| 宏包. 不少写法个人不喜欢.
 % 鉴于此我决定写个模板自用, 顺便把自己的编写思路记录下来. 因此本模板仅保证
 % 基本的格式要求. 额外的需求请自行使用相应的宏包.
+%
+% 下载地址: \url{https://github.com/jiaopjie/ustcthesis}
 %
 % \section{编译运行}
 %
@@ -1554,40 +1556,68 @@ LaTeX version 2005/12/01 or later.
 % 通过宏包 |titletoc| 来设置目录格式.
 %
 % \changes{v1.0.1}{2017/04/16}{一级标题目录添加字体尺寸命令}
+% \changes{v1.0.3}{2017/04/26}{修改本科论文目录字体设置}
 %
 %    \begin{macrocode}
 \RequirePackage{titletoc}
-\titlecontents{chapter}[0em]
-  {\addvspace{6bp}\fontsize{14bp}{21bp}\selectfont}
-  {\thecontentslabel\hspace{0.5em}}{}
-  {\fontsize{12bp}{21bp}\selectfont
-    \titlerule*[12bp]{$\cdot$}\contentspage
-  }
-\titlecontents{section}[1em]
-  {\addvspace{6bp}\normalsize}
-  {\thecontentslabel\hspace{0.5em}}{}
-  {\titlerule*[12bp]{$\cdot$}\contentspage}
-\titlecontents{subsection}[2em]
-  {\addvspace{6bp}\fontsize{10.5bp}{16bp}\selectfont}
-  {\thecontentslabel\hspace{0.5em}}{}
-  {\fontsize{12bp}{16bp}\selectfont
-    \titlerule*[12bp]{$\cdot$}\contentspage
-  }
+\if@ustc@bachelor
+  \titlecontents{chapter}[0em]
+    {\normalsize}
+    {\thecontentslabel\hspace{0.5em}}{}
+    {\titlerule*[12bp]{$\cdot$}\contentspage}
+  \titlecontents{section}[1em]
+    {\normalsize}
+    {\thecontentslabel\hspace{0.5em}}{}
+    {\titlerule*[12bp]{$\cdot$}\contentspage}
+  \titlecontents{subsection}[2em]
+    {\normalsize}
+    {\thecontentslabel\hspace{0.5em}}{}
+    {\titlerule*[12bp]{$\cdot$}\contentspage}
+\else
+  \titlecontents{chapter}[0em]
+    {\addvspace{6bp}\fontsize{14bp}{21bp}\selectfont}
+    {\thecontentslabel\hspace{0.5em}}{}
+    {\fontsize{12bp}{21bp}\selectfont
+      \titlerule*[12bp]{$\cdot$}\contentspage
+    }
+  \titlecontents{section}[1em]
+    {\addvspace{6bp}\normalsize}
+    {\thecontentslabel\hspace{0.5em}}{}
+    {\titlerule*[12bp]{$\cdot$}\contentspage}
+  \titlecontents{subsection}[2em]
+    {\addvspace{6bp}\fontsize{10.5bp}{16bp}\selectfont}
+    {\thecontentslabel\hspace{0.5em}}{}
+    {\fontsize{12bp}{16bp}\selectfont
+      \titlerule*[12bp]{$\cdot$}\contentspage
+    }
+\fi
 %    \end{macrocode}
 %
 % 设置图和表的索引格式.
 %
 % \changes{v1.0.1}{2017/04/16}{图和表的索引添加字体尺寸命令}
+% \changes{v1.0.3}{2017/04/26}{修改本科论文图和表索引行距设置}
 %
 %    \begin{macrocode}
-\titlecontents{figure}[1em]
-  {\addvspace{6bp}\normalsize}
-  {\thecontentslabel\hspace{0.5em}}{}
-  {\titlerule*[12bp]{$\cdot$}\contentspage}
-\titlecontents{table}[1em]
-  {\addvspace{6bp}\normalsize}
-  {\thecontentslabel\hspace{0.5em}}{}
-  {\titlerule*[12bp]{$\cdot$}\contentspage}
+\if@ustc@bachelor
+  \titlecontents{figure}[1em]
+    {\normalsize}
+    {\thecontentslabel\hspace{0.5em}}{}
+    {\titlerule*[12bp]{$\cdot$}\contentspage}
+  \titlecontents{table}[1em]
+    {\normalsize}
+    {\thecontentslabel\hspace{0.5em}}{}
+    {\titlerule*[12bp]{$\cdot$}\contentspage}
+\else
+  \titlecontents{figure}[1em]
+    {\addvspace{6bp}\normalsize}
+    {\thecontentslabel\hspace{0.5em}}{}
+    {\titlerule*[12bp]{$\cdot$}\contentspage}
+  \titlecontents{table}[1em]
+    {\addvspace{6bp}\normalsize}
+    {\thecontentslabel\hspace{0.5em}}{}
+    {\titlerule*[12bp]{$\cdot$}\contentspage}
+\fi
 %    \end{macrocode}
 %
 % \subsection{章节标题格式}
@@ -1769,8 +1799,13 @@ LaTeX version 2005/12/01 or later.
 %
 %    \begin{macrocode}
 \RequirePackage[numbers,sort]{natbib}
-\renewcommand\bibfont{\fontsize{10.5bp}{16bp}\selectfont}
+\if@ustc@bachelor
+\else
+  \renewcommand\bibfont{\fontsize{10.5bp}{16bp}\selectfont}
+\fi
 %    \end{macrocode}
+%
+% \changes{v1.0.3}{2017/04/26}{修改本科论文参考文献正文字号}
 %
 % 在行文中可以通过命令 |\setcitestyle{authoryear}| 进入 author-year 模式. 另外,
 % 一些标准的 |.bst| 文件格式 (比如 |plain.bst|) 只能支持数字模式. 因此在
@@ -1815,9 +1850,9 @@ LaTeX version 2005/12/01 or later.
 %
 %    \begin{macrocode}
 \if@ustc@chinese
-  \def\chapterautorefname~#1\null{第#1章\null}
-  \def\sectionautorefname~#1\null{第#1节\null}
-  \def\subsectionautorefname~#1\null{第#1小节\null}
+  \def\chapterautorefname~#1\null{第~#1~章\null}
+  \def\sectionautorefname~#1\null{第~#1~节\null}
+  \def\subsectionautorefname~#1\null{第~#1~小节\null}
   \def\equationautorefname~#1\null{方程~(#1)\null}
   \renewcommand*\figureautorefname{图}
   \renewcommand*\tableautorefname{表}

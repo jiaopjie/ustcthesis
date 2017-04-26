@@ -20,7 +20,7 @@
 %% 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{ustcthesis}
-  [2017/04/16 v1.0.1 USTC thesis template]
+  [2017/04/26 v1.0.3 USTC thesis template]
 \newif\if@ustc@bachelor
 \newif\if@ustc@chinese
 \newif\if@ustc@openright
@@ -297,30 +297,56 @@
 \renewcommand\listoftables
   {\cleardoublepage\ustc@save@listoftables}
 \RequirePackage{titletoc}
-\titlecontents{chapter}[0em]
-  {\addvspace{6bp}\fontsize{14bp}{21bp}\selectfont}
-  {\thecontentslabel\hspace{0.5em}}{}
-  {\fontsize{12bp}{21bp}\selectfont
-    \titlerule*[12bp]{$\cdot$}\contentspage
-  }
-\titlecontents{section}[1em]
-  {\addvspace{6bp}\normalsize}
-  {\thecontentslabel\hspace{0.5em}}{}
-  {\titlerule*[12bp]{$\cdot$}\contentspage}
-\titlecontents{subsection}[2em]
-  {\addvspace{6bp}\fontsize{10.5bp}{16bp}\selectfont}
-  {\thecontentslabel\hspace{0.5em}}{}
-  {\fontsize{12bp}{16bp}\selectfont
-    \titlerule*[12bp]{$\cdot$}\contentspage
-  }
-\titlecontents{figure}[1em]
-  {\addvspace{6bp}\normalsize}
-  {\thecontentslabel\hspace{0.5em}}{}
-  {\titlerule*[12bp]{$\cdot$}\contentspage}
-\titlecontents{table}[1em]
-  {\addvspace{6bp}\normalsize}
-  {\thecontentslabel\hspace{0.5em}}{}
-  {\titlerule*[12bp]{$\cdot$}\contentspage}
+\if@ustc@bachelor
+  \titlecontents{chapter}[0em]
+    {\normalsize}
+    {\thecontentslabel\hspace{0.5em}}{}
+    {\titlerule*[12bp]{$\cdot$}\contentspage}
+  \titlecontents{section}[1em]
+    {\normalsize}
+    {\thecontentslabel\hspace{0.5em}}{}
+    {\titlerule*[12bp]{$\cdot$}\contentspage}
+  \titlecontents{subsection}[2em]
+    {\normalsize}
+    {\thecontentslabel\hspace{0.5em}}{}
+    {\titlerule*[12bp]{$\cdot$}\contentspage}
+\else
+  \titlecontents{chapter}[0em]
+    {\addvspace{6bp}\fontsize{14bp}{21bp}\selectfont}
+    {\thecontentslabel\hspace{0.5em}}{}
+    {\fontsize{12bp}{21bp}\selectfont
+      \titlerule*[12bp]{$\cdot$}\contentspage
+    }
+  \titlecontents{section}[1em]
+    {\addvspace{6bp}\normalsize}
+    {\thecontentslabel\hspace{0.5em}}{}
+    {\titlerule*[12bp]{$\cdot$}\contentspage}
+  \titlecontents{subsection}[2em]
+    {\addvspace{6bp}\fontsize{10.5bp}{16bp}\selectfont}
+    {\thecontentslabel\hspace{0.5em}}{}
+    {\fontsize{12bp}{16bp}\selectfont
+      \titlerule*[12bp]{$\cdot$}\contentspage
+    }
+\fi
+\if@ustc@bachelor
+  \titlecontents{figure}[1em]
+    {\normalsize}
+    {\thecontentslabel\hspace{0.5em}}{}
+    {\titlerule*[12bp]{$\cdot$}\contentspage}
+  \titlecontents{table}[1em]
+    {\normalsize}
+    {\thecontentslabel\hspace{0.5em}}{}
+    {\titlerule*[12bp]{$\cdot$}\contentspage}
+\else
+  \titlecontents{figure}[1em]
+    {\addvspace{6bp}\normalsize}
+    {\thecontentslabel\hspace{0.5em}}{}
+    {\titlerule*[12bp]{$\cdot$}\contentspage}
+  \titlecontents{table}[1em]
+    {\addvspace{6bp}\normalsize}
+    {\thecontentslabel\hspace{0.5em}}{}
+    {\titlerule*[12bp]{$\cdot$}\contentspage}
+\fi
 \setcounter{secnumdepth}{3}
 \ctexset{
   chapter={
@@ -419,7 +445,10 @@
 \newenvironment{notation}
   {\cleardoublepage\chapter{\notationname}}{}
 \RequirePackage[numbers,sort]{natbib}
-\renewcommand\bibfont{\fontsize{10.5bp}{16bp}\selectfont}
+\if@ustc@bachelor
+\else
+  \renewcommand\bibfont{\fontsize{10.5bp}{16bp}\selectfont}
+\fi
 \let\ustc@save@thebibliography\thebibliography
 \let\ustc@save@endthebibliography\endthebibliography
 \renewenvironment{thebibliography}[1]{%
@@ -429,9 +458,9 @@
   \addcontentsline{toc}{chapter}{\bibname}%
 }{\ustc@save@endthebibliography\clearpage}
 \if@ustc@chinese
-  \def\chapterautorefname~#1\null{第#1章\null}
-  \def\sectionautorefname~#1\null{第#1节\null}
-  \def\subsectionautorefname~#1\null{第#1小节\null}
+  \def\chapterautorefname~#1\null{第~#1~章\null}
+  \def\sectionautorefname~#1\null{第~#1~节\null}
+  \def\subsectionautorefname~#1\null{第~#1~小节\null}
   \def\equationautorefname~#1\null{方程~(#1)\null}
   \renewcommand*\figureautorefname{图}
   \renewcommand*\tableautorefname{表}
