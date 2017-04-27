@@ -87,7 +87,7 @@ LaTeX version 2005/12/01 or later.
 %<class>\NeedsTeXFormat{LaTeX2e}
 %<class>\ProvidesClass{ustcthesis}
 %<*class>
-  [2017/04/26 v1.0.3 USTC thesis template]
+  [2017/04/27 v1.0.3 USTC thesis template]
 %</class>
 %
 %<*driver>
@@ -1562,15 +1562,15 @@ LaTeX version 2005/12/01 or later.
 \RequirePackage{titletoc}
 \if@ustc@bachelor
   \titlecontents{chapter}[0em]
-    {\normalsize}
+    {\fontsize{12bp}{22bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
   \titlecontents{section}[1em]
-    {\normalsize}
+    {\fontsize{12bp}{22bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
   \titlecontents{subsection}[2em]
-    {\normalsize}
+    {\fontsize{12bp}{22bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
 \else
@@ -1581,7 +1581,7 @@ LaTeX version 2005/12/01 or later.
       \titlerule*[12bp]{$\cdot$}\contentspage
     }
   \titlecontents{section}[1em]
-    {\addvspace{6bp}\normalsize}
+    {\addvspace{6bp}\fontsize{12bp}{20bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
   \titlecontents{subsection}[2em]
@@ -1596,25 +1596,26 @@ LaTeX version 2005/12/01 or later.
 % 设置图和表的索引格式.
 %
 % \changes{v1.0.1}{2017/04/16}{图和表的索引添加字体尺寸命令}
+% \changes{v1.0.3}{2017/04/27}{修改字体尺寸命令}
 % \changes{v1.0.3}{2017/04/26}{修改本科论文图和表索引行距设置}
 %
 %    \begin{macrocode}
 \if@ustc@bachelor
   \titlecontents{figure}[1em]
-    {\normalsize}
+    {\fontsize{12bp}{22bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
   \titlecontents{table}[1em]
-    {\normalsize}
+    {\fontsize{12bp}{22bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
 \else
   \titlecontents{figure}[1em]
-    {\addvspace{6bp}\normalsize}
+    {\addvspace{6bp}\fontsize{12bp}{20bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
   \titlecontents{table}[1em]
-    {\addvspace{6bp}\normalsize}
+    {\addvspace{6bp}\fontsize{12bp}{20bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
 \fi
@@ -1664,7 +1665,7 @@ LaTeX version 2005/12/01 or later.
     afterindent=true,
     beforeskip=12bp,
     afterskip=6bp,
-    format=\sffamily\normalsize,
+    format=\sffamily\fontsize{12bp}{20bp}\selectfont,
   },
 }
 \renewcommand\frontmatter{%
@@ -1679,6 +1680,7 @@ LaTeX version 2005/12/01 or later.
   \ctexset{
     section/format+=\centering\fontsize{15bp}{22bp}\selectfont,
     subsection/format+=\fontsize{14bp}{22bp}\selectfont,
+    subsubsection/format+=\fontsize{12bp}{22bp}\selectfont,
   }
 \fi
 %    \end{macrocode}
@@ -1741,7 +1743,8 @@ LaTeX version 2005/12/01 or later.
 %    \begin{macrocode}
 \RequirePackage{caption}
 \if@ustc@bachelor
-  \DeclareCaptionFont{captionfont}{\normalsize}
+  \DeclareCaptionFont{captionfont}
+    {\fontsize{12bp}{22bp}\selectfont}
 \else
   \DeclareCaptionFont{captionfont}
     {\bfseries\fontsize{10.5bp}{16bp}\selectfont}

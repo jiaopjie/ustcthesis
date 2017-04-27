@@ -299,15 +299,15 @@
 \RequirePackage{titletoc}
 \if@ustc@bachelor
   \titlecontents{chapter}[0em]
-    {\normalsize}
+    {\fontsize{12bp}{22bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
   \titlecontents{section}[1em]
-    {\normalsize}
+    {\fontsize{12bp}{22bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
   \titlecontents{subsection}[2em]
-    {\normalsize}
+    {\fontsize{12bp}{22bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
 \else
@@ -318,7 +318,7 @@
       \titlerule*[12bp]{$\cdot$}\contentspage
     }
   \titlecontents{section}[1em]
-    {\addvspace{6bp}\normalsize}
+    {\addvspace{6bp}\fontsize{12bp}{20bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
   \titlecontents{subsection}[2em]
@@ -330,20 +330,20 @@
 \fi
 \if@ustc@bachelor
   \titlecontents{figure}[1em]
-    {\normalsize}
+    {\fontsize{12bp}{22bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
   \titlecontents{table}[1em]
-    {\normalsize}
+    {\fontsize{12bp}{22bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
 \else
   \titlecontents{figure}[1em]
-    {\addvspace{6bp}\normalsize}
+    {\addvspace{6bp}\fontsize{12bp}{20bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
   \titlecontents{table}[1em]
-    {\addvspace{6bp}\normalsize}
+    {\addvspace{6bp}\fontsize{12bp}{20bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
 \fi
@@ -376,7 +376,7 @@
     afterindent=true,
     beforeskip=12bp,
     afterskip=6bp,
-    format=\sffamily\normalsize,
+    format=\sffamily\fontsize{12bp}{20bp}\selectfont,
   },
 }
 \renewcommand\frontmatter{%
@@ -391,6 +391,7 @@
   \ctexset{
     section/format+=\centering\fontsize{15bp}{22bp}\selectfont,
     subsection/format+=\fontsize{14bp}{22bp}\selectfont,
+    subsubsection/format+=\fontsize{12bp}{22bp}\selectfont,
   }
 \fi
 \let\ustc@save@cleardoublepage\cleardoublepage
@@ -427,7 +428,8 @@
 \fi
 \RequirePackage{caption}
 \if@ustc@bachelor
-  \DeclareCaptionFont{captionfont}{\normalsize}
+  \DeclareCaptionFont{captionfont}
+    {\fontsize{12bp}{22bp}\selectfont}
 \else
   \DeclareCaptionFont{captionfont}
     {\bfseries\fontsize{10.5bp}{16bp}\selectfont}
