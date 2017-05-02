@@ -87,7 +87,7 @@ LaTeX version 2005/12/01 or later.
 %<class>\NeedsTeXFormat{LaTeX2e}
 %<class>\ProvidesClass{ustcthesis}
 %<*class>
-  [2017/04/27 v1.0.3 USTC thesis template]
+  [2017/05/02 v1.0.4 USTC thesis template]
 %</class>
 %
 %<*driver>
@@ -1786,10 +1786,15 @@ LaTeX version 2005/12/01 or later.
 % |\chapter{符号说明}| 来搞定也是可以的.
 %
 % \changes{v1.0.2}{2017/04/23}{更改 ``符号说明'' 环境标题和正文格式}
+% \changes{v1.0.4}{2017/05/02}{更改 ``符号说明'' 页码, 不放入目录}
 %
 %    \begin{macrocode}
-\newenvironment{notation}
-  {\cleardoublepage\chapter{\notationname}}{}
+\newenvironment{notation}{%
+  \cleardoublepage
+  \chapter*{\notationname}%
+  \renewcommand{\ustc@header@head}{\notationname}%
+  \renewcommand{\ustc@header@foot}{}%
+}{\clearpage}
 %    \end{macrocode}
 % \end{environment}
 %
@@ -1874,16 +1879,19 @@ LaTeX version 2005/12/01 or later.
 % 我们知道 |article| 文档类有 |abstract| 环境. 这里定义中文 |abstract| 环境.
 %
 % \changes{v1.0.2}{2017/04/23}{摘要从奇数页开始}
+% \changes{v1.0.4}{2017/05/02}{研究生摘要不放入目录}
 %
 %    \begin{macrocode}
 \newenvironment{abstract}{%
   \if@ustc@bachelor
     \ctexset{chapter/format+=\fontsize{18bp}{27bp}\selectfont}
+    \chapter{\abstractname}%
   \else
     \cleardoublepage
+    \chapter*{\abstractname}%
+    \renewcommand{\ustc@header@head}{\abstractname}%
   \fi
-  \chapter{\abstractname}%
-}{}
+}{\clearpage}
 %    \end{macrocode}
 % \end{environment}
 %
@@ -1907,17 +1915,17 @@ LaTeX version 2005/12/01 or later.
 % \begin{environment}{enabstract}
 % 英文的 |enabstract| 环境以及英文的 |\enkeywords| 命令.
 %
-% \changes{v1.0.2}{2017/04/23}{英文摘要从奇数页开始}
-%
 %    \begin{macrocode}
 \newenvironment{enabstract}{%
   \if@ustc@bachelor
     \ctexset{chapter/format+=\fontsize{18bp}{27bp}\selectfont}
+    \chapter{\enabstractname}%
   \else
     \cleardoublepage
+    \chapter*{\enabstractname}%
+    \renewcommand{\ustc@header@head}{\enabstractname}%
   \fi
-  \chapter{\enabstractname}%
-}{}
+}{\clearpage}
 %    \end{macrocode}
 % \end{environment}
 %

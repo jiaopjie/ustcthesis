@@ -20,7 +20,7 @@
 %% 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{ustcthesis}
-  [2017/04/26 v1.0.3 USTC thesis template]
+  [2017/05/02 v1.0.4 USTC thesis template]
 \newif\if@ustc@bachelor
 \newif\if@ustc@chinese
 \newif\if@ustc@openright
@@ -444,8 +444,12 @@
   \captionsetup{position = bottom}%
   \caption*{\hangindent=2em\captionnotename\ \textmd{#1}}%
 }
-\newenvironment{notation}
-  {\cleardoublepage\chapter{\notationname}}{}
+\newenvironment{notation}{%
+  \cleardoublepage
+  \chapter*{\notationname}%
+  \renewcommand{\ustc@header@head}{\notationname}%
+  \renewcommand{\ustc@header@foot}{}%
+}{\clearpage}
 \RequirePackage[numbers,sort]{natbib}
 \if@ustc@bachelor
 \else
@@ -473,22 +477,26 @@
 \newenvironment{abstract}{%
   \if@ustc@bachelor
     \ctexset{chapter/format+=\fontsize{18bp}{27bp}\selectfont}
+    \chapter{\abstractname}%
   \else
     \cleardoublepage
+    \chapter*{\abstractname}%
+    \renewcommand{\ustc@header@head}{\abstractname}%
   \fi
-  \chapter{\abstractname}%
-}{}
+}{\clearpage}
 \def\abstractname{摘要}
 \def\keywords#1
   {\par\vskip\baselineskip\noindent\textbf{关键词: }#1}
 \newenvironment{enabstract}{%
   \if@ustc@bachelor
     \ctexset{chapter/format+=\fontsize{18bp}{27bp}\selectfont}
+    \chapter{\enabstractname}%
   \else
     \cleardoublepage
+    \chapter*{\enabstractname}%
+    \renewcommand{\ustc@header@head}{\enabstractname}%
   \fi
-  \chapter{\enabstractname}%
-}{}
+}{\clearpage}
 \def\enabstractname{Abstract}
 \def\enkeywords#1
   {\par\vskip\baselineskip\noindent\textbf{Keywords: }#1}
