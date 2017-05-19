@@ -20,7 +20,7 @@
 %% 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{ustcthesis}
-  [2017/05/02 v1.0.4 USTC thesis template]
+  [2017/05/19 v1.0.4 USTC thesis template]
 \newif\if@ustc@bachelor
 \newif\if@ustc@chinese
 \newif\if@ustc@openright
@@ -224,14 +224,14 @@
     \parbox[t][42mm][c]{\textwidth}{%
       \fontsize{16bp}{30bp}\selectfont\rmfamily
       \begin{tabular}{@{\hspace*{28.3mm}}lc}
-        Author: &\textrm{\ustc@enauthor}\\
+        Author:     &\textrm{\ustc@enauthor}\\
         Speciality: &\textrm{\ustc@enmajor}\\
-        Advisor: &\textrm{\ustc@enadvisor}\\
+        Supervisor: &\textrm{\ustc@enadvisor}\\
         \ifx\@empty\ustc@encoadvisor
         \else
           &\textrm{\ustc@encoadvisor}\\
         \fi
-        Date: &\textrm{\ustc@ensubmitdate}
+        Date:       &\textrm{\ustc@ensubmitdate}
       \end{tabular}
     }%
   \end{center}

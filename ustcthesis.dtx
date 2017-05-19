@@ -87,7 +87,7 @@ LaTeX version 2005/12/01 or later.
 %<class>\NeedsTeXFormat{LaTeX2e}
 %<class>\ProvidesClass{ustcthesis}
 %<*class>
-  [2017/05/02 v1.0.4 USTC thesis template]
+  [2017/05/19 v1.0.4 USTC thesis template]
 %</class>
 %
 %<*driver>
@@ -1407,6 +1407,9 @@ LaTeX version 2005/12/01 or later.
 % 的空白, 所以这里图片的总高度变成了 48\,mm. 另外, 规范里英文标题的行间距略小.
 % 这里适当的加大了行间距.
 %
+% \changes{v1.0.4}{2017/05/19}
+%   {修改英文导师标题}
+%
 %    \begin{macrocode}
 \newcommand\ustc@make@entitle{%
   \cleardoublepage
@@ -1432,14 +1435,14 @@ LaTeX version 2005/12/01 or later.
     \parbox[t][42mm][c]{\textwidth}{%
       \fontsize{16bp}{30bp}\selectfont\rmfamily
       \begin{tabular}{@{\hspace*{28.3mm}}lc}
-        Author: &\textrm{\ustc@enauthor}\\
+        Author:     &\textrm{\ustc@enauthor}\\
         Speciality: &\textrm{\ustc@enmajor}\\
-        Advisor: &\textrm{\ustc@enadvisor}\\
+        Supervisor: &\textrm{\ustc@enadvisor}\\
         \ifx\@empty\ustc@encoadvisor
         \else
           &\textrm{\ustc@encoadvisor}\\
         \fi
-        Date: &\textrm{\ustc@ensubmitdate}
+        Date:       &\textrm{\ustc@ensubmitdate}
       \end{tabular}
     }%
   \end{center}
