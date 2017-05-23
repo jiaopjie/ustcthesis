@@ -403,15 +403,15 @@ LaTeX version 2005/12/01 or later.
 % \begin{center}
 %   \begin{tabular}{lll}
 %     \toprule
-%     命令          & 命令 (英文)     & 说明\\
+%     命令            & 命令 (英文)       & 说明\\
 %     \midrule
-%     |\title|      & |\entitle|      & 论文标题\\
-%     |\author|     & |\enauthor|     & 作者姓名\\
-%     |\major|      & |\enmajor|      & 学科专业\\
-%     |\advisor|    & |\enadvisor|    & 导师姓名\\
-%     |\coadvisor|  & |\encoadvisor|  & 合作导师 (不设置则不显示该项)\\
-%     |\date|       & |\endate|       & 完成日期\\
-%     |\secrettext| & |\ensecrettext| & 密级信息 (不设置则不显示该项)\\
+%     |\title|        & |\entitle|        & 论文标题\\
+%     |\author|       & |\enauthor|       & 作者姓名\\
+%     |\major|        & |\enmajor|        & 学科专业\\
+%     |\supervisor|   & |\ensupervisor|   & 导师姓名\\
+%     |\cosupervisor| & |\encosupervisor| & 合作导师 (不设置则不显示该项)\\
+%     |\date|         & |\endate|         & 完成日期\\
+%     |\secrettext|   & |\ensecrettext|   & 密级信息 (不设置则不显示该项)\\
 %     \bottomrule
 %   \end{tabular}
 % \end{center}
@@ -1342,17 +1342,18 @@ LaTeX version 2005/12/01 or later.
 %
 % \changes{v1.0.1}{2017/04/16}{修改日期的宏名}
 % \changes{v1.0.5}{2017/05/23}{改回日期的宏名, 并初始化日期为当前日期}
+% \changes{v1.0.5}{2017/05/23}{更改导师的宏名}
 %
 %    \begin{macrocode}
 \ustc@def@term{major}
-\ustc@def@term{advisor}
-\ustc@def@term{coadvisor}
+\ustc@def@term{supervisor}
+\ustc@def@term{cosupervisor}
 \ustc@def@term{secrettext}
 \ustc@def@term{entitle}
 \ustc@def@term{enauthor}
 \ustc@def@term{enmajor}
-\ustc@def@term{enadvisor}
-\ustc@def@term{encoadvisor}
+\ustc@def@term{ensupervisor}
+\ustc@def@term{encosupervisor}
 \ustc@def@term{endate}
 \ustc@def@term{ensecrettext}
 \date{\ctexset{today=big}\today}
@@ -1399,10 +1400,10 @@ LaTeX version 2005/12/01 or later.
       \begin{tabular}{@{\hspace*{28.3mm}}lc}
         作者姓名: &\textrm{\@author}\\
         学科专业: &\textrm{\ustc@major}\\
-        导师姓名: &\textrm{\ustc@advisor}\\
-        \ifx\@empty\ustc@coadvisor
+        导师姓名: &\textrm{\ustc@supervisor}\\
+        \ifx\@empty\ustc@cosupervisor
         \else
-          &\textrm{\ustc@coadvisor}\\
+          &\textrm{\ustc@cosupervisor}\\
         \fi
         完成时间: &\textrm{\@date}
       \end{tabular}
@@ -1450,10 +1451,10 @@ LaTeX version 2005/12/01 or later.
       \begin{tabular}{@{\hspace*{28.3mm}}lc}
         Author:     &\textrm{\ustc@enauthor}\\
         Speciality: &\textrm{\ustc@enmajor}\\
-        Supervisor: &\textrm{\ustc@enadvisor}\\
-        \ifx\@empty\ustc@encoadvisor
+        Supervisor: &\textrm{\ustc@ensupervisor}\\
+        \ifx\@empty\ustc@encosupervisor
         \else
-          &\textrm{\ustc@encoadvisor}\\
+          &\textrm{\ustc@encosupervisor}\\
         \fi
         Date:       &\textrm{\ustc@endate}
       \end{tabular}

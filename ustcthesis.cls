@@ -154,14 +154,14 @@
   \csname #1\endcsname{}%
 }
 \ustc@def@term{major}
-\ustc@def@term{advisor}
-\ustc@def@term{coadvisor}
+\ustc@def@term{supervisor}
+\ustc@def@term{cosupervisor}
 \ustc@def@term{secrettext}
 \ustc@def@term{entitle}
 \ustc@def@term{enauthor}
 \ustc@def@term{enmajor}
-\ustc@def@term{enadvisor}
-\ustc@def@term{encoadvisor}
+\ustc@def@term{ensupervisor}
+\ustc@def@term{encosupervisor}
 \ustc@def@term{endate}
 \ustc@def@term{ensecrettext}
 \date{\ctexset{today=big}\today}
@@ -196,10 +196,10 @@
       \begin{tabular}{@{\hspace*{28.3mm}}lc}
         作者姓名: &\textrm{\@author}\\
         学科专业: &\textrm{\ustc@major}\\
-        导师姓名: &\textrm{\ustc@advisor}\\
-        \ifx\@empty\ustc@coadvisor
+        导师姓名: &\textrm{\ustc@supervisor}\\
+        \ifx\@empty\ustc@cosupervisor
         \else
-          &\textrm{\ustc@coadvisor}\\
+          &\textrm{\ustc@cosupervisor}\\
         \fi
         完成时间: &\textrm{\@date}
       \end{tabular}
@@ -236,10 +236,10 @@
       \begin{tabular}{@{\hspace*{28.3mm}}lc}
         Author:     &\textrm{\ustc@enauthor}\\
         Speciality: &\textrm{\ustc@enmajor}\\
-        Supervisor: &\textrm{\ustc@enadvisor}\\
-        \ifx\@empty\ustc@encoadvisor
+        Supervisor: &\textrm{\ustc@ensupervisor}\\
+        \ifx\@empty\ustc@encosupervisor
         \else
-          &\textrm{\ustc@encoadvisor}\\
+          &\textrm{\ustc@encosupervisor}\\
         \fi
         Date:       &\textrm{\ustc@endate}
       \end{tabular}
