@@ -4,8 +4,6 @@
 
 另外, 编译方式应该选用 XeLaTeX. 宏包 \verb|ctex| 应该升级到 2.0 版本以上.
 
-\section{文档选项}
-
 本模板新设置了三个文档选项 \verb|bachelor|, \verb|master|, \verb|doctor| 用于区分学士、硕士、博士学位论文.
 
 \begin{center}
@@ -69,7 +67,7 @@
     \verb|\major|      & \verb|\enmajor|      & 学科专业\\
     \verb|\advisor|    & \verb|\enadvisor|    & 导师姓名\\
     \verb|\coadvisor|  & \verb|\encoadvisor|  & 合作导师 (不设置则不显示该项)\\
-    \verb|\submitdate| & \verb|\ensubmitdate| & 完成日期\\
+    \verb|\date|       & \verb|\endate|       & 完成日期\\
     \verb|\secrettext| & \verb|\ensecrettext| & 密级信息 (不设置则不显示该项)\\
     \bottomrule
   \end{tabular}
@@ -77,7 +75,7 @@
 
 这些命令都有一个必选参数用于提供相应的个人信息. 个人信息用于制作扉页. 扉页由命令 \verb|\maketitle| 生成. 该命令应该作为正文开始后的第一个命令. 个人信息应该在 \verb|\maketitle| 命令之前提供, 最好是放在导言区.
 
-其中的日期项可以手工填入日期, 也可以使用 \verb|\today| 命令自动生成. \verb|ctex| 宏包对该命令进行了汉化, 并提供了 \verb|small|, \verb|big|, \verb|old| 三种样式供选择. 前两种样式是中文的日期样式, 最后一种是原本的英文日期样式. 两种中文日期样式的区别是, \verb|small| 使用阿拉伯数字而 \verb|big| 则全部为汉字. \verb|ctex| 默认的是 \verb|small| 样式. \verb|\ctexset{today=old}| 则切换到英文日期样式.
+这里设置默认日期为当前日期. 可通过命令 \verb|\date| 重新设置. 可以手工填写日期, 也可以使用 \verb|\today| 命令. \verb|ctex| 宏包 对该命令进行了汉化, 并提供了 \verb|small|, \verb|big|, \verb|old| 三种样式供选择. 前两种样式是中文的日期样式, 最后一种是原本的英文日期样式. 两种中文日期样式的区别是, \verb|small| 使用阿拉伯数字而 \verb|big| 则全部为汉字. \verb|ctex| 默认的是 \verb|small| 样式. \verb|\ctexset{today=old}| 则切换到英文日期样式.
 
 \section{摘要等环境}
 

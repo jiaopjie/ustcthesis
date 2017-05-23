@@ -20,7 +20,7 @@
 %% 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{ustcthesis}
-  [2017/05/19 v1.0.4 USTC thesis template]
+  [2017/05/23 v1.0.5 USTC thesis template]
 \newif\if@ustc@bachelor
 \newif\if@ustc@chinese
 \newif\if@ustc@openright
@@ -122,6 +122,7 @@
   bookmarksopenlevel=1,
   bookmarksnumbered=true,
   linkcolor=blue,
+  linktoc=all,
   hidelinks,
 }
 \AtBeginDocument{%
@@ -155,22 +156,27 @@
 \ustc@def@term{major}
 \ustc@def@term{advisor}
 \ustc@def@term{coadvisor}
-\ustc@def@term{submitdate}
 \ustc@def@term{secrettext}
 \ustc@def@term{entitle}
 \ustc@def@term{enauthor}
 \ustc@def@term{enmajor}
 \ustc@def@term{enadvisor}
 \ustc@def@term{encoadvisor}
-\ustc@def@term{ensubmitdate}
+\ustc@def@term{endate}
 \ustc@def@term{ensecrettext}
+\date{\ctexset{today=big}\today}
+\endate{\ctexset{today=old}\today}
 \newcommand\ustc@make@title{%
   \cleardoublepage
   \begin{center}
-    \vspace*{-\topskip}\vspace*{14.6mm}\nointerlineskip
-    \parbox[t][12mm][t]{\textwidth}
-      {\raggedleft\fangsong
-       \fontsize{14bp}{21bp}\selectfont\ustc@secrettext}%
+    \vspace*{-\topskip}\vspace*{14.6mm}%
+    \nointerlineskip
+    \normalfont
+    \parbox[t][12mm][t]{\textwidth}{%
+      \raggedleft\fangsong
+      \fontsize{14bp}{21bp}\selectfont
+      \ustc@secrettext
+    }%
     \par\nointerlineskip
     \sffamily
     \parbox[t][23mm][t]{\textwidth}
@@ -195,7 +201,7 @@
         \else
           &\textrm{\ustc@coadvisor}\\
         \fi
-        完成时间: &\textrm{\ustc@submitdate}
+        完成时间: &\textrm{\@date}
       \end{tabular}
     }%
   \end{center}
@@ -203,10 +209,14 @@
 \newcommand\ustc@make@entitle{%
   \cleardoublepage
   \begin{center}
-    \vspace*{-\topskip}\vspace*{14.6mm}\nointerlineskip
-    \parbox[t][10mm][t]{\textwidth}
-      {\raggedleft\normalfont
-       \fontsize{14bp}{21bp}\selectfont\ustc@ensecrettext}%
+    \vspace*{-\topskip}\vspace*{14.6mm}%
+    \nointerlineskip
+    \normalfont
+    \parbox[t][10mm][t]{\textwidth}{%
+      \raggedleft\normalfont
+      \fontsize{14bp}{21bp}\selectfont
+      \ustc@ensecrettext
+    }%
     \par\nointerlineskip
     \sffamily
     \parbox[t][10mm][t]{\textwidth}
@@ -231,7 +241,7 @@
         \else
           &\textrm{\ustc@encoadvisor}\\
         \fi
-        Date:       &\textrm{\ustc@ensubmitdate}
+        Date:       &\textrm{\ustc@endate}
       \end{tabular}
     }%
   \end{center}
@@ -253,7 +263,7 @@
 \newcommand\ustc@make@declare{
   \cleardoublepage
   \begingroup
-    \normalsize
+    \normalsize\normalfont
     \vspace*{0.5em}
     \begin{center}
       \sffamily\fontsize{16bp}{24bp}\selectfont

@@ -87,7 +87,7 @@ LaTeX version 2005/12/01 or later.
 %<class>\NeedsTeXFormat{LaTeX2e}
 %<class>\ProvidesClass{ustcthesis}
 %<*class>
-  [2017/05/19 v1.0.4 USTC thesis template]
+  [2017/05/23 v1.0.5 USTC thesis template]
 %</class>
 %
 %<*driver>
@@ -410,7 +410,7 @@ LaTeX version 2005/12/01 or later.
 %     |\major|      & |\enmajor|      & 学科专业\\
 %     |\advisor|    & |\enadvisor|    & 导师姓名\\
 %     |\coadvisor|  & |\encoadvisor|  & 合作导师 (不设置则不显示该项)\\
-%     |\submitdate| & |\ensubmitdate| & 完成日期\\
+%     |\date|       & |\endate|       & 完成日期\\
 %     |\secrettext| & |\ensecrettext| & 密级信息 (不设置则不显示该项)\\
 %     \bottomrule
 %   \end{tabular}
@@ -420,17 +420,18 @@ LaTeX version 2005/12/01 or later.
 % 扉页由命令 |\maketitle| 生成. 该命令应该作为正文开始后的第一个命令.
 % 个人信息应该在 |\maketitle| 命令之前提供, 最好是放在导言区.
 %
-% 其中的日期项可以手工填入日期, 也可以使用 |\today| 命令自动生成. |ctex| 宏包
-% 对该命令进行了汉化, 并提供了 |small|, |big|, |old| 三种样式供选择. 前两种样式
-% 是中文的日期样式, 最后一种是原本的英文日期样式. 两种中文日期样式的区别是,
-% |small| 使用阿拉伯数字而 |big| 则全部为汉字. |ctex| 默认的是 |small| 样式.
-% |\ctexset{today=old}| 则切换到英文日期样式.
+% 这里设置默认日期为当前日期. 可通过命令 |\date| 重新设置. 可以手工填写日期,
+% 也可以使用 |\today| 命令. |ctex| 宏包 对该命令进行了汉化, 并提供了 |small|,
+% |big|, |old| 三种样式供选择. 前两种样式是中文的日期样式, 最后一种是原本的
+% 英文日期样式. 两种中文日期样式的区别是, |small| 使用阿拉伯数字而 |big|
+% 则全部为汉字. |ctex| 默认的是 |small| 样式. |\ctexset{today=old}| 则切换到
+% 英文日期样式.
 %
 % 要使用更复杂的中文日期样式, 可以使用 |zhnumber| 宏包. |ctex| 宏包默认
 % 加载了该宏包.
 %
 % 另外, 全部是汉字的日期可能会比较长. 因此只写年和月似乎也是个不错的选择.
-% 这里自定义了两个命令, 分别用于生成中英文的年月.
+% 例如, 下面两个命令分别用于生成中英文的年月.
 % \begin{verbatim}
 % \newcommand{\enmonth}{\ifcase\month
 %   \or January\or February\or March\or April\or May \or June\or July\or
@@ -1263,6 +1264,8 @@ LaTeX version 2005/12/01 or later.
 % 时却会被打印为黑色的. 但是似乎此时的超链接不会自动断行. 如果链接文本比较长,
 % 文本会超出文本区边界.
 %
+% \changes{v1.0.5}{2017/05/23}{目录中页码处设置超链接}
+%
 %    \begin{macrocode}
 \RequirePackage{hyperref}
 \hypersetup{
@@ -1270,6 +1273,7 @@ LaTeX version 2005/12/01 or later.
   bookmarksopenlevel=1,
   bookmarksnumbered=true,
   linkcolor=blue,
+  linktoc=all,
   hidelinks,
 }
 %    \end{macrocode}
@@ -1337,20 +1341,22 @@ LaTeX version 2005/12/01 or later.
 % 声明 ``专业'' 等项目.
 %
 % \changes{v1.0.1}{2017/04/16}{修改日期的宏名}
+% \changes{v1.0.5}{2017/05/23}{改回日期的宏名, 并初始化日期为当前日期}
 %
 %    \begin{macrocode}
 \ustc@def@term{major}
 \ustc@def@term{advisor}
 \ustc@def@term{coadvisor}
-\ustc@def@term{submitdate}
 \ustc@def@term{secrettext}
 \ustc@def@term{entitle}
 \ustc@def@term{enauthor}
 \ustc@def@term{enmajor}
 \ustc@def@term{enadvisor}
 \ustc@def@term{encoadvisor}
-\ustc@def@term{ensubmitdate}
+\ustc@def@term{endate}
 \ustc@def@term{ensecrettext}
+\date{\ctexset{today=big}\today}
+\endate{\ctexset{today=old}\today}
 %    \end{macrocode}
 %
 % \begin{macro}{\ustc@make@title}
@@ -1366,10 +1372,14 @@ LaTeX version 2005/12/01 or later.
 \newcommand\ustc@make@title{%
   \cleardoublepage
   \begin{center}
-    \vspace*{-\topskip}\vspace*{14.6mm}\nointerlineskip
-    \parbox[t][12mm][t]{\textwidth}
-      {\raggedleft\fangsong
-       \fontsize{14bp}{21bp}\selectfont\ustc@secrettext}%
+    \vspace*{-\topskip}\vspace*{14.6mm}%
+    \nointerlineskip
+    \normalfont
+    \parbox[t][12mm][t]{\textwidth}{%
+      \raggedleft\fangsong
+      \fontsize{14bp}{21bp}\selectfont
+      \ustc@secrettext
+    }%
     \par\nointerlineskip
     \sffamily
     \parbox[t][23mm][t]{\textwidth}
@@ -1394,7 +1404,7 @@ LaTeX version 2005/12/01 or later.
         \else
           &\textrm{\ustc@coadvisor}\\
         \fi
-        完成时间: &\textrm{\ustc@submitdate}
+        完成时间: &\textrm{\@date}
       \end{tabular}
     }%
   \end{center}
@@ -1407,17 +1417,20 @@ LaTeX version 2005/12/01 or later.
 % 的空白, 所以这里图片的总高度变成了 48\,mm. 另外, 规范里英文标题的行间距略小.
 % 这里适当的加大了行间距.
 %
-% \changes{v1.0.4}{2017/05/19}
-%   {修改英文导师标题}
+% \changes{v1.0.4}{2017/05/19}{修改英文导师标题}
 %
 %    \begin{macrocode}
 \newcommand\ustc@make@entitle{%
   \cleardoublepage
   \begin{center}
-    \vspace*{-\topskip}\vspace*{14.6mm}\nointerlineskip
-    \parbox[t][10mm][t]{\textwidth}
-      {\raggedleft\normalfont
-       \fontsize{14bp}{21bp}\selectfont\ustc@ensecrettext}%
+    \vspace*{-\topskip}\vspace*{14.6mm}%
+    \nointerlineskip
+    \normalfont
+    \parbox[t][10mm][t]{\textwidth}{%
+      \raggedleft\normalfont
+      \fontsize{14bp}{21bp}\selectfont
+      \ustc@ensecrettext
+    }%
     \par\nointerlineskip
     \sffamily
     \parbox[t][10mm][t]{\textwidth}
@@ -1442,7 +1455,7 @@ LaTeX version 2005/12/01 or later.
         \else
           &\textrm{\ustc@encoadvisor}\\
         \fi
-        Date:       &\textrm{\ustc@ensubmitdate}
+        Date:       &\textrm{\ustc@endate}
       \end{tabular}
     }%
   \end{center}
@@ -1490,7 +1503,7 @@ LaTeX version 2005/12/01 or later.
 \newcommand\ustc@make@declare{
   \cleardoublepage
   \begingroup
-    \normalsize
+    \normalsize\normalfont
     \vspace*{0.5em}
     \begin{center}
       \sffamily\fontsize{16bp}{24bp}\selectfont
