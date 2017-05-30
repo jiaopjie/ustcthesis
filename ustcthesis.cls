@@ -20,7 +20,7 @@
 %% 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{ustcthesis}
-  [2017/05/23 v1.0.5 USTC thesis template]
+  [2017/05/30 v1.0.5 USTC thesis template]
 \newif\if@ustc@bachelor
 \newif\if@ustc@chinese
 \newif\if@ustc@openright
@@ -509,7 +509,7 @@
 }{\clearpage}
 \def\enabstractname{Abstract}
 \def\enkeywords#1
-  {\par\vskip\baselineskip\noindent\textbf{Keywords: }#1}
+  {\par\vskip\baselineskip\noindent\textbf{Key Words: }#1}
 \newenvironment{acknowledgements}{%
   \if@ustc@bachelor
     \ctexset{chapter/format+=\fontsize{18bp}{27bp}\selectfont}

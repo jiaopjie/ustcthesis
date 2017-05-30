@@ -87,7 +87,7 @@ LaTeX version 2005/12/01 or later.
 %<class>\NeedsTeXFormat{LaTeX2e}
 %<class>\ProvidesClass{ustcthesis}
 %<*class>
-  [2017/05/23 v1.0.5 USTC thesis template]
+  [2017/05/30 v1.0.5 USTC thesis template]
 %</class>
 %
 %<*driver>
@@ -1957,9 +1957,11 @@ LaTeX version 2005/12/01 or later.
 % \begin{macro}{\enkeywords}
 % 英文关键词. 该命令应该用在 |enabstract| 环境中.
 %
+% \changes{v1.0.5}{2017/05/30}{修正英文关键词标题}
+%
 %    \begin{macrocode}
 \def\enkeywords#1
-  {\par\vskip\baselineskip\noindent\textbf{Keywords: }#1}
+  {\par\vskip\baselineskip\noindent\textbf{Key Words: }#1}
 %    \end{macrocode}
 % \end{macro}
 %
