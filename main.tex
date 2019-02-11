@@ -1,79 +1,90 @@
 %% USTC thesis template ------------------------------------------
-\documentclass[doctor, twoside, openany]{ustcthesis}
-%% bachelor|master|doctor
-%% 学位论文选项默认是 doctor
+\documentclass[doctor]{ustcthesis}
+%% 模板有以下三个文档选项, 各选项中的第一个选项为默认选项
+%% [doctor|master|bachelor]
+%% [academic|professional]
+%% [chinese|english]
 %%
-%% chinese|english
-%% 语种选项默认是 chinese
-%%
-%% 本科默认 oneside; 研究生默认 twoside, openany
+%% book 文档类原有的文档选项继续有效
+%% 默认 twoside, openany
 
 %% Package -------------------------------------------------------
 \usepackage{enumitem}
-\setlist{nolistsep}
-\setlist[enumerate,1]
-  {labelindent=\parindent, leftmargin=*, label=\textup{(\arabic*)}}
+\setlist{nolistsep, leftmargin=*}
+\setlist[1]{labelindent=\parindent}
+\setlist[enumerate,1]{label=\textup{(\arabic*)}}
 
 \usepackage{amsmath,amssymb}
 \usepackage{longtable,booktabs}
-\bibliographystyle{plainnat}     % 参考文献格式
-%\ctexset{chapter/fixskip=true}  % ctex 宏包 2016.06.03 引入的新选项, 修正章标题前的空白
 
 %% Theorems ------------------------------------------------------
-\usepackage{amsthm}
-\def\proofname{\upshape\sffamily 证.}
+\usepackage{amsthm,aliascnt}
+\def\proofname{\upshape\sffamily\indent 证.}
 \newtheoremstyle{ustctheorem}
-  {\topsep}{\topsep}{\itshape}{}{\sffamily}{}{1em}{}
+  {\topsep}{\topsep}{\itshape}{\parindent}{\sffamily}{}{1em}{}
 \newtheoremstyle{ustcdefinition}
-  {\topsep}{\topsep}{}{}{\sffamily}{}{1em}{}
-
+  {\topsep}{\topsep}{}{\parindent}{\sffamily}{}{1em}{}
 \theoremstyle{ustctheorem}
 \newtheorem{theorem}{定理}[section]
-\newtheorem{proposition}[theorem]{命题}
-\newtheorem{lemma}[theorem]{引理}
-\newtheorem{corollary}[theorem]{推论}
-
 \theoremstyle{ustcdefinition}
-\newtheorem{definition}[theorem]{定义}
-\newtheorem{example}[theorem]{例}
-\newtheorem{remark}[theorem]{注}
+\newaliascnt{definition}{theorem}
+\newtheorem{definition}[definition]{定义}
+\aliascntresetthe{definition}
+\newcommand\definitionautorefname{定义}
+\newaliascnt{remark}{theorem}
+\newtheorem{remark}[remark]{注}
+\aliascntresetthe{remark}
+\newcommand\remarkautorefname{注}
+
+%% Macro ---------------------------------------------------------
+\newcommand\Emph[1]{\textsf{#1}}
+
+%% Customize -----------------------------------------------------
+%\hypersetup{colorlinks}       % 超链接以彩色显示
+\bibliographystyle{plainnat}  % 参考文献列表样式
+
+%%%  扉页中显示密级需要仿宋字体, 显示专业学位类型需要隶书字体
+% \providecommand\fangsong{\CJKfontspec{FangSong}}
+% \providecommand\lishu{\CJKfontspec{LiSu}}
+%%%  更改中文字体为思源字体
+% \setCJKmainfont[ItalicFont={KaiTi}]{Source Han Serif SC}
+% \setCJKsansfont[ItalicFont={KaiTi}]{Source Han Sans SC}
+%%%  使用中易宋体和黑体, 并开启伪粗体
+ \setCJKmainfont[AutoFakeBold=3,ItalicFont={KaiTi}]{SimSun}
+ \setCJKsansfont[AutoFakeBold=3,ItalicFont={KaiTi}]{SimHei}
 
 %% Title ---------------------------------------------------------
-\title{中国科学技术大学\texorpdfstring{\\}{}本硕博毕业论文模板示例文档}
+\title{中国科学技术大学\texorpdfstring{\\}{}学位论文模板示例文档}
 \author{赵钱孙}
 \major{某}
-\supervisor{周吴郑~教授}
-%\cosupervisor{冯陈褚~教授}
-%\date{\ctexset{today=big}\today}      % 默认是当前日期, 可手动修改
+\supervisor{周吴郑~教授\quad 冯陈褚~教授}
+\date{\ctexset{today=big}\today}      % 默认是当前日期, 可手动修改
+\professionaltype{专业学位类型}
 %\secrettext{机密\quad 小于等于20年}   % 内部|秘密|机密, 注释本行则不保密
 
-\entitle{An Example of USTC Thesis Template for Bachelor, Master and Doctor}
+\entitle{An example of thesis template for
+  University of Science and Technology of China}
 \enauthor{Qiansun Zhao}
 \enmajor{Whatever}
-\ensupervisor{Prof.~Wuzheng Zhou}
-%\encosupervisor{Prof.~Chenchu Feng}
-%\endate{\ctexset{today=old}\today}    % default is today
+\ensupervisor{Prof.~Wuzheng Zhou, Prof.~Chenchu Feng}
+\endate{\ctexset{today=old}\today}    % default is today
+\enprofessionaltype{Professional degree type}
 %\ensecrettext{Confidential\quad Less than or equal to 20 years}  % Internal|Secret|Confidential
 
 %% ---------------------------------------------------------------
-
-%\overfullrule10pt
 \begin{document}
-
-\maketitle
-
 %% ---------------------------------------------------------------
 %%
 %% 本科生论文文档顺序:
-%%   frontmatter: 致谢、目录、中文摘要、英文摘要
-%%   mainmatter:  正文章节、参考文献
-%%   appendix:    附录
+%%   front matter: 致谢、目录、中文摘要、英文摘要
+%%   main matter:  正文、参考文献
+%%   appendix:     附录
 %%
 %% 研究生论文文档顺序:
-%%   frontmatter: 中文摘要、英文摘要、目录、符号说明
-%%   mainmatter:  正文、参考文献
-%%   appendix:    附录
-%%   backmatter:  致谢、发表论文
+%%   front matter: 中文摘要、英文摘要、目录、符号说明
+%%   main matter:  正文、参考文献
+%%   appendix:     附录
+%%   backmatter:   致谢、发表论文
 %%
 %% ---------------------------------------------------------------
 %%
@@ -81,6 +92,8 @@
 %% 本科生论文请自行调整顺序
 %%
 %% ---------------------------------------------------------------
+
+\maketitle
 
 \frontmatter
 
@@ -94,10 +107,7 @@
 
 \input{chapter/introduction}
 \input{chapter/readme}
-\input{chapter/test}
-\input{chapter/table}
-\input{chapter/theorem}
-\input{chapter/citation}
+\input{chapter/other}
 
 \setcitestyle{numbers}
 \bibliography{bib/latex}

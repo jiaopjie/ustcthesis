@@ -1,0 +1,172 @@
+\chapter{其他设置}
+\label{chap:other}
+
+\section{项目编号}
+
+\verb|book| 文档类默认的 \verb|itemize| 与 \verb|enumerate| 环境的各条项目之间的距离偏大. 可以通过宏包 \verb|enumitem| 来进行个性化设置. 相关使用方法请参阅该宏包的说明文档.
+
+下面的设置是一个简单的例子, 含义如下.
+\begin{enumerate}
+  \item
+    项目之间的距离就等于普通的行间距.
+  \item
+    第一级环境的项目标号的缩进等于段落首行缩进.
+  \item
+    第一级 \verb|enumerate| 环境的项目标号样式为直立的 (1).
+\end{enumerate}
+
+\begin{verbatim}
+\setlist{nolistsep, leftmargin=*}
+\setlist[1]{labelindent=\parindent}
+\setlist[enumerate,1]{label=\textup{(\arabic*)}}
+\end{verbatim}
+
+\section{自动引用}
+
+自动引用可以由 \verb|hyperref| 宏包提供的命令 \verb|\autoref| 来实现.
+该命令会在引用标号前自动加上对应的前缀, 并且把前缀和标号一起加上超链接.
+
+模板对自动引用前缀作了一些处理.
+使用效果可参见\autoref{chap:readme}.
+
+需要注意的是, 该机制通过识别计数器工作.
+数学中各种定理环境经常共用一个计数器. 这样, 相应的自动引用前缀就是一样的.
+若要对不同定理环境区分前缀, 可通过 \verb|aliascnt| 宏包进行修正.
+详情可参见这两个宏包的说明文档, 也可参见\autoref{sec:theorem}.
+
+\section{定理类环境}
+\label{sec:theorem}
+
+为了适配中文习惯. 可以使用 \verb|amsthm| 宏包提供的 \verb|\newtheoremstyle| 命令来给出新的定理样式.
+这里给出 ``定理'' 和 ``定义'' 两种定理样式.
+
+\begin{verbatim}
+\newtheoremstyle{ustctheorem}
+  {\topsep}{\topsep}{\itshape}{\parindent}{\sffamily}{}{1em}{}
+\newtheoremstyle{ustcdefinition}
+  {\topsep}{\topsep}{}{\parindent}{\sffamily}{}{1em}{}
+\end{verbatim}
+
+为了配合 \verb|hyperref| 宏包自动引用功能, 需要通过宏包 \verb|aliascnt| 修正.
+
+下面的代码定义了 ``定理'' 与 ``定义'' 两个环境, 它们共享一个计数器.
+可以看到, \autoref{def:sphere} 与\autoref{thm:CRT} 的编号是连着的, 它们的自动引用也没有问题.
+
+\begin{verbatim}
+\theoremstyle{ustctheorem}
+\newtheorem{theorem}{定理}[section]
+\theoremstyle{ustcdefinition}
+\newaliascnt{definition}{theorem}
+\newtheorem{definition}[definition]{定义}
+\aliascntresetthe{definition}
+\newcommand\definitionautorefname{定义}
+\end{verbatim}
+
+在中文状态下, 可对 \verb|proof| 环境修改 \verb|\proofname| 来打印“证”字.
+\begin{verbatim}
+\renewcommand\proofname{\upshape\sffamily\indent 证.}
+\end{verbatim}
+
+\begin{definition}\label{def:sphere}
+  $n$ 维\Emph{单位球面} (unit sphere) 是指 $n$ 维欧式空间 $\boldsymbol{E}^n$ 的子集
+  \[
+    S^n :=
+    \left\{
+    (x_1, x_2, \dots, x_n)
+    \middle|
+    \sum_{i=1}^n x_i^2 = 1
+    \right\}.
+  \]
+\end{definition}
+
+\begin{theorem}[中国剩余定理]\label{thm:CRT}
+  设 $m = m_1 \cdots m_n$, 其中 $m_1, \dots, m_n$ 两两互素. 则同余方程组
+  \begin{equation}
+    \left\{
+    \begin{matrix}
+      x \equiv a_1 \mod m_1, \\
+      \cdots \\
+      x \equiv a_n \mod m_n, \\
+    \end{matrix}
+    \right.
+  \end{equation}
+  必有解, 且全部解为模 $m$ 的一个同余类 (congruence class).
+\end{theorem}
+
+\begin{proof}
+  略.
+\end{proof}
+
+\begin{remark}\label{rem:CRT}
+  中国剩余定理又称\Emph{孙子定理}, 最初起源于《孙子算经》中的问题:
+  \begin{quote}
+    \itshape
+    今有物不知其数, 三三数之余二, 五五数之余三, 七七数之余二, 问物之几何?
+  \end{quote}
+\end{remark}
+
+\section{长表格}
+
+如果表格的长度超过了一页, 可使用 \verb|longtable| 宏包提供的 \verb|longtable| 环境.
+还可以使用 \verb|booktabs| 宏包提供的更丰富的表格线.
+该宏包提供的表格线也可以应用到 \verb|tabular| 生成的表格中.
+参见\autoref{chap:readme}中的表格.
+
+下表是一个长表格, 它不能放置在浮动环境中, 因此位置是准确的.
+这里给它加了表头, 方便在其他位置引用.
+
+\begin{center}
+  \begin{longtable}{cccc}
+    \caption{长表格}\label{tab:test-long}\\ % 首页的表序
+    \toprule
+    左 & 中 & 中 & 右\\
+    \midrule
+    \endfirsthead  % 到这里为止是首页的表头
+    \caption[]{长表格 (续)}\\ % 后续页的表序
+    \toprule
+    左 & 中 & 中 & 右\\
+    \midrule
+    \endhead  % 到这里为止是后续页的表头
+    \hline
+    \multicolumn{4}{r}{\small 续下页}
+    \endfoot  % 到这里为止是首页的表尾
+    \bottomrule
+    \captionnote{这是个长表格.}
+    \endlastfoot  % 到这里为止是后续页的表尾
+    1  &  abc  &  def  &  xyz \\
+    2  &  abc  &  def  &  xyz \\
+    3  &  abc  &  def  &  xyz \\
+    4  &  abc  &  def  &  xyz \\
+    5  &  abc  &  def  &  xyz \\
+    6  &  abc  &  def  &  xyz \\
+    7  &  abc  &  def  &  xyz \\
+    8  &  abc  &  def  &  xyz \\
+    9  &  abc  &  def  &  xyz \\
+    10 &  abc  &  def  &  xyz \\
+    11 &  abc  &  def  &  xyz \\
+    12 &  abc  &  def  &  xyz \\
+    13 &  abc  &  def  &  xyz \\
+    14 &  abc  &  def  &  xyz \\
+    15 &  abc  &  def  &  xyz \\
+    16 &  abc  &  def  &  xyz \\
+    17 &  abc  &  def  &  xyz \\
+    18 &  abc  &  def  &  xyz \\
+    19 &  abc  &  def  &  xyz \\
+    20 &  abc  &  def  &  xyz \\
+    21 &  abc  &  def  &  xyz \\
+    22 &  abc  &  def  &  xyz \\
+    23 &  abc  &  def  &  xyz \\
+    24 &  abc  &  def  &  xyz \\
+    25 &  abc  &  def  &  xyz \\
+    26 &  abc  &  def  &  xyz \\
+    27 &  abc  &  def  &  xyz \\
+    28 &  abc  &  def  &  xyz \\
+    29 &  abc  &  def  &  xyz \\
+    30 &  abc  &  def  &  xyz \\
+    31 &  abc  &  def  &  xyz \\
+    32 &  abc  &  def  &  xyz \\
+    33 &  abc  &  def  &  xyz \\
+    34 &  abc  &  def  &  xyz \\
+    35 &  abc  &  def  &  xyz \\
+  \end{longtable}
+\end{center}

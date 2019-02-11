@@ -17,32 +17,45 @@
 %</internal>
 %<*readme>
 # USTC Thesis
+![](https://img.shields.io/github/release/jiaopjie/ustcthesis.svg)
+![](https://img.shields.io/github/downloads/jiaopjie/ustcthesis/total.svg)
 
-本项目是中国科学技术大学的毕业论文 LaTeX 模板 ustcthesis \fileversion.
+本项目是中国科学技术大学学位论文 LaTeX 模板 ustcthesis.
 
 ### 说明
 
 * 编写时参考了
   [ywgATustcbbs/ustcthesis](https://github.com/ywgATustcbbs/ustcthesis)
-  和 [ustctug/ustcthesis](https://github.com/ustctug/ustcthesis) 的代码
+  和
+  [ustctug/ustcthesis](https://github.com/ustctug/ustcthesis)
+  的代码
 
-* 编写按自己的喜好进行
+* 没有处理参考文献列表的格式. 请自行使用合适的 `.bst` 格式文件
 
-* 在论文规范的要求范围内对格式进行了一些优化
+* 请使用 XeLaTeX 或 LuaLaTeX 编译.
+  推荐使用 XeLaTeX, 使用 LuaLaTeX 时 `fontspec` 宏包不支持开启伪粗体.
 
 * 说明文档也还比较详细
 
-### 注意事项
+* 使用前请先阅读说明文档和示例文档
 
-* 使用指南请参考说明文档和预先给定的主文档内容
+* 编译前请先升级相关宏包
 
-* 请先升级宏包
+### 重要提醒
+
+* 本模板**不是**官方推荐模板
+
+* 本模板在格式上适当作了一些调整
+
+* 本模板作者**不对**使用者的格式问题负责
 
 ### 论文规范
-* [《中国科学技术大学研究生学位论文撰写规范》
-  ](http://gradschool.ustc.edu.cn/ylb/material/xw/wdxz/1.doc)
+
+* [《中国科学技术大学研究生学位论文撰写手册》
+  ]( https://gradschool.ustc.edu.cn/ylb/material/xw/wdxz/32.pdf)
+
 * [《关于本科毕业论文（设计）格式和统一封面的通知》
-  ](http://www.teach.ustc.edu.cn/document/doc-administration/4032.html)
+  ](https://www.teach.ustc.edu.cn/document/doc-administration/4032.html)
 %</readme>
 %<*internal>
 \fi
@@ -87,18 +100,25 @@ LaTeX version 2005/12/01 or later.
 %<class>\NeedsTeXFormat{LaTeX2e}
 %<class>\ProvidesClass{ustcthesis}
 %<*class>
-  [2017/05/30 v1.0.5 USTC thesis template]
+  [2019/02/11 v1.1 USTC thesis template]
 %</class>
 %
 %<*driver>
 \documentclass[a4paper]{ltxdoc}
-\usepackage{ctex,etoolbox,hypdoc}
+\usepackage{ctex}
+\usepackage{etoolbox,hypdoc}
 \usepackage{longtable,booktabs}
+\usepackage{enumitem,caption}
+\renewcommand*\tableautorefname{表}
+\setlist{nolistsep, leftmargin=*}
+\setlist[1]{labelindent=\parindent}
+\setlist[enumerate,1]{label=\textup{(\arabic*)}}
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
 \linespread{1.25}
 \AtBeginEnvironment{verbatim}{\linespread{1}}
+%\AtBeginEnvironment{verbatim}{\setlist[trivlist]{nolistsep}}
 \AtBeginEnvironment{macrocode}{\linespread{1}}
 \renewcommand\glossaryname{版本历史}
 \GlossaryPrologue{\section*{\glossaryname}}
@@ -166,31 +186,45 @@ LaTeX version 2005/12/01 or later.
 %
 % \section{简介}
 %
-% \verb|ustcthesis| 是用于排版中国科学技术大学学位论文的 \LaTeX{} 模板. 适用于
-% 学士, 硕士和博士的学位论文编写. 模板参照
-% 《中国科学技术大学研究生学位论文撰写规范》
-% \footnote{\url{http://gradschool.ustc.edu.cn/ylb/material/xw/wdxz/1.doc}}
+% |ustcthesis| 是中国科学技术大学学位论文的 \LaTeX{} 模板.
+% 适用于学士、硕士和博士学位论文.
+% 本模板参照《中国科学技术大学研究生学位论文撰写手册》
+% \footnote{\url{https://gradschool.ustc.edu.cn/ylb/material/xw/wdxz/32.pdf}}
 % 和《关于本科毕业论文（设计）格式和统一封面的通知》
-% \footnote{\url{http://www.teach.ustc.edu.cn/document/doc-administration/4032.html}}
-% 的要求编写. 本模板的编写过程中参考了已有的论文模板的编写方式.
+% \footnote{\url{https://www.teach.ustc.edu.cn/document/doc-administration/4032.html}}
+% 的要求编写.
 %
-% 早期的模板有中国科学技术大学本科论文模板 (作者XPS, 最后维护ywg)
+% 早期的论文模板有 ``中国科学技术大学本科论文模板'' (作者 XPS, 最后维护 ywg)
 % \footnote{\url{https://github.com/ywgATustcbbs/ustcthesis.bachelor}}
-% 和中国科学技术大学研究生论文模板 (作者Liuqs，主要维护Liuqs, Guolicai)
+% 和 ``中国科学技术大学研究生论文模板'' (作者 Liuqs, 主要维护 Liuqs, Guolicai)
 % \footnote{\url{https://github.com/ywgATustcbbs/ustcthesis.msphd}}.
-% 后来 ywg@USTC 对这两个模板进行了整合梳理并对其维护
+% 之后 ywg@USTC 对这两个模板进行了整合梳理并对其维护
 % \footnote{\url{https://github.com/ywgATustcbbs/ustcthesis}}.
-% 该模板在研究生院网站和 bbs 站点均有下载链接. 2015 年, seisman 和 zepinglee
-% 基于 \verb|ctex| 2.0 重新编写了模板
+% 后来 seisman 和 zepinglee 基于 |ctex| 2.0 重新编写了模板
 % \footnote{\url{https://github.com/ustctug/ustcthesis}}.
 %
-% ywg@USTC 整合后的模板有不少冗余代码. 该模板自 2016 年 2 月以来尚未更新.
-% 并且在 TeXLive 2016 下, 该模板中的 |appendix| 环境会报错. 而 seisman 和
-% zepinglee 写的模板中, 制作扉页时用了 |tikz| 宏包. 不少写法个人不喜欢.
-% 鉴于此我决定写个模板自用, 顺便把自己的编写思路记录下来. 因此本模板仅保证
-% 基本的格式要求. 额外的需求请自行使用相应的宏包.
+% ywg@USTC 整合后的模板有不少冗余代码.
+% 该模板自 2016 年 2 月以来尚未更新.
+% 在 TeXLive 2016 下, 该模板中的 |appendix| 环境会报错.
+% 而 seisman 和 zepinglee 写的模板中一些设置我个人不太喜欢.
+%
+% 鉴于以上原因, 我决定编写本模板自用, 顺便记录编写思路.
+% 编写过程中参考了以上模板的编写方式.
 %
 % 下载地址: \url{https://github.com/jiaopjie/ustcthesis}
+%
+% \subsection*{重要提醒}
+%
+% \begin{itemize}
+%   \item
+%     本模板\textsf{不是}官方推荐模板.
+%   \item
+%     本模板在格式上适当作了一些调整.
+%   \item
+%     本模板作者\textsf{不对}使用者的格式问题负责.
+%   \item
+%     本模板仅保证基本格式要求, 额外需求请自行使用相关宏包.
+% \end{itemize}
 %
 % \section{编译运行}
 %
@@ -199,17 +233,20 @@ LaTeX version 2005/12/01 or later.
 %
 % \subsection{模板结构}
 %
-% 本模板主要由以下文件组成.
+% 本模板主要文件如\autoref{tab:doc} 所示.
 %
-% \begin{center}
+% \begin{table}[!htb]
+%   \caption{模板主要文件}
+%   \label{tab:doc}
+%   \centering
 %   \begin{tabular}{lll}
 %     \toprule
 %     类别     & 文件               & 备注\\
 %     \midrule
-%     目录     & |bib/|             & 放置 |.bib| 文件\\
+%     目录     & |logo/|            & 放置校名和校徽\\
+%              & |bib/|             & 放置 |.bib| 文件\\
 %              & |chapter/|         & 放置主文档的各个章节\\
 %              & |figure/|          & 放置图片\\
-%              & |logo/|            & 放置校名和校徽\\
 %     \midrule
 %     模板文件 & |ustcthesis.dtx|   & 模板代码文件 (普通用户无需使用)\\
 %              & |ustcthesis.cls|   & 文档类文件\\
@@ -220,12 +257,9 @@ LaTeX version 2005/12/01 or later.
 %              & |chapter/*.tex|    & 主文档的各个章节\\
 %              & |bib/latex.bib|    & \BibTeX 数据文件\\
 %              & |figure/test.jpg|  & 图片文件\\
-%     \midrule
-%     编译文件 & |.latexmkrc|       & latexmk 的配置文件\\
-%              & |Makefile|         & GNU make 的配置文件\\
 %     \bottomrule
 %   \end{tabular}
-% \end{center}
+% \end{table}
 %
 % 其中的目录 |logo/| 以及目录下的两个 PDF 文件要在制作扉页时用到. 因此不能
 % 删除. 其他目录可以根据个人需要增删.
@@ -237,12 +271,10 @@ LaTeX version 2005/12/01 or later.
 % |ustcthesis.cls| 和模板说明文件 |ustcthesis.pdf|. 源代码文件仅用于模板维护
 % 和了解模板编写细节. 普通用户不必理会.
 %
-% 编译文件 |.latexmkrc| 和 |Makefile| 是用于命令行编译的配置文件. 不是必需的.
-% 这两个文件拷贝自 seisman 和 zepinglee 编写的模板.
-%
 % \subsection{宏包要求}
 %
-% 本模板直接依赖的宏包有: |ctex|, |fontspec|, |geometry|, |hyperref|,
+% 本模板直接依赖的宏包有:
+% |ctex|, |fontspec|, |geometry|, |graphicx|, |hyperref|,
 % |titleps|, |titletoc|, |caption|, |natbib|.
 %
 % 另外可能有一些间接依赖的宏包, 这里不一一提起. 编译运行前应该保证这些宏包已经
@@ -253,121 +285,133 @@ LaTeX version 2005/12/01 or later.
 %
 % \subsection{编译}
 %
-% 编译方式应该选用 XeLaTeX.
+% 本模板支持使用 XeLaTeX 或 LuaLaTeX 编译.
+% 以下是一些注意事项.
 %
-% 首先, 在 pdfLaTeX 编译方式下, |ctex| 宏包会选择 |CJK| 宏包来支持中文输出.
-% 这种模式下对中文空格的控制不好.
-%
-% 其次, 模板中使用了 |fontspec| 宏包, 而该宏包要求使用较新的 XeLaTeX 或者
-% LuaLaTeX 方式编译.
-%
-% 再者, 在 LuaLaTeX 编译方式下, |ctex| 宏包会选择 |luatexja| 宏包来支持
-% 中文输出. 不过或许是 |luatexja| 宏包的问题, 在使用 LuaLaTeX 编译时,
-% 有可能会出现一些字体选择方面的莫名其妙的问题.
-%
-% 另外, XeLaTeX 和 LuaLaTeX 在中文文档中断行的处理上貌似有些不同 (也有可能
-% 只是 |luatexja| 宏包和 |xeCJK| 宏包处理方式的不同).
-%
-% 总之, 还是建议使用 XeLaTeX 方式编译.
-%
-% \begin{enumerate}
-% \item \LaTeX{} 专用编辑器可视化编译
-%
-% 如果使用的编辑器是 \LaTeX{} 专用编辑器, 只要打开主文件 |main.tex|, 选择
-% |xelatex| 编译方式, 对主文档点击编译按钮编译即可. 下面是一些注意事项.
 % \begin{itemize}
-%   \item 要得到正确的目录、交叉引用、文献引用、页眉页脚等项目, 可能需要运行
+%   \item
+%     |fontspec| 宏包要求使用 XeLaTeX 或 LuaLaTeX 编译.
+%   \item
+%     XeLaTeX 和 LuaLaTeX 对中文断行的处理有些不同
+%     (也有可能只是 |luatexja| 宏包和 |xeCJK| 宏包处理方式的不同).
+%   \item
+%     使用 LuaLaTeX 时, |fontspec| 宏包不支持开启伪粗体.
+%   \item
+%     要得到正确的目录、交叉引用、文献引用、页眉页脚等项目, 可能需要运行
 %     两遍以上.
-%   \item 第一次编译之后可能需要运行一次 \BibTeX 以生成参考文献条目
+%   \item
+%     第一次编译之后可能需要运行一次 \BibTeX 以生成参考文献条目
 %     (在使用了 \BibTeX 数据文件的前提下).
-%   \item 在较新版本的 Windows 系统下用 |xelatex| 编译中文可能会卡在
-%     |eu1lmr.fd| 较长时间. 编译前运行一次 |fc-cache -fv| 命令可能会有效果.
-%     如果不行就用管理员模式运行一次. 如果还是不行, 就只好每次都用管理员权限
-%     运行编辑器进行编译.
+%   \item
+%     在较新版本的 Windows 系统下用 |xelatex| 编译中文可能会卡在
+%     |eu1lmr.fd| 较长时间. 可依次尝试以下解决方案.
+%     \begin{enumerate}
+%       \item 编译前运行一次 |fc-cache -fv| 命令.
+%       \item 在管理员模式编译一次.
+%       \item 每次都以管理员模式编译.
+%     \end{enumerate}
 % \end{itemize}
-% \item |latexmk|
 %
-% 在当前目录下运行 |latexmk| 命令进行编译. 配置文件由 |.latexmkrc| 给出,
-% 其参数设置为 |-xelatex|.
-% \begin{center}
-%   \begin{tabular}{ll}
-%     \toprule
-%     命令                     & 功能\\
-%     \midrule
-%     |latexmk main|           & 编译主文档 |main.pdf|\\
-%     |latexmk ustcthesis.dtx| & 编译说明文档 |ustcthesis.pdf|\\
-%     |latexmk -c|             & 清理辅助文件\\
-%     \bottomrule
-%   \end{tabular}
-% \end{center}
-% \item GNU make
+% \section{模板说明}
 %
-%   Linux/Mac 用户, 可以直接使用 GNU make 工具.
-% \begin{center}
-%   \begin{tabular}{ll}
-%     \toprule
-%     命令         & 功能\\
-%     \midrule
-%     |make|       & 编译主文档 |main.pdf|\\
-%     |make doc|   & 编译说明文档 |ustcthesis.pdf|\\
-%     |make clean| & 清理辅助文件\\
-%     \bottomrule
-%   \end{tabular}
-% \end{center}
-% \item 手动编译
+% 注意到《中国科学技术大学研究生学位论文撰写手册》中的格式要求
+% 与对应的 Word 模板有矛盾的地方.
+% 这里适当作了一些调整.
 %
-% 自己去搞吧.
-% \end{enumerate}
+% \subsection{注意事项}
 %
-% \section{模板简介}
+% 使用本模板之前请注意以下事项.
+%
+% \begin{itemize}
+%   \item
+%     扉页中各项目与页面上边缘的距离作了调整.
+%   \item
+%     两到四字的章标题 (包括目录、摘要、致谢等), 字中间没有留空白.
+%   \item
+%     没有处理参考文献列表的格式. 请自行使用合适的 |.bst| 格式文件.
+%   \item
+%     默认未开启伪粗体.
+%   \item
+%     使用前请升级宏包. 其中 |ctex| 宏包应该升级到 2.0 版本以上.
+% \end{itemize}
 %
 % \subsection{文档选项}
 %
-% 本模板基于标准文档类 |book| 编写. 设置了三个文档选项 |bachelor|, |master|,
-% |doctor| 用于区分学士、硕士、博士学位论文.
+% 本模板基于标准文档类 |book| 编写,
+% 并新设置了一些文档选项, 如\autoref{tab:doc-option} 所示.
 %
-% \begin{center}
+% \begin{table}[!htb]
+%   \caption{模板的文档选项}
+%   \label{tab:doc-option}
+%   \centering
 %   \begin{tabular}{ll}
 %     \toprule
-%     选项        & 说明\\
+%     选项           & 说明\\
 %     \midrule
-%     |bachelor|  & 学士论文\\
-%     |master|    & 硕士论文\\
-%     |doctor|    & 博士论文 (默认)\\
-%     |chinese|   & 中文论文 (默认)\\
-%     |english|   & 英文论文\\
+%     |doctor|       & 博士学位 (默认)\\
+%     |master|       & 硕士学位\\
+%     |bachelor|     & 学士学位\\
+%     \midrule
+%     |chinese|      & 中文论文 (默认)\\
+%     |english|      & 英文论文\\
+%     \midrule
+%     |academic|     & 学术学位 (默认)\\
+%     |professional| & 专业学位\\
 %     \bottomrule
 %   \end{tabular}
-% \end{center}
+% \end{table}
 %
-% 另外, |book| 文档类提供的文档选项仍然可以使用. 下面是常用的选项.
+% 另外, |book| 文档类提供的文档选项仍然可用.
+% 模板更改了其中 |openright| 和 |openany| 选项的默认值,
+% 参见\autoref{tab:book-option}.
 %
-% \begin{center}
-%   \begin{tabular}{lp{0.5\textwidth}l}
+% \begin{table}[!htb]
+%   \caption{单双面选项}
+%   \label{tab:book-option}
+%   \centering
+%   \begin{tabular}{lp{16em}l}
 %     \toprule
 %     选项        & 说明\\
 %     \midrule
-%     |oneside|   & 单面格式 (|bachelor| 默认)\\
-%     |twoside|   & 双面格式 (|master|, |doctor| 默认)\\
+%     |oneside|   & 单面格式\\
+%     |twoside|   & 双面格式 (默认)\\
 %     \midrule
 %     |openright| & 双面格式下新一章总是从奇数页开始\\
 %     |openany|   & 双面格式下新一章总是从新一页开始
-%                   (|master|, |doctor| 默认)\\
+%                   (双面格式下默认)\\
 %     \bottomrule
 %   \end{tabular}
-% \end{center}
+% \end{table}
 %
 % \subsection{字体设置}
 %
-% 中文字体由 |ctex| 宏包自动设置. 英文字体调用 |fontspec| 宏包进行设置. 衬线
-% 字体为 Times New Roman, 无衬线字体为 Arial, 等宽字体保持默认.
+% 英文字体调用 |fontspec| 宏包进行设置.
+% 衬线字体为 Times New Roman, 无衬线字体为 Arial, 等宽字体保持默认.
 %
-% 用户也可以自定义文档字体. 其中中文字体设置命令由 |ctex| 宏包提供.
+% 中文字体由 |ctex| 宏包自动设置.
+% 以下几点需要注意.
 %
-% \begin{center}
+% \begin{itemize}
+%   \item
+%     较新的 Windows 系统下默认的微软雅黑可能不太适合打印.
+%   \item
+%     其他系统可能会缺少一些字体, 如仿宋、隶书以及 Times New Roman 等.
+%   \item
+%     \verb|ctex| 宏包默认不开启伪粗体, 此时宋体的加粗一般用黑体代替.
+% \end{itemize}
+%
+% 用户可以自定义文档字体. 相关命令可参见\autoref{tab:font-set}.
+% 自定义字体时可通过 |BoldFont| 选项设定粗体的替代字体
+% (或通过 |AutoFakeBold| 选项开启伪粗体),
+% 通过 |ItalicFont| 选项设定斜体的替代字体.
+%
+% \begin{table}[!htb]
+%   \caption{自定义字体命令}
+%   \label{tab:font-set}
+%   \centering
 %   \begin{tabular}{ll}
 %     \toprule
-%     选项              & 说明\\
+%     命令              & 说明\\
 %     \midrule
 %     |\setmainfont|    & 设置衬线字体\\
 %     |\setsansfont|    & 设置无衬线字体\\
@@ -378,29 +422,97 @@ LaTeX version 2005/12/01 or later.
 %     |\setCJKmonofont| & 设置中文等宽字体\\
 %     \bottomrule
 %   \end{tabular}
-% \end{center}
+% \end{table}
 %
-% 下面是一个自定义中文字体的例子.
-% \begin{verbatim}
-% \setCJKmainfont
-%   [BoldFont={STZhongsong}, ItalicFont={KaiTi}]{SimSun}
-% \setCJKsansfont
-%   [BoldFont={FandolHei-Bold}, ItalicFont={KaiTi}]{SimHei}
-% \end{verbatim}
+% 下面针对 Windows 系统提供几点解决方案.
+%
+% \begin{enumerate}
+%   \item
+%     使用 Fandol 字体 (比较容易缺字), 或自行下载有粗体形式的字体
+%     (如思源字体). 设置如下 (斜体用楷体代替).
+%\begin{verbatim}
+%\setCJKmainfont[ItalicFont={KaiTi}]{Source Han Serif SC}
+%\setCJKsansfont[ItalicFont={KaiTi}]{Source Han Sans SC}
+%\end{verbatim}
+%   \item
+%     使用中易字体, 并开启伪粗体. 伪粗体一般被认为质量比较差, 慎用.
+%\begin{verbatim}
+%\setCJKmainfont[AutoFakeBold=2.9,ItalicFont={KaiTi}]{SimSun}
+%\setCJKsansfont[AutoFakeBold=2.9,ItalicFont={KaiTi}]{SimHei}
+%\end{verbatim}
+%   \item
+%     使用中易黑体替换微软雅黑, 且关闭伪粗体.
+%     宋体的加粗形式一般是使用黑体代替.
+%\begin{verbatim}
+%\setCJKsansfont[ItalicFont={KaiTi}]{SimHei}
+%\end{verbatim}
+%     这种情况下, 中英混排会有以下两个小问题.
+%     \begin{itemize}
+%       \item
+%         黑体加粗时 (如扉页中的文章标题和研究生论文的章标题),
+%         中文不加粗, 而英文加粗, 稍微欠协调.
+%       \item
+%         宋体加粗时 (如研究生论文的插图和表格标题),
+%         中文是黑体, 而英文是加粗的 Times New Roman, 稍微欠协调.
+%     \end{itemize}
+%     用户可自行把相应的标题都修改为黑体不加粗.
+%     这主要包括中英文标题、章标题、插图和表格标题、“关键词”字样.
+%     其中, 中英文标题不加粗, 可在 |\title| 和 |\entitle| 的参数中
+%     加上 |\mdseries|.
+%\begin{verbatim}
+%\ctexset{chapter={format+=\mdseries}}
+%\captionsetup{font+={md,sf}}
+%\title{\mdseries <中文标题>}
+%\entitle{\mdseries <English title>}
+%\renewcommand\keywords[1]
+%  {\par\vspace{\baselineskip}\noindent\textsf{关键词：}#1}
+%\end{verbatim}
+% \end{enumerate}
+%
+% 研究生论文撰写手册里要求的单倍行距到底是几倍的字号, 这个含义不太明确.
+% 在 Word 里面, 这个倍数值会随着字号的变化而不同.
+% 中文出版惯例上似乎有设置行距为 1.5 倍字号的规范, 这里参照设置,
+% 并兼顾正文字体行距 20\,bp (研究生论文) 和 22\,bp (本科生论文) 的要求.
+%
+% \subsection{页面设置}
+%
+% 研究生论文 front matter 部分的页码采用大写罗马数字形式.
+% 若要改为小写罗马数字, 可在 |\frontmatter| 后加上 |\pagenumbering{roman}|.
+% 本科生论文该部分不打印页码.
+%
+% 模板的页码都置于页脚中央, 若要置于页脚外侧, 可在导言区设置如下.
+%\begin{verbatim}
+%\makeatletter
+%\renewpagestyle{main}[\ustc@head@font]{%
+%  \sethead{}{\ustc@head@header}{}%
+%  \setfoot[\ustc@head@footer][][]{}{}{\ustc@head@footer}%
+%  \headrule
+%}%
+%\makeatother
+%\end{verbatim}
 %
 % \subsection{扉页}
 %
-% 扉页的安排并没有完全遵循规范的要求. 尤其是规范里单独为扉页设置了页面边距.
-% 但考虑到扉页不显示页眉页脚, 并且扉页里的各信息也都规定了距离页面边缘的距离.
-% 因此, 这里扉页使用了正文的页面边距设置.
+% 扉页中各项目与页面上边缘的距离作了调整.
+% 下面是一些注意事项.
 %
-% 这里把扉页和原创性声明页的页码格式改为 |Alph| 的样式, 用以和后面的正文的页码
-% 区分. 另外, 由于 |hyperref| 宏包的作用, 这里的页码虽然不会打印在 PDF 页面上,
-% 但会显示在 PDF 阅读器的页码栏中.
+% \begin{itemize}
+%   \item
+%     扉页所需的个人信息由\autoref{tab:info} 中命令设置, 它们应该用在导言区.
+%   \item
+%     若导师多于一人, 请一并用 |\supervisor| 和 |\ensupervisor| 给出.
+%   \item
+%     若英文专业或导师的文本过长, 可用 |\\| 在合适的地方换行.
+%   \item
+%     扉页由命令 |\maketitle| 生成, 它应该作为正文开始后的第一个命令.
+%   \item
+%     默认日期为当前日期.
+% \end{itemize}
 %
-% 扉页中的个人信息由下述命令提供.
-%
-% \begin{center}
+% \begin{table}[!htb]
+%   \caption{个人信息命令}
+%   \label{tab:info}
+%   \centering
 %   \begin{tabular}{lll}
 %     \toprule
 %     命令            & 命令 (英文)       & 说明\\
@@ -409,84 +521,70 @@ LaTeX version 2005/12/01 or later.
 %     |\author|       & |\enauthor|       & 作者姓名\\
 %     |\major|        & |\enmajor|        & 学科专业\\
 %     |\supervisor|   & |\ensupervisor|   & 导师姓名\\
-%     |\cosupervisor| & |\encosupervisor| & 合作导师 (不设置则不显示该项)\\
 %     |\date|         & |\endate|         & 完成日期\\
-%     |\secrettext|   & |\ensecrettext|   & 密级信息 (不设置则不显示该项)\\
+%     |\secrettext|   & |\ensecrettext|   & 密级信息\\
 %     \bottomrule
 %   \end{tabular}
-% \end{center}
+% \end{table}
 %
-% 这些命令都有一个必选参数用于提供相应的个人信息. 个人信息用于制作扉页.
-% 扉页由命令 |\maketitle| 生成. 该命令应该作为正文开始后的第一个命令.
-% 个人信息应该在 |\maketitle| 命令之前提供, 最好是放在导言区.
-%
-% 这里设置默认日期为当前日期. 可通过命令 |\date| 重新设置. 可以手工填写日期,
-% 也可以使用 |\today| 命令. |ctex| 宏包 对该命令进行了汉化, 并提供了 |small|,
-% |big|, |old| 三种样式供选择. 前两种样式是中文的日期样式, 最后一种是原本的
-% 英文日期样式. 两种中文日期样式的区别是, |small| 使用阿拉伯数字而 |big|
-% 则全部为汉字. |ctex| 默认的是 |small| 样式. |\ctexset{today=old}| 则切换到
-% 英文日期样式.
+% 其中 |\date| 的参数可使用 |\today| 命令, 也可手工填写日期.
+% |ctex| 宏包汉化了 |\today| 命令,
+% 并提供了 |small|, |big|, |old| 三种样式.
+% \begin{itemize}
+%   \item |small| 中文样式, 其中数字使用阿拉伯数字.
+%   \item |big| 全汉字样式.
+%   \item |old| 原英文样式.
+% \end{itemize}
+% |ctex| 默认的是 |small| 样式. |\ctexset{today=old}| 则切换到英文日期样式.
 %
 % 要使用更复杂的中文日期样式, 可以使用 |zhnumber| 宏包. |ctex| 宏包默认
 % 加载了该宏包.
 %
 % 另外, 全部是汉字的日期可能会比较长. 因此只写年和月似乎也是个不错的选择.
 % 例如, 下面两个命令分别用于生成中英文的年月.
-% \begin{verbatim}
-% \newcommand{\enmonth}{\ifcase\month
-%   \or January\or February\or March\or April\or May \or June\or July\or
-%   August\or September\or October\or November\or December\fi, \the\year}
-% \newcommand{\zhmonth}{\zhdigits{\the\year}年\zhdigits{\the\month}月}
-% \end{verbatim}
+%\begin{verbatim}
+%\newcommand{\zhmonth}{\zhdigits{\the\year}年\zhdigits{\the\month}月}
+%\newcommand{\enmonth}{\ifcase\month
+%  \or January\or February\or March\or April\or May \or June\or July\or
+%  August\or September\or October\or November\or December\fi, \the\year}
+%\end{verbatim}
 % 其中的 |\zhdigits| 命令是由 |zhnumber| 宏包提供的命令.
-%
-% \subsection{章节标题}
-%
-% 研究生学位论文规范里要求的 ``单倍行距'' 到底是几倍的字号, 这个含义不太明确.
-% 在 Word 里面, 这个倍值会随着字号的变化而不同. 中文出版惯例上似乎有设置行距
-% 为 1.5 倍字号的规范. 这里就参照这个倍数来设置. 并兼顾正文字体行距 20bp
-% (研究生论文) 和 22bp (本科生论文) 的要求.
-%
-% 章节标题格式是用 |ctex| 宏包来设置的. 该宏包在 2016 年 6 月 3 日的更新
-% 中引入了一个新的选项 |fixskip| 用于修正章标题前的空白. 通过 |ctex| 的
-% 选项设置命令把该选项的值设为真即可激活.\\
-% |\ctexset{chapter/fixskip=true}|\\
-% 但考虑到该选项太新, 似乎不适合写在 |.cls| 文件中. 因此把这条命令放在了
-% 主文档 |main.tex| 的导言区, 并且默认注释掉. 如果把 |ctex| 宏包升级到了
-% 2016 年 6 月 3 日之后的版本, 可以开启该选项.
 %
 % \subsection{摘要等环境}
 %
-% 本模板提供了 ``中文摘要'', ``英文摘要'', ``符号说明'', ``致谢'' 和
-% ``在读期间发表的学术论文与取得的研究成果'' 五个环境, 以及 ``中文关键词''
-% 和 ``英文关键词'' 两个命令.
+% 本模板对中英文摘要、符号说明、致谢、研究成果部分提供了专门的环境,
+% 如\autoref{tab:doc-environment} 所示.
+% 这主要是因为这些部分的格式要求与普通章的格式略有区别.
 %
-% \begin{center}
+% 如果不在意这种区别的话, 完全可以用 |\chapter*| 甚至 |\chapter| 命令来代替.
+% 例如 |\chapter{摘要}|, |\chapter{符号说明}|.
+%
+% \begin{table}[!htb]
+%   \caption{模板提供的环境}
+%   \label{tab:doc-environment}
+%   \centering
 %   \begin{tabular}{ll}
 %     \toprule
-%     环境或命令              & 说明\\
+%     环境或命令         & 说明\\
 %     \midrule
-%     \verb|abstract|         & 中文摘要\\
-%     \verb|enabstract|       & 英文摘要\\
-%     \verb|notation|         & 符号说明\\
-%     \verb|acknowledgements| & 致谢\\
-%     \verb|publications|     & 研究成果\\
+%     |abstract|         & 中文摘要\\
+%     |enabstract|       & 英文摘要\\
+%     |notation|         & 符号说明\\
+%     |acknowledgements| & 致谢\\
+%     |publications|     & 研究成果\\
 %     \midrule
-%     \verb|\keywords|        & 中文关键词
-%                               (该命令应该写在 \verb|abstract| 环境中)\\
-%     \verb|\enkeywords|      & 英文关键词
-%                               (该命令应该写在 \verb|enabstract| 环境中)\\
+%     |\keywords|        & 中文关键词
+%                          (用在 |abstract| 环境中)\\
+%     |\enkeywords|      & 英文关键词
+%                          (用在 |enabstract| 环境中)\\
 %     \bottomrule
 %   \end{tabular}
-% \end{center}
-%
-% 提供这几个环境的主要原因是这些环境的标题格式跟普通的章标题格式略有不同.
-% 如果不在意这种区别的话, 完全可以用 |\chapter| 命令或者 |\chapter*| 命令
-% 来代替. 例如 |\chapter{摘要}|, |\chapter{符号说明}|.
+% \end{table}
 %
 % \subsection{目录和图、表}
 %
-% |book| 文档类原本已有生成目录, 插图和表格的索引的命令.
+% |book| 文档类原本已有生成目录、插图和表格的索引的命令.
+%
 % \begin{center}
 %   \begin{tabular}{ll}
 %     \toprule
@@ -503,90 +601,83 @@ LaTeX version 2005/12/01 or later.
 % 不需要出现在索引中的插图或者表格可以不用 |\caption| 命令来创建图题和表题.
 % 或者使用 |\caption*| 创建不自动编号的图题和表题.
 %
-% \noindent
-% \DescribeMacro{\captionnote} 创建图注和表注. 应该用在对应的 |figure| 环境
-% 或者 |table| 环境中.
+% 需要注意的是, |\caption| 命令并不能控制在浮动环境中的位置,
+% 作者应该把该命令写在需要的地方.
+%
+% \DescribeMacro{\captionnote}
+% 创建图注和表注, 用在 |figure| 或 |table| 环境中.
+% 该命令也需要作者根据要求手动写在浮动环境的上部或下部.
 %
 % \subsection{长表格}
 %
 % 对于长表格, 模板中没有进行专门的设置. 如果要用到需要换页的长表格, 可以自行
-% 使用宏包 |longtable| 来实现. 使用方法参见相关说明文档. 另外可以使用宏包
-% |booktabs| 来生成特定粗细的表格线. 下面这段代码是一个例子.
+% 使用宏包 |longtable| 来实现. 使用方法参见相关说明文档.
 %
-% \begin{verbatim}
-% \documentclass{article}
-% \usepackage{longtable,booktabs}
-% \begin{document}
-% \begin{center}
-%   \begin{longtable}{cccc}
-%     \caption{long table}\label{tab:longtable}\\ % 首页的表序
-%     \toprule[1.5pt]
-%     left & middle1 & middle2 & right\\
-%     \midrule[1pt]
-%     \endfirsthead  % 到这里为止是首页的表头
-%     \caption[]{long table (continued)}\\ % 后续页的表序
-%     \toprule[1.5pt]
-%     left & middle1 & middle2 & right\\
-%     \midrule[1pt]
-%     \endhead  % 到这里为止是后续页的表头
-%     \hline
-%     \multicolumn{4}{r}{\small continue}
-%     \endfoot  % 到这里为止是首页的表尾
-%     \bottomrule[1.5pt]
-%     \endlastfoot  % 到这里为止是后续页的表尾
-%     1  &  abc  &  def  &  xyz \\
-%     2  &  abc  &  def  &  xyz \\
-%     3  &  abc  &  def  &  xyz \\
-%     4  &  abc  &  def  &  xyz \\
-%     5  &  abc  &  def  &  xyz \\
-%     6  &  abc  &  def  &  xyz \\
-%     7  &  abc  &  def  &  xyz \\
-%     8  &  abc  &  def  &  xyz \\
-%     9  &  abc  &  def  &  xyz \\
-%     10 &  abc  &  def  &  xyz \\
-%     11 &  abc  &  def  &  xyz \\
-%     12 &  abc  &  def  &  xyz \\
-%     13 &  abc  &  def  &  xyz \\
-%     14 &  abc  &  def  &  xyz \\
-%     15 &  abc  &  def  &  xyz \\
-%     16 &  abc  &  def  &  xyz \\
-%     17 &  abc  &  def  &  xyz \\
-%     18 &  abc  &  def  &  xyz \\
-%     19 &  abc  &  def  &  xyz \\
-%     20 &  abc  &  def  &  xyz \\
-%     21 &  abc  &  def  &  xyz \\
-%     22 &  abc  &  def  &  xyz \\
-%     23 &  abc  &  def  &  xyz \\
-%     24 &  abc  &  def  &  xyz \\
-%     25 &  abc  &  def  &  xyz \\
-%     26 &  abc  &  def  &  xyz \\
-%     27 &  abc  &  def  &  xyz \\
-%     28 &  abc  &  def  &  xyz \\
-%     29 &  abc  &  def  &  xyz \\
-%     30 &  abc  &  def  &  xyz \\
-%     31 &  abc  &  def  &  xyz \\
-%     32 &  abc  &  def  &  xyz \\
-%     33 &  abc  &  def  &  xyz \\
-%     34 &  abc  &  def  &  xyz \\
-%     35 &  abc  &  def  &  xyz \\
-%   \end{longtable}
-% \end{center}
-% \end{document}
-% \end{verbatim}
+% 下面的代码给出了一个完整的示例.
 %
-% 下面的表~\ref{tab:longtable} 即是效果. 其中的 |\toprule|, |\midrule| 和
-% |\bottomrule| 是由 |booktabs| 提供的命令. 这些命令跟 \LaTeX{} 原本的命令
-% |\hline| 类似. 只不过是可以更改线条的粗细, 并对横线上下的空白做了一些优化.
+%\begin{verbatim}
+%\documentclass{article}
+%\usepackage{longtable,booktabs}
+%\begin{document}
+%\begin{center}
+%  \begin{longtable}{cccc}
+%    \caption{long table}\label{tab:longtable}\\ % 首页的表序
+%    \toprule[1.5pt]
+%    left & middle1 & middle2 & right\\
+%    \midrule[1pt]
+%    \endfirsthead  % 到这里为止是首页的表头
+%    \caption[]{long table (continued)}\\ % 后续页的表序
+%    \toprule[1.5pt]
+%    left & middle1 & middle2 & right\\
+%    \midrule[1pt]
+%    \endhead  % 到这里为止是后续页的表头
+%    \hline
+%    \multicolumn{4}{r}{\small continue}
+%    \endfoot  % 到这里为止是首页的表尾
+%    \bottomrule[1.5pt]
+%    \endlastfoot  % 到这里为止是后续页的表尾
+%    1  &  abc  &  def  &  xyz \\
+%    2  &  abc  &  def  &  xyz \\
+%    3  &  abc  &  def  &  xyz \\
+%    4  &  abc  &  def  &  xyz \\
+%    5  &  abc  &  def  &  xyz \\
+%    6  &  abc  &  def  &  xyz \\
+%    7  &  abc  &  def  &  xyz \\
+%    8  &  abc  &  def  &  xyz \\
+%    9  &  abc  &  def  &  xyz \\
+%    10 &  abc  &  def  &  xyz \\
+%    11 &  abc  &  def  &  xyz \\
+%    12 &  abc  &  def  &  xyz \\
+%    13 &  abc  &  def  &  xyz \\
+%    14 &  abc  &  def  &  xyz \\
+%    15 &  abc  &  def  &  xyz \\
+%    16 &  abc  &  def  &  xyz \\
+%    17 &  abc  &  def  &  xyz \\
+%    18 &  abc  &  def  &  xyz \\
+%    19 &  abc  &  def  &  xyz \\
+%    20 &  abc  &  def  &  xyz \\
+%    21 &  abc  &  def  &  xyz \\
+%    22 &  abc  &  def  &  xyz \\
+%    23 &  abc  &  def  &  xyz \\
+%    24 &  abc  &  def  &  xyz \\
+%    25 &  abc  &  def  &  xyz \\
+%    26 &  abc  &  def  &  xyz \\
+%    27 &  abc  &  def  &  xyz \\
+%    28 &  abc  &  def  &  xyz \\
+%    29 &  abc  &  def  &  xyz \\
+%    30 &  abc  &  def  &  xyz \\
+%    31 &  abc  &  def  &  xyz \\
+%    32 &  abc  &  def  &  xyz \\
+%    33 &  abc  &  def  &  xyz \\
+%    34 &  abc  &  def  &  xyz \\
+%    35 &  abc  &  def  &  xyz \\
+%  \end{longtable}
+%\end{center}
+%\end{document}
+%\end{verbatim}
 %
-% 第一个 |\caption| 命令没有可选参数, 将产生一个可以被 |\listoftables| 索引的
-% 自动编号的表序. 它的必选参数生成表题.
-%
-% 第二个 |\caption| 命令没有带 |*|. 此时续表将沿用前驱表的表序. 但这个命令有
-% 一个空的可选参数. 这表示这个沿用的表序将不会被 |\listoftables| 索引. 后面
-% |\endhead| 之后的 |\hline| 表示在首页的表尾后画一条横线.
-%
-% 接着 |\multicolumn{4}{r}{\small 续下页}| 命令在横线下靠右侧写下 ``续下页''
-% 三个字. 其中的参数 |4| 表示占用 4 个表项的宽度.
+% 该表格的效果如下.
+% 这里给它加了表头, 方便在其他位置引用.
 %
 % \begin{center}
 %   \begin{longtable}{cccc}
@@ -642,23 +733,42 @@ LaTeX version 2005/12/01 or later.
 %   \end{longtable}
 % \end{center}
 %
+% 其中的 |\toprule|, |\midrule| 和 |\bottomrule| 是由 |booktabs| 提供的命令.
+% 这些命令跟 \LaTeX{} 原本的命令 |\hline| 类似.
+% 只不过是可以更改线条的粗细, 并对横线上下的空白做了一些优化.
+%
+% 第一个 |\caption| 命令没有可选参数, 将产生一个可以被 |\listoftables| 索引的
+% 自动编号的表序. 它的必选参数生成表题.
+%
+% 第二个 |\caption| 命令没有带 |*|. 此时续表将沿用前驱表的表序. 但这个命令有
+% 一个空的可选参数. 这表示这个沿用的表序将不会被 |\listoftables| 索引. 后面
+% |\endhead| 之后的 |\hline| 表示在首页的表尾后画一条横线.
+%
+% 接着 |\multicolumn{4}{r}{\small 续下页}| 命令在横线下靠右侧写下“续下页”
+% 三个字. 其中的参数 |4| 表示占用 4 个表项的宽度.
+%
 % \subsection{项目编号}
 %
 % |book| 文档类默认的 |itemize| 与 |enumerate| 环境的各条项目之间的距离偏大.
 % 可以通过宏包 |enumitem| 来进行个性化设置. 相关使用方法请参阅该宏包的说明文档.
 %
-% 下面给出的是一个例子.
-% 其中第一行设置项目之间的距离就等于普通的行间距.
-% 第二行表示对 |enumerate| 环境的第一级进行设置.
-% 第三行表示项目标号的缩进等于段落首行缩进, 并且标号使用直立字体,
-% 标号格式是阿拉伯数字外加圆括号.
-% \begin{verbatim}
-% \setlist{nolistsep}
-% \setlist[enumerate,1]
-%   {labelindent=\parindent, leftmargin=*, label=\textup{(\arabic*)}}
-% \end{verbatim}
+% 下面的设置是一个简单的例子, 含义如下.
+% \begin{itemize}
+%   \item
+%     项目之间的距离就等于普通的行间距.
+%   \item
+%     第一级环境的项目标号的缩进等于段落首行缩进.
+%   \item
+%     第一级 |enumerate| 环境的项目标号样式为直立的 (1).
+% \end{itemize}
 %
-% \subsection{定理环境}
+%\begin{verbatim}
+%\setlist{nolistsep, leftmargin=*}
+%\setlist[1]{labelindent=\parindent}
+%\setlist[enumerate,1]{label=\textup{(\arabic*)}}
+%\end{verbatim}
+%
+% \subsection{定理类环境}
 %
 % 关于定理环境, 模板里也没有做特殊的设置. 用户可以自行决定使用 \LaTeX{} 本身的
 % 定理环境还是 |amsthm| 增强的定理环境.
@@ -666,26 +776,30 @@ LaTeX version 2005/12/01 or later.
 % 为了适配中文习惯. 可以使用 |amsthm| 宏包提供的 |\newtheoremstyle| 命令来新
 % 定义一种定理样式. 该命令有 9 个参数. 下面是每个参数的含义以及 |plain| 样式
 % 的对应取值.
-% \begin{verbatim}
-% \newtheoremstyle  % default of `plain' style
-%   {ustctheorem}   % NAME
-%   {\topsep}       % ABOVESPACE
-%   {\topsep}       % BELOWSPACE
-%   {\itshape}      % BODYFONT
-%   {}              % INDENT (empty value is the same as 0pt)
-%   {\bfseries}     % HEADFONT
-%   {.}             % HEADPUNCT
-%   {5pt plus 1pt minus 1pt} % HEADSPACE
-%   {}              % CUSTOM-HEAD-SPEC
-% \end{verbatim}
+%\begin{verbatim}
+%\newtheoremstyle  % default of `plain' style
+%  {ustctheorem}   % NAME
+%  {\topsep}       % ABOVESPACE
+%  {\topsep}       % BELOWSPACE
+%  {\itshape}      % BODYFONT
+%  {}              % INDENT (empty value is the same as 0pt)
+%  {\bfseries}     % HEADFONT
+%  {.}             % HEADPUNCT
+%  {5pt plus 1pt minus 1pt} % HEADSPACE
+%  {}              % CUSTOM-HEAD-SPEC
+%\end{verbatim}
 %
-% 这里给出 ``定理'' 和 ``定义'' 两种定理样式.
-% \begin{verbatim}
-% \newtheoremstyle{ustctheorem}
-%   {\topsep}{\topsep}{\itshape}{}{\sffamily}{}{1em}{}
-% \newtheoremstyle{ustcdefinition}
-%   {\topsep}{\topsep}{}{}{\sffamily}{}{1em}{}
-% \end{verbatim}
+% 这里给出定理和定义两种定理样式,
+% 并把证明环境的标题改为“证”字.
+% 它们的首行都缩进两字符.
+%
+%\begin{verbatim}
+%\newtheoremstyle{ustctheorem}
+%  {\topsep}{\topsep}{\itshape}{\parindent}{\sffamily}{}{1em}{}
+%\newtheoremstyle{ustcdefinition}
+%  {\topsep}{\topsep}{}{\parindent}{\sffamily}{}{1em}{}
+%\renewcommand\proofname{\upshape\sffamily\indent 证.}
+%\end{verbatim}
 %
 % \subsection{自动引用}
 %
@@ -695,19 +809,20 @@ LaTeX version 2005/12/01 or later.
 % 本模板中已经对常用的引用项目作了汉化. 中文章节序号的安排习惯与西文不同.
 % 这里也进行了调整.
 %
-% 另外, 在数学中各种定理环境经常共用一个计数器. 此时这些定理环境对应的自动引用
-% 也共享同样的前缀. 若要对不同定理环境区分前缀, 可通过宏包 |aliascnt| 对
-% |hyperref| 宏包做一些修正.
+% 需要注意的是, 该机制通过识别计数器工作.
+% 数学中各种定理环境经常共用一个计数器. 这样, 相应的自动引用前缀就是一样的.
+% 若要对不同定理环境区分前缀, 可通过 |aliascnt| 宏包进行修正.
+% 详情可参见宏包 |aliascnt| 和 |hyperref| 的说明文档.
 %
 % 下面是一个用宏包 |aliascnt| 修正的例子. 这里定义了 |theorem| 和 |lemma| 环境.
 % 这两个环境共享计数器.
-% \begin{verbatim}
-% \newtheorem{theorem}{定理}[section]
-% \newaliascnt{lemma}{theorem}
-% \newtheorem{lemma}[lemma]{引理}
-% \aliascntresetthe{lemma}
-% \newcommand\lemmaautorefname{引理}
-% \end{verbatim}
+%\begin{verbatim}
+%\newtheorem{theorem}{定理}[section]
+%\newaliascnt{lemma}{theorem}
+%\newtheorem{lemma}[lemma]{引理}
+%\aliascntresetthe{lemma}
+%\newcommand\lemmaautorefname{引理}
+%\end{verbatim}
 %
 % 这里 |\newaliascnt| 命令新建了 |lemma| 计数器. 这个计数器跟 |theorem| 关联.
 % 接下来的 |\newtheorem| 命令用上面新建的计数器创建了 |lemma| 环境. 但是由于
@@ -715,79 +830,89 @@ LaTeX version 2005/12/01 or later.
 % 命令创建 |lemma| 环境对应的自动引用前缀.
 %
 % 可以把上面的命令组合成一个宏, 方便多个定理环境的创建.
-% \begin{verbatim}
-% \newcommand\newautoreftheorem[3]{%
-%   \newaliascnt{#1}{#2}%
-%   \newtheorem{#1}[#1]{#3}%
-%   \aliascntresetthe{#1}%
-%   \expandafter\newcommand\csname #1autorefname\endcsname{#3}%
-% }
-% \newtheorem{theorem}{定理}[section]
-% \newautoreftheorem{lemma}{theorem}{引理}
-% \end{verbatim}
+%\begin{verbatim}
+%\newcommand\newautoreftheorem[3]{%
+%  \newaliascnt{#1}{#2}%
+%  \newtheorem{#1}[#1]{#3}%
+%  \aliascntresetthe{#1}%
+%  \expandafter\newcommand\csname #1autorefname\endcsname{#3}%
+%}
+%\newtheorem{theorem}{定理}[section]
+%\newautoreftheorem{lemma}{theorem}{引理}
+%\end{verbatim}
 %
 % \subsection{参考文献}
 %
-% 参考文献部分使用了 |natbib| 宏包. 在该宏包下引用文献时有两种模式: author-year
-% 模式和 numerical 模式. 这两种模式可分别由选项 |authoryear| 和 |numbers| 激活.
-% 其中 author-year 模式是缺省模式. 本模板载入该宏包时使用了 |numbers| 选项.
-% 因此, 文档开始时进入的是 numerical 模式.
+% 参考文献引用部分使用了 |natbib| 宏包.
 %
-% 载入宏包 |natbib| 时还可使用 |sort|, |compress| 和 |sort&compress| 选项.
-% 其中 |sort| 表示会在多文献引用时进行排序. 选项 |compress| 表示在多文献引用是
-% 顺序排列的时候会进行缩写. 例如会把 [1,2,3,4] 缩写为 [1--4]. 选项
-% |sort&compress| 则会对多文献引用先排序, 再尽可能的缩写.
+% |natbib| 宏包提供了两种引用模式: author-year 和 numerical.
+% 它们可分别使用 |authoryear| 和 |numbers| 选项激活.
+% numerical 模式还有上标的形式, 可由 |super| 选项激活.
+% 其中 author-year 为默认模式.
+%
+% 宏包预定义了圆括号和方括号两种定界符, 分别使用 |round| 和 |square| 选项激活.
+% 其中 |round| 为默认定界符.
+%
+% 本模板载入 |natbib| 宏包时使用了 |numbers| 和 |square| 选项.
+%
+% 载入宏包时还使用了 |sort&compress| 选项.
+% 这表示在多文献引用时, 先进行排序 (|sort|), 再尽可能的缩写 (|compress|).
+% 如 [1,2,3,4] 会缩写为 [1--4].
+% 它们可单独使用. 但只使用 |compress| 时多文献引用需要是顺序排列.
 %
 % 命令 |\bibliographystyle| 用于指定参考文献的样式. 它的参数是要使用参考文献
 % 样式对应的 |.bst| 文件的文件名 (不包括扩展名). 宏包 |natbib| 的作者提供了三个
 % 可用于 author-year 模式的 |.bst| 文件: |plainnat.bst|, |abbrvnat.bst|,
 % |unsrtnat.bst|.
 %
-% 需要注意的是, 一些标准的 |.bst| 文件 (比如 |plain.bst|) 只支持数字模式.
-% 因此在 author-year 模式下使用这些文件格式可能会遇到下述的错误信息.\\
-% |Bibliography not compatible with author-year citations.|\\
-% 此时只能使用 numerical 模式.
+% 需要注意的是, 一些标准的 |.bst| 文件 (如 |plain.bst|) 只支持 numerical 模式.
+% 在 author-year 模式下使用这些文件格式可能会遇到下述错误信息.
+%\begin{verbatim}
+%Bibliography not compatible with author-year citations.
+%\end{verbatim}
+% 此时只使用 numerical 模式即可.
 %
-% 研究生论文的规范中要求对多作者的文献进行缩写时, 区分中英文文献的缩写词后缀.
-% 这可能需要自己编写新的 |.bst| 文件. 用户如有这样的要求的话, 可自行编写或
-% 下载满足条件的 |.bst| 文件
-% \footnote{例如: \url{https://github.com/ustctug/gbt-7714-2015}}.
-%
-% 正文中引用文献时, |natbib| 宏包对标号的界定符预定义了一些选项. 其中选项
-% |round| 和 |square| 分别选定圆括号和方括号作为界定符.
-%
-% 行文中可通过 |\setcitestyle| 命令切换引用模式, 自定义引用风格.
+% 如果使用的 |.bst| 文件支持 author-year 模式,
+% 在行文中是可以随时通过 |\setcitestyle| 命令切换引用模式的.
 % \begin{itemize}
-%   \item 命令 |\setcitestyle{authoryear,round}| 切换到 author-year 模式,
-%     并选定圆括号作为界定符.
-%   \item 命令 |\setcitestyle{numbers,square}| 则切换到 numerical 模式,
-%     并选定方括号作为界定符.
+%   \item
+%     |\setcitestyle{authoryear,round}| 切换到 author-year 模式,
+%     并选定圆括号作为定界符.
+%   \item
+%     |\setcitestyle{numbers,square}| 切换到 numerical 模式,
+%     并选定方括号作为定界符.
+%   \item
+%     |\setcitestyle{super}| 切换到上标的 numerical 模式, 不更改定界符.
 % \end{itemize}
 %
-% 宏包 |natbib| 似乎修改了 |\cite| 命令, 并提供了两个新的引用命令 |\citet| 和
+% 如果行文中使用了 author-year 模式, 则在 |\bibliography| 命令之前应该切换回
+% numerical 模式. 否则参考文献列表前面不会有数字编号的前缀.
+%
+% 宏包 |natbib| 修改了 |\cite| 命令, 并提供了两个新的引用命令 |\citet| 和
 % |\citep|. 它们在 author-year 和 numerical 模式下的区别见下表.
 % \begin{center}
-%   \begin{tabular}{lll}
+%   \begin{tabular}{llll}
 %     \toprule
-%              & |authoryear|   & |numbers|\\
+%              & |authoryear|   & |numbers|       & |super|\\
 %     \midrule
-%     |\cite|  & author (year)  & [number]\\
-%     |\citet| & author (year)  & author [number]\\
-%     |\citep| & (author, year) & [number]\\
+%     |\cite|  & author (year)  & [number]        & \textsuperscript{[number]}\\
+%     |\citet| & author (year)  & author [number] & author\textsuperscript{[number]}\\
+%     |\citep| & (author, year) & [number]        & \textsuperscript{[number]}\\
 %     \bottomrule
 %   \end{tabular}
 % \end{center}
 %
-% 这些引用命令都有两个可选参数, 分别是引用的前缀和后缀. 例如, |\citep| 命令
-% 在 author-year 模式下有下面的效果.\\
+% 这三个命令都有两个可选参数, 分别是引用的前缀和后缀.
+% 例如, 命令 |\citep| 在 author-year 模式下的效果如下.\\
 % |\citep[see][Chapter~1]{article}| $\Rightarrow$ (see author, year, Chapter 1)
 %
 % 引用命令在 author-year 模式下会对多作者的文献使用 ``author1 et al.''
-% 的形式进行缩写. 带星号的引用命令会罗列所有作者. 这些命令也都可以一次引用
-% 多个文献.
+% 的形式进行缩写. 带星号的引用命令则会罗列所有作者.
 %
-% 如果行文中使用了 author-year 模式, 则在 |\bibliography| 命令之前应该切换回
-% numerical 模式. 否则参考文献列表前面不会有数字编号的前缀.
+% 研究生论文撰写手册要求, 对多作者的文献进行缩写时区分中英文文献的缩写词后缀.
+% 这可能需要自己编写新的 |.bst| 文件. 用户如有这样的要求的话, 可自行编写或
+% 下载满足条件的 |.bst| 文件
+% \footnote{例如: \url{https://github.com/ustctug/gbt-7714-2015}}.
 %
 % \section{\LaTeX{} 参考资料}
 %
@@ -825,7 +950,7 @@ LaTeX version 2005/12/01 or later.
 % \item clsguide.pdf: \LaTeXe{} 宏包和文档类的命令和编写规范.
 % \item classes.pdf: 这是 \LaTeXe{} 三个标准文档类的实现, 用于参考.
 % \item macros2e.pdf: 集中介绍了 \LaTeXe{} 里使用的一些内部宏,用于参考.
-% \item dtxtut.pdf: \LaTeX{} 的宏包与说明文档的封装方式, 即所谓 ``文学编程'',
+% \item dtxtut.pdf: \LaTeX{} 的宏包与说明文档的封装方式, 即所谓“文学编程”,
 %   更详细的有 docstrip.pdf 和 doc.pdf,
 %   \href{http://www.texdev.net/2009/10/06/a-model-dtx-file/}
 %     {Joseph Wright 的文章} 介绍了更好封装的技巧.
@@ -865,7 +990,7 @@ LaTeX version 2005/12/01 or later.
 %
 % 参考 dtxtut.pdf 文件, 这里有一个把 .ins 文件整合进 .dtx 文件的参考.
 %
-% \begin{verbatim}
+%\begin{verbatim}
 % % \iffalse meta-comment
 % %
 % % Copyright (C) <year> by <your name>
@@ -925,11 +1050,11 @@ LaTeX version 2005/12/01 or later.
 % \end{document}
 % %</driver>
 % % \fi
-% \end{verbatim}
+%\end{verbatim}
 %
 % 下面也是可以自动生成 |.cls| 文件的代码. 模块写法参考了别人的写法.
 %
-% \begin{verbatim}
+%\begin{verbatim}
 % % \iffalse meta-comment
 % %
 % % Copyright (C) <year> by <your name>
@@ -1006,7 +1131,7 @@ LaTeX version 2005/12/01 or later.
 % \end{document}
 % %</driver>
 % % \fi
-% \end{verbatim}
+%\end{verbatim}
 %
 % \StopEventually{}
 %
@@ -1016,53 +1141,116 @@ LaTeX version 2005/12/01 or later.
 %<*class>
 %    \end{macrocode}
 %
-% \subsection{声明文档选项}
+% \subsection{文档选项}
 %
-% 基于基础文档类 |book| 设计模板. 先设置新的文档选项 |bachelor|, |master|,
-% |doctor|. 使用对应选项分别用于本科, 硕士, 博士学位论文. 这些选项不会被传递
-% 给 |book| 文档类.
+% 本模板基于基础文档类 |book| 设计.
+%
+% |book| 文档类在选项 |twoside| 和 |openany| 下有下述设置.
+% \begin{itemize}
+%   \item
+%     |\maketitle|, |\frontmatter| 和 |\mainmatter| 依然会在奇数页开始.
+%   \item
+%     |\appendix| 和 |\backmatter| 允许在偶数页开始.
+%   \item
+%     |\chapter|, |\tableofcontents| 和 |thebibliography| 等
+%     章一级的命令和环境都允许在偶数页开始.
+% \end{itemize}
+%
+% 在选项 |oneside|下, 命令 |\cleardoublepage| 和 |\clearpage| 效果相同.
+%
+% \begin{macro}{doctor}
+% \begin{macro}{master}
+% \begin{macro}{bachelor}
+% \begin{macro}{chinese}
+% \begin{macro}{english}
 %
 % \changes{v1.0.2}{2017/04/23}
 %   {新增 \texttt{chinese} 与 \texttt{english} 文档选项以支持英文}
 %
+% \begin{macro}{academic}
+% \begin{macro}{professional}
+%
+% 模板设置了以下三组选项. 每组选项中的第一个为默认选项.
+% 这些选项不会被传递给 |book| 文档类.
+%
+% \begin{itemize}
+% \item \verb'[doctor|master|bachelor]' 分别对应本科、硕士、博士学位论文.
+% \item \verb'[chinese|english]' 分别对应正文采用中文和英文.
+% \item \verb'[academic|professional]' 分别对应学术学位和专业学位.
+% \end{itemize}
+%
+% \changes{v1.1}{2019/02/03}
+%   {新增 \texttt{academic} 与 \texttt{professional}
+%   文档选项以区分学术学位和专业学位}
+%
 %    \begin{macrocode}
 \newif\if@ustc@bachelor
 \newif\if@ustc@chinese
+\newif\if@ustc@professional
 \newif\if@ustc@openright
-\DeclareOption{bachelor}{%
-  \@ustc@bachelortrue
-  \PassOptionsToClass{oneside}{book}
-  \def\ustc@thesisname{学士学位论文}%
-  \def\ustc@enthesisname{A dissertation for bachelor's degree}%
+\DeclareOption{doctor}{%
+  \@ustc@bachelorfalse
+  \def\ustc@thesisname{博士学位论文}
+  \def\ustc@enthesisname{A dissertation for doctor's degree}
 }
 \DeclareOption{master}{%
   \@ustc@bachelorfalse
-  \def\ustc@thesisname{硕士学位论文}%
-  \def\ustc@enthesisname{A dissertation for master's degree}%
+  \def\ustc@thesisname{硕士学位论文}
+  \def\ustc@enthesisname{A dissertation for master's degree}
 }
-\DeclareOption{doctor}{%
-  \@ustc@bachelorfalse
-  \def\ustc@thesisname{博士学位论文}%
-  \def\ustc@enthesisname{A dissertation for doctor's degree}%
+\DeclareOption{bachelor}{%
+  \@ustc@bachelortrue
+  \def\ustc@thesisname{学士学位论文}
+  \def\ustc@enthesisname{A dissertation for bachelor's degree}
 }
 \DeclareOption{chinese}{\@ustc@chinesetrue}
 \DeclareOption{english}{\@ustc@chinesefalse}
+\DeclareOption{academic}{\@ustc@professionalfalse}
+\DeclareOption{professional}{\@ustc@professionaltrue}
+%    \end{macrocode}
+%
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{openany}
+% \begin{macro}{openright}
+%
+% 设置 |openany| 和 |openright| 选项.
+%
+% 研究生论文要求默认激活 |openany| 选项.
+% 而 |book| 文档类默认激活 |openright| 选项.
+% 如果这里简单地激活 |openany| 选项, 那么用户将无法再次激活 |openright| 选项.
+% 这里为模板设置了 |openany| 和 |openright| 选项.
+% 然后根据用户的选择传递给 |book| 文档类.
+%
+%    \begin{macrocode}
+\DeclareOption{openany}{\@ustc@openrightfalse}
 \DeclareOption{openright}{\@ustc@openrighttrue}
 %    \end{macrocode}
 %
-% 默认激活 |doctor| 选项. 把其他文档选项传递给 |book| 文档类. 命令
-% |\ProcessOptions| 结束选项声明.
+% \end{macro}
+% \end{macro}
 %
-% 默认激活 |openany| 选项. 但此时的中英文摘要、目录、图和表的索引、符号说明等
-% 内容仍然需要从奇数页开始.
-%
-% 另外, 论文规范要求的主文档字体大小跟 12\,pt 很接近. 所以这里也可以激活
-% 12\,pt 文档选项并载入 |book| 文档类.
+% 默认激活 |doctor|, |chinese| 和 |academic| 选项.
+% 把其他文档选项传递给 |book| 文档类.
+% 命令 |\ProcessOptions| 结束选项声明.
 %
 %    \begin{macrocode}
-\ExecuteOptions{doctor, chinese}
+\ExecuteOptions{doctor, chinese, academic}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
 \ProcessOptions
+%    \end{macrocode}
+%
+% 处理 |openright| 和 |openany| 选项.
+% 由于 |\if@ustc@openright| 默认值为 |false|, 这里默认会激活 |openany| 选项.
+% 此时, 目录、图和表的索引、符号说明等内容仍要求从奇数页开始.
+%
+%    \begin{macrocode}
 \if@ustc@openright
   \PassOptionsToClass{openright}{book}
 \else
@@ -1071,7 +1259,30 @@ LaTeX version 2005/12/01 or later.
 \LoadClass{book}
 %    \end{macrocode}
 %
+% 对专业学位论文, 需要修正宏 |\ustc@thesisname| 的内容
+% (本科学位论文不应该使用 |professional| 选项).
+%
+% \changes{v1.1}{2019/02/03}
+%   {对本科论文取消 \texttt{professional} 选项的影响}
+%
+%    \begin{macrocode}
+\if@ustc@bachelor
+  \@ustc@professionalfalse
+\fi
+\if@ustc@professional
+  \edef\ustc@thesisname{专业\ustc@thesisname}
+\fi
+%    \end{macrocode}
+%
 % \subsection{字体设置}
+%
+% 论文正文字体要求是小四 (12\,bp).
+% 这与 |book| 文档类的字体选项 |12pt| 的正文尺寸尺寸较为接近.
+% 因此, 在载入 |book| 文档类的时候也可以激活文档选项 |12pt|.
+% 此时 1\,em = 12\,pt = |\topskip|.
+%
+% 这里 |\topskip| 的值由文档选项 |10pt|, |11pt| 或 |12pt| 全局设定.
+% 即使载入 |ctex| 宏包时修改了主文档字体尺寸, |\topskip| 的值也并不变.
 %
 % 默认情况下, 使用 |fontspec| 宏包修改主文档字体时也会相应地修改 |mathrm| 字体.
 % 但是却不会相应地修改 |mathnormal| 字体. 为保持一致性, 对宏包 |fontspec| 使用
@@ -1083,12 +1294,20 @@ LaTeX version 2005/12/01 or later.
 %
 % 载入 |ctex| 宏包. 这里使用了两个宏包选项.
 %
-% |heading| 选项启用标题格式设置功能. 该选项默认设置 |scheme=chinese|
-% 来汉化标题. 此时还会把 |\baselinestretch| 设置为 1.3. 因此在 |english|
-% 文档选项下应该显式使用 |scheme=plain| 选项. 否则应显式使用
-% |linespread=1| 选项把 |\baselinestretch| 设置为 1.
-%
-% |zihao=-4| 选项设置主文档字体尺寸为小四 (12\,bp).
+% \begin{itemize}
+%   \item
+%     |heading| 选项启用标题格式设置功能.
+%     此时会设置 |scheme=chinese| 来汉化标题, 并设置 |linespread=1.3|.
+%     需要如下显式设置.
+%     \begin{itemize}
+%       \item
+%         中文时应显式设置 |linespread=1|.
+%       \item
+%         英文时应显式设置 |scheme=plain| 取消汉化.
+%     \end{itemize}
+%   \item
+%     |zihao=-4| 选项设置主文档字体尺寸为小四.
+% \end{itemize}
 %
 %    \begin{macrocode}
 \if@ustc@chinese
@@ -1102,11 +1321,11 @@ LaTeX version 2005/12/01 or later.
 %
 % 这里是用 |ctex| 宏包提供中文支持. 原则上可以使用各种编译方式.
 % 但下文还要用到 |fontspec| 宏包.
-% 而该宏包要求使用 XeLaTeX 或者 LuaLaTeX 编译方式.
+% 该宏包要求使用 XeLaTeX 或者 LuaLaTeX 编译.
 %
 % 上面代码中的第二行是为了应对 LuaLaTeX 编译方式下使用 |ctex| 宏包的问题.
 % 如果文档中使用了 |\verb| 命令, 并且在该命令之前没有激活过等宽字体,
-% 那么会在这个命令处额外插入两个命令名.\\
+% 那么会在这个命令处额外插入下述宏名.\\
 % |\FontspecSetCheckBoolFalse\FontspecSetCheckBoolFalse|\\
 % 这个问题或许是由于 |ctex| 调用的 |fontspec| 宏包的原因. 这里的解决办法是
 % 在文档开始的时候激活一次等宽字体族, 然后再切换回罗马字体族.
@@ -1114,12 +1333,13 @@ LaTeX version 2005/12/01 or later.
 % 如果不调用 |ctex| 宏包, 也可以使用 |xeCJK| 提供中文支持, 用 |ctexheading|
 % 设置章节格式. 但此时需要手动设置中文字体. 并设置在文档开始时把行首缩进设置
 % 为两个字符. 并且修改字体尺寸时, 不会自动调整行首缩进. 中文扉页的密级的字体
-% 要求是仿宋字体. 这里还需要提供 |\fongsong| 命令, 以及一些汉化.
+% 要求是仿宋字体. 这里还需要提供 |\fongsong| 和 |lishu| 命令, 以及一些汉化.
 %
 %    \begin{macrocode}
 % \RequirePackage{xeCJK}
 % \AtBeginDocument{\setlength{\parindent}{2em}}
 % \providecommand\fangsong{\CJKfontspec{FangSong}}
+% \providecommand\lishu{\CJKfontspec{LiSu}}
 % \setCJKmainfont
 %   [BoldFont={FandolSong-Bold},ItalicFont={KaiTi}]{SimSun}
 % \setCJKsansfont
@@ -1142,9 +1362,11 @@ LaTeX version 2005/12/01 or later.
 %    \end{macrocode}
 %
 % 主文档开始时会重置主文档字体大小. 这里重定义 |\normalsize| 使得文档
-% 开始时的字体大小即是规范要求的字体大小. 由于本科和研究生主文档字体行距不同,
-% 这里分开设置. 这里需要注意的是, 下面设置页眉页脚使用了 |titleps| 宏包. 由于
-% |titleps| 的原因, 重定义 |\normalsize| 时不能插入多余的空格.
+% 开始时的字体大小即是规范要求的字体大小.
+% 由于本科生和研究生主文档字体行距不同, 这里分开设置.
+%
+% 需要注意的是, 下面设置页眉页脚时使用了 |titleps| 宏包. 由于该宏包的原因,
+% 重定义 |\normalsize| 时不能插入多余的空格.
 %
 %    \begin{macrocode}
 \if@ustc@bachelor
@@ -1160,23 +1382,26 @@ LaTeX version 2005/12/01 or later.
 % \begin{macro}{\acknowledgementsname}
 % \begin{macro}{\publicationsname}
 % \begin{macro}{\captionnotename}
-% 这里设置了几个环境变量的名字.
 %
-% \changes{v1.0.2}{2017/04/23}{新增环境变量名}
+% 定义宏命令为几个环境和命令设置标签.
+%
+% \changes{v1.0.2}{2017/04/23}
+%   {定义宏命令为几个环境和命令设置标签}
 %
 %    \begin{macrocode}
 \if@ustc@chinese
   \newcommand\notationname{符号说明}
   \newcommand\acknowledgementsname{致谢}
   \newcommand\publicationsname{在读期间发表的学术论文与取得的研究成果}
-  \newcommand\captionnotename{注: }
+  \newcommand\captionnotename{注：}
 \else
   \newcommand\notationname{Notation}
   \newcommand\acknowledgementsname{Acknowledgements}
   \newcommand\publicationsname{Publications}
-  \newcommand\captionnotename{Notes: }
+  \newcommand\captionnotename{Notes:\space}
 \fi
 %    \end{macrocode}
+%
 % \end{macro}
 % \end{macro}
 % \end{macro}
@@ -1189,17 +1414,31 @@ LaTeX version 2005/12/01 or later.
 %
 %    \begin{macrocode}
 \RequirePackage{geometry}
-\geometry{paper=a4paper,
-  top=25.4mm, bottom=25.4mm, left=31.7mm, right=31.7mm,
-  footskip=7.9mm, headsep=7mm, headheight=3.4mm,
+\geometry{
+  paper      = a4paper,
+  vmargin    = 25.4mm,
+  hmargin    = 31.7mm,
+  headsep    = 7mm,
+  headheight = 3.4mm,
+  footskip   = 7.9mm,
 }
 %    \end{macrocode}
 %
-% \begin{macro}{\ustc@header@size}
-% \begin{macro}{\ustc@header@head}
-% \begin{macro}{\ustc@header@foot}
-% 由于本科生论文和研究生论文对页眉页脚的要求有所不同, 这里定义了三个宏分别储存
-% 字体尺寸, 页眉内容, 页脚内容. 主要是为了方便设置页眉页脚.
+% \begin{macro}{\ustc@head@font}
+% \begin{macro}{\ustc@head@header}
+% \begin{macro}{\ustc@head@footer}
+%
+% 设置页眉页脚.
+%
+% 通过 |titleps| 宏包进行设置.
+% 其中 |\sethead| 和 |\setfoot| 的三个参数分别表示左侧, 中间, 右侧的内容.
+% 可选的三个参数表示偶数页的左侧, 中间, 右侧的内容.
+%
+% 由于本科生论文和研究生论文对页眉页脚的要求有所不同,
+% 这里定义了三个宏分别储存页眉和页脚内容以及字体, 这样方便设置.
+%
+% \changes{v1.1}{2019/02/09}
+%   {页码统一置于页脚并居中}
 %
 % 原本研究生部分还有一行测试代码 |\ifx\@empty\thechapter|. 是为了参考文献部分
 % 写的. 修改了参考文献环境之后就不需要了. 原本如果参考文献放在附录的第一部分
@@ -1207,73 +1446,92 @@ LaTeX version 2005/12/01 or later.
 % 但如果放在 main matter 或者附录中的其他部分, 这个测试就起不到什么作用了.
 %
 %    \begin{macrocode}
-\if@ustc@bachelor
-  \newcommand\ustc@header@head{中国科学技术大学本科毕业论文}
-  \newcommand\ustc@header@size{\fontsize{9bp}{14bp}\selectfont}
-\else
-  \newcommand\ustc@header@head
-    {\if@mainmatter\CTEXthechapter\quad\fi\chaptertitle}
-  \newcommand\ustc@header@size{\fontsize{10.5bp}{16bp}\selectfont}
-\fi
-\newcommand*\ustc@header@foot{\thepage}
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-%
-% 页眉页脚的具体设置通过使用 |titleps| 宏包来完成. 其中 |\sethead| 和
-% |\setfoot| 的三个参数分别表示左侧, 中间, 右侧的内容. 可选的三个参数表示偶数页
-% 的左侧, 中间, 右侧的内容.
-%
-% 这里把本科生论文页码置于页脚中间位置. 另外, 研究生论文规范里对页码位置的规定
-% 有自相矛盾的地方. 这里并未遵循规范的要求. 而是在默认的 |twoside| 选项下把页码
-% 放置在页脚外侧, 在 |oneside| 选项下则放置在页脚中间位置.
-%
-%    \begin{macrocode}
 \RequirePackage{titleps}
 \if@ustc@bachelor
-  \newpagestyle{main}[\ustc@header@size]{%
-    \sethead{}{\ustc@header@head}{}%
-    \setfoot{}{\ustc@header@foot}{}%
-    \headrule
-  }%
+  \newcommand\ustc@head@font{\fontsize{9bp}{14bp}\selectfont}
+  \newcommand\ustc@head@header{中国科学技术大学本科毕业论文}
 \else
-  \if@twoside
-    \newpagestyle{main}[\ustc@header@size]{%
-      \sethead{}{\ustc@header@head}{}%
-      \setfoot[\ustc@header@foot][][]{}{}{\ustc@header@foot}%
-      \headrule
-    }%
-  \else
-    \newpagestyle{main}[\ustc@header@size]{%
-      \sethead{}{\ustc@header@head}{}%
-      \setfoot{}{\ustc@header@foot}{}%
-      \headrule
-    }%
-  \fi
+  \newcommand\ustc@head@font{\fontsize{10.5bp}{16bp}\selectfont}
+  \newcommand\ustc@head@header
+    {\if@mainmatter\CTEXthechapter\quad\fi\chaptertitle}
 \fi
+\newcommand\ustc@head@footer{\thepage}
+\newpagestyle{main}[\ustc@head@font]{%
+  \sethead{}{\ustc@head@header}{}%
+  \setfoot{}{\ustc@head@footer}{}%
+  \headrule
+}
 \pagestyle{main}
 %    \end{macrocode}
 %
-% \subsection{扉页}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\frontmatter}
+%
+% 重定义 |\frontmatter| 命令使得 front matter 部分的页码
+% 改为大写罗马数字形式.
+% 其中, 本科论文该部分不打印页码.
+%
+% \changes{v1.0.2}{2017/04/23}
+%   {front matter 的页码修改为大写罗马数字}
+%
+%    \begin{macrocode}
+\renewcommand\frontmatter{%
+  \cleardoublepage
+  \@mainmatterfalse
+  \pagenumbering{Roman}%
+  \if@ustc@bachelor
+    \renewcommand\ustc@head@footer{}%
+  \fi
+}
+%    \end{macrocode}
+%
+% \end{macro}
+%
+% \begin{macro}{\cleardoublepage}
+%
+% 重定义 |\cleardoublepage| 以解决章标题前的空白页的页眉页脚问题.
+% 这里也可以直接使用 |emptypage| 宏包来实现.
+%
+%    \begin{macrocode}
+\let\ustc@save@cleardoublepage\cleardoublepage
+\renewcommand\cleardoublepage{%
+  \clearpage
+  \begingroup
+  \pagestyle{empty}%
+  \ustc@save@cleardoublepage
+  \endgroup
+}
+%    \end{macrocode}
+%
+% \end{macro}
+%
+% \subsection{扉页与声明}
+%
+% \subsubsection{hyperref 设置}
 %
 % 给扉页创建 PDF 书签要用到 |hyperref| 宏包. 这里设置书签显示章节的序号,
 % 书签默认打开的层次, 以及超链接的颜色.
 %
-% 另外, 如果在载入宏包时如果使用选项 |ocgcolorlinks| 会设置彩色超链接, 而打印
-% 时却会被打印为黑色的. 但是似乎此时的超链接不会自动断行. 如果链接文本比较长,
+% 如果在载入宏包时如果使用选项 |ocgcolorlinks| 会设置彩色超链接, 而打印时
+% 却会被打印为黑色的. 但是似乎此时的超链接不会自动断行. 如果链接文本比较长,
 % 文本会超出文本区边界.
+%
+% 这里默认取消了超链接的颜色. 如果需要显示颜色, 可在正文中使用命令
+% |\hypersetup{colorlinks}| 开启.
 %
 % \changes{v1.0.5}{2017/05/23}{目录中页码处设置超链接}
 %
 %    \begin{macrocode}
 \RequirePackage{hyperref}
 \hypersetup{
-  bookmarksopen=true,
-  bookmarksopenlevel=1,
-  bookmarksnumbered=true,
-  linkcolor=blue,
-  linktoc=all,
+  bookmarksopen      = true,
+  bookmarksopenlevel = 1,
+  bookmarksnumbered  = true,
+  linkcolor          = blue,
+  linktoc            = all,
   hidelinks,
 }
 %    \end{macrocode}
@@ -1285,26 +1543,409 @@ LaTeX version 2005/12/01 or later.
 %    \begin{macrocode}
 \AtBeginDocument{%
   \hypersetup{%
-    pdftitle={\@title},
-    pdfauthor={\@author},
-    pdfsubject={中国科学技术大学\ustc@thesisname},
+    pdftitle   = {\@title},
+    pdfauthor  = {\@author},
+    pdfsubject = {中国科学技术大学\ustc@thesisname},
   }%
 }
 %    \end{macrocode}
 %
-% \begin{macro}{\maketitle}
-% 重定义 |\maketitle| 调用 |\ustc@make@title| 和 |\ustc@make@entitle| 分别生成
-% 中文扉页和英文扉页. 对研究生论文调用 |\ustc@make@declare| 生成原创性声明.
+% \subsubsection{个人信息}
 %
-% 扉页的安排并没有完全遵循规范的要求. 尤其是规范里单独为扉页设置了页面边距.
+% \begin{macro}{\ustc@def@term}
+%
+% 定义宏命令用于声明储存专业等项目的宏.
+%
+%    \begin{macrocode}
+\def\ustc@def@term#1{%
+  \expandafter\def\csname #1\endcsname##1{%
+    \expandafter\def\csname ustc@#1\endcsname{##1}%
+  }%
+  \csname #1\endcsname{}%
+}%
+%    \end{macrocode}
+%
+% \end{macro}
+%
+% \begin{macro}{\entitle}
+% \begin{macro}{\enauthor}
+% \begin{macro}{\endate}
+%
+% \changes{v1.0.1}{2017/04/16}
+%   {修改日期的宏名}
+% \changes{v1.0.5}{2017/05/23}
+%   {改回日期的宏名, 并初始化日期为当前日期}
+%
+% \begin{macro}{\major}
+% \begin{macro}{\enmajor}
+% \begin{macro}{\supervisor}
+%
+% \changes{v1.0.5}{2017/05/23}{更改导师的宏名}
+% \changes{v1.1}{2019/02/09}
+%   {删除了合作导师的宏名}
+%
+% \begin{macro}{\ensupervisor}
+% \begin{macro}{\secrettext}
+% \begin{macro}{\ensecrettext}
+% \begin{macro}{\professionaltype}
+%
+% \changes{v1.1}{2019/02/03}
+%   {新增中英文专业学位类型的宏}
+%
+% \begin{macro}{\enprofessionaltype}
+%
+% 声明储存英文标题、作者、时间等项目以及中英文专业、导师、保密文本、专业学位类型
+% 等项目的宏. 其中, 前三个项目的中文部分采用 |book| 文档类原本的宏.
+%
+%    \begin{macrocode}
+\ustc@def@term{entitle}
+\ustc@def@term{enauthor}
+\ustc@def@term{endate}
+\ustc@def@term{major}
+\ustc@def@term{enmajor}
+\ustc@def@term{supervisor}
+\ustc@def@term{ensupervisor}
+\ustc@def@term{secrettext}
+\ustc@def@term{ensecrettext}
+\ustc@def@term{professionaltype}
+\ustc@def@term{enprofessionaltype}
+\date{\ctexset{today=big}\today}
+\endate{\ctexset{today=old}\today}
+%    \end{macrocode}
+%
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\ustc@tabularcell}
+%
+%  允许扉页中个人信息区手动换行.
+%
+%  可选参数是对齐方式, 默认居中.
+%  这里是通过 |tabular| 环境间接获得. 因此必需参数中不能包含 |&| 字符.
+%  也可使用 |makecell| 宏包的 |\makecell| 命令.
+%
+%    \begin{macrocode}
+\newcommand\ustc@tabularcell[2][c]
+  {\begin{tabular}[t]{@{}#1@{}}#2\end{tabular}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsubsection{中文扉页}
+%
+% \begin{macro}{\ustc@make@title}
+%
+% 制作中文扉页. 参照 Word 模板对位置进行了调整.
+%
+% 这里 |\nointerlineskip| 的使用是重要的.
+% 该命令使得接下来的文本紧贴着上一行文本的下缘排版, 而忽略行间距.
+% 这样, 文本的上边缘与页面上边缘之间的距离是准确的.
+% 该命令仅对一行文本生效.
+%
+% 对于专业学位论文, “专业博士学位论文”几个字的宽度会超过页心宽度.
+% 这里把它们放入 |\makebox| 盒子中, 以禁止换行.
+%
+% 中文扉页中校徽的尺寸与英文扉页保持一致.
+% 个人信息区的竖直对齐方式也修改为居中.
+%
+% \changes{v1.1}{2019/02/04}
+%   {调整扉页各项目的位置}
+%
+% \changes{v1.1}{2019/02/04}
+%   {专业学位论文的学科专业改为专业领域}
+%
+% \changes{v1.1}{2019/02/04}
+%   {更改校名和校徽的 PDF 文件}
+%
+% \changes{v1.1}{2019/02/06}
+%   {论文标题加粗}
+%
+% 主要位置数据如下.
+% \begin{enumerate}
+%   \item
+%     密级信息, 距上边缘 30\,mm.
+%   \item
+%     中国科学技术大学字样, 距上边缘 40\,mm.
+%   \item
+%     $\times\times$学位论文字样, 距上边缘 63\,mm.
+%   \item
+%     专业学位类型信息 (仅限专业学位类型), 距上边缘 90\,mm.
+%   \item
+%     校徽尺寸 42\,mm $\times$ 42\,mm, 与上边缘的距离:
+%     \begin{itemize}
+%       \item
+%         学术学位论文 102\,mm--144\,mm;
+%       \item
+%         专业学位论文 108\,mm--150\,mm.
+%     \end{itemize}
+%   \item
+%     标题行距 39\,bp, 在校徽下边缘至 205\,mm 内竖直居中.
+%   \item
+%     个人信息区参考英文部分, 行距 30\,bp, 水平居中.
+% \end{enumerate}
+%
+%    \begin{macrocode}
+\RequirePackage{graphicx}
+\newcommand\ustc@make@title{%
+  \cleardoublepage
+  \begin{center}%
+    \vspace*{-\topskip}\vspace*{4.6mm}%
+    \normalfont\nointerlineskip
+    \parbox[t][10mm][t]{\textwidth}
+      {\raggedleft\fontsize{14bp}{21bp}\selectfont
+      \fangsong\ustc@secrettext}%
+    \par\sffamily\nointerlineskip
+    \includegraphics[height=36bp]{logo/ustc_logo_text}%
+    \par\vspace{-36bp}\vspace{23mm}\nointerlineskip
+    \parbox[t][27mm][t]{\textwidth}
+      {\centering\fontsize{56bp}{84bp}\selectfont
+      \makebox[\textwidth][c]{\ustc@thesisname}}%
+    \par\nointerlineskip
+    \if@ustc@professional
+      \parbox[t][18mm][t]{\textwidth}
+        {\centering\lishu\fontsize{26bp}{39bp}\selectfont
+        （\ustc@professionaltype）}%
+      \par\nointerlineskip
+      \includegraphics[height=42mm]{logo/ustc_logo_fig}%
+      \par\nointerlineskip
+      \parbox[t][55mm][c]{\textwidth}
+        {\centering\fontsize{26bp}{39bp}\selectfont
+        \bfseries\@title}%
+    \else
+      \vspace{12mm}%
+      \includegraphics[height=42mm]{logo/ustc_logo_fig}%
+      \par\nointerlineskip
+      \parbox[t][61mm][c]{\textwidth}
+        {\centering\fontsize{26bp}{39bp}\selectfont
+        \bfseries\@title}%
+    \fi
+    \par\fontsize{16bp}{30bp}\selectfont\nointerlineskip
+    \begin{tabular}{@{}lc@{}}%
+      作者姓名：&\rmfamily\ustc@tabularcell{\@author}\\
+      \if@ustc@professional 专业领域：\else 学科专业：\fi
+                &\rmfamily\ustc@tabularcell{\ustc@major}\\
+      导师姓名：&\rmfamily\ustc@tabularcell{\ustc@supervisor}\\
+      完成时间：&\rmfamily\ustc@tabularcell{\@date}\\
+    \end{tabular}%
+  \end{center}%
+}
+%    \end{macrocode}
+%
+% \end{macro}
+%
+% \subsubsection{英文扉页}
+%
+% \begin{macro}{\ustc@make@entitle}
+%
+% 制作英文扉页. 参照 Word 模板对各项目位置进行了调整.
+%
+% 其中, 对专业学位论文来说, 校徽上边缘与页面上边缘调整为 88\,mm.
+% 这是由于规范里的 82\,mm 看起来太靠上, 而 Word 模板里的 93\,mm 又偏下.
+% 折中取为 88\,mm.
+%
+% 规范里英文标题的行间距略小, 这里适当的加大了行间距.
+%
+% \changes{v1.0.4}{2017/05/19}{修改英文导师标题}
+%
+% \changes{v1.1}{2019/02/06}{英文标题加粗}
+%
+% 主要位置数据如下.
+% \begin{enumerate}
+%   \item
+%     英文密级信息, 距上边缘 30\,mm.
+%   \item
+%     英文校名, 距上边缘 40\,mm.
+%   \item
+%     A dissertation for $\times\times$ degree 字样, 距上边缘 50\,mm.
+%   \item
+%     英文专业学位类型信息 (仅限专业学位类型), 距上边缘 63\,mm.
+%   \item
+%     校徽尺寸 42\,mm $\times$ 42\,mm, 与上边缘的距离:
+%     \begin{itemize}
+%       \item
+%         学术学位论文 82\,mm--124\,mm.
+%       \item
+%         专业学位论文 88\,mm--130\,mm.
+%     \end{itemize}
+%   \item
+%     英文标题行距 39\,bp, 在校徽下边缘至 205\,mm 内竖直居中.
+%   \item
+%     英文个人信息区行距 30\,bp, 水平居中.
+% \end{enumerate}
+%
+%    \begin{macrocode}
+\newcommand\ustc@make@entitle{%
+  \cleardoublepage
+  \begin{center}%
+    \vspace*{-\topskip}\vspace*{4.6mm}%
+    \normalfont\nointerlineskip
+    \parbox[t][10mm][t]{\textwidth}
+      {\raggedleft\fontsize{14bp}{21bp}\selectfont
+      \ustc@ensecrettext}%
+    \par\nointerlineskip
+    \parbox[t][10mm][t]{\textwidth}
+      {\centering\sffamily\fontsize{20bp}{30bp}\selectfont
+      University of Science and Technology of China}%
+    \par\nointerlineskip
+    \parbox[t][13mm][t]{\textwidth}
+      {\centering\sffamily\fontsize{26bp}{39bp}\selectfont
+      \ustc@enthesisname}%
+    \par\nointerlineskip
+    \if@ustc@professional
+      \parbox[t][25mm][t]{\textwidth}
+        {\centering\fontsize{16bp}{24bp}\selectfont
+        (\ustc@enprofessionaltype)}%
+      \par\nointerlineskip
+      \includegraphics[height=42mm]{logo/ustc_logo_fig}%
+      \par\nointerlineskip
+      \parbox[t][75mm][c]{\textwidth}
+        {\centering\fontsize{26bp}{39bp}\selectfont
+        \sffamily\bfseries\ustc@entitle}%
+    \else
+      \vspace{19mm}%
+      \includegraphics[height=42mm]{logo/ustc_logo_fig}%
+      \par\nointerlineskip
+      \parbox[t][81mm][c]{\textwidth}
+        {\centering\fontsize{26bp}{39bp}\selectfont
+        \sffamily\bfseries\ustc@entitle}%
+    \fi
+    \par\fontsize{16bp}{30bp}\selectfont\nointerlineskip
+    \begin{tabular}{@{}lc@{}}%
+      Author:      &\ustc@tabularcell{\ustc@enauthor}\\
+      Speciality:  &\ustc@tabularcell{\ustc@enmajor}\\
+      Supervisors: &\ustc@tabularcell{\ustc@ensupervisor}\\
+      Date:        &\ustc@tabularcell{\ustc@endate}\\
+    \end{tabular}%
+  \end{center}%
+}
+%    \end{macrocode}
+%
+% \end{macro}
+%
+% \subsubsection{原创性和授权声明}
+%
+% \begin{macro}{\ustc@origindeclare}
+%
+% 原创性声明文本.
+%
+%    \begin{macrocode}
+\newcommand\ustc@origindeclare{%
+本人声明所呈交的学位论文，是本人在导师指导下进行研究工作所取得的成果。%
+除已特别加以标注和致谢的地方外，论文中不包含任何他人已经发表或撰写过%
+的研究成果。与我一同工作的同志对本研究所做的贡献均已在论文中作了明确%
+的说明。%
+}
+%    \end{macrocode}
+%
+% \end{macro}
+%
+% \begin{macro}{\ustc@authorization}
+%
+% 授权声明文本.
+%
+%    \begin{macrocode}
+\newcommand\ustc@authorization{%
+作为申请学位的条件之一，学位论文著作权拥有者授权中国科学技术大学拥有%
+学位论文的部分使用权，即：学校有权按有关规定向国家有关部门或机构送交%
+论文的复印件和电子版，允许论文被查阅和借阅，可以将学位论文编入《中国%
+学位论文全文数据库》等有关数据库进行检索，可以采用影印、缩印或扫描等%
+复制手段保存、汇编学位论文。本人提交的电子文档的内容和纸质论文的内容%
+相一致。\par
+保密的学位论文在解密后也遵守此规定。%
+}
+%    \end{macrocode}
+%
+% \end{macro}
+%
+% \begin{macro}{\ustc@make@declare}
+%
+% 制作原创性和授权声明页面.
+%
+% \changes{v1.0.1}{2017/04/16}
+%   {在开始处添加命令 \texttt{\textbackslash normalsize}}
+%
+% \changes{v1.1}{2019/02/04}
+%   {在开始处添加命令 \texttt{\textbackslash normalfont} 并设置首行缩进}
+%
+%    \begin{macrocode}
+\newcommand\ustc@make@declare{%
+  \begingroup
+    \cleardoublepage
+    \vspace*{7mm}\normalfont\normalsize\parindent2em\relax
+    \begingroup
+      \centering\sffamily\fontsize{16bp}{24bp}\selectfont
+      中国科学技术大学学位论文原创性声明\par
+    \endgroup
+    \par\vspace{7mm}\ustc@origindeclare
+    \par\vspace{7mm}%
+    作者签名：\underline{\hspace{8em}}\hfill
+    签字日期：\underline{\hspace{8em}}\hspace*{2em}%
+    \par\vspace{28mm}%
+    \begingroup
+      \centering\sffamily\fontsize{16bp}{24bp}\selectfont
+      中国科学技术大学学位论文授权使用声明\par
+    \endgroup
+    \par\vspace{7mm}\ustc@authorization
+    \par\vspace{7mm}%
+    \setlength{\fboxsep}{0.05em}%
+    \fbox{\rule[0.683em]{0.683em}{0em}} 公开\qquad
+    \fbox{\rule[0.683em]{0.683em}{0em}} 保密%
+    （\underline{\qquad}年）%
+    \par\vspace{7mm}%
+    作者签名：\underline{\hspace{8em}}\hfill
+    导师签名：\underline{\hspace{8em}}\hspace*{2em}%
+    \par\vspace{7mm}%
+    签字日期：\underline{\hspace{8em}}\hfill
+    签字日期：\underline{\hspace{8em}}\hspace*{2em}\par
+  \endgroup
+}
+%    \end{macrocode}
+%
+% \end{macro}
+%
+% \subsubsection{制作扉页与声明页}
+%
+% \begin{macro}{\maketitle}
+%
+% 重定义 |\maketitle| 命令.
+%
+% \begin{itemize}
+% \item 调用 |\ustc@make@title| 生成中文扉页,
+% \item 调用 |\ustc@make@entitle| 生成英文扉页.
+% \item 调用 |\ustc@make@declare| 生成原创性和授权声明 (研究生论文).
+% \end{itemize}
+%
+% 扉页的安排并没有完全遵循规范的要求. 其中规范里单独为扉页设置了页面边距.
 % 但考虑到扉页不显示页眉页脚, 并且扉页里的各信息也都规定了距离页面边缘的距离.
-% 因此, 这里扉页使用了正文的页面边距设置. 如要修改页面边距设置, 可通过
-% |geometry| 宏包的 |\newgeometry| 命令和 |\restoregeometry| 命令来实现.
+% 因此, 这里扉页使用了正文的页面边距设置.
+%
+% 如要修改页面边距设置, 可通过 |geometry| 宏包的 |\newgeometry| 命令和
+% |\restoregeometry| 命令来实现.
 % 另外, 命令 |\restoregeometry| 似乎会重置行间距.
 %
-% 这里把扉页和原创性声明页的页码格式改为 |Alph| 的样式, 用以和后面的正文的页码
-% 区分. 另外, 由于 |hyperref| 宏包的作用, 这里的页码虽然不会打印在 PDF 页面上,
+% 扉页中各信息距顶边的距离也没有完全按照规范的要求.
+% 注意到研究生院给出的研究生学位论文的 Word 模板与规范的要求不完全一致.
+% 这里参考了 Word 模板中的设置.
+%
+% 扉页以及原创性和授权声明页面的页码格式改为 |Alph| 的样式,
+% 用以和后面的正文的页码区分.
+% 由于 |hyperref| 宏包的作用, 这里的页码虽然不会打印在 PDF 页面上,
 % 但会显示在 PDF 阅读器的页码栏中.
+% 这样指定页码打印的时候不会出现页码上的歧义.
+%
+% 通过 |hyperref| 宏包提供的 |\pdfbookmark| 命令为扉页添加书签.
+% 可选参数 |-1| 表示该书签比章的书签高一级.
+% 该命令需要在制作扉页之前运行
+% (否则书签链接到的是扉页的最后一页),
+% 并且在运行之前应该 |\clearpage|.
 %
 %    \begin{macrocode}
 \renewcommand\maketitle{%
@@ -1314,260 +1955,110 @@ LaTeX version 2005/12/01 or later.
   \pdfbookmark[-1]{\@title}{title}%
   \ustc@make@title
   \ustc@make@entitle
-  \if@ustc@bachelor
-  \else
+  \if@ustc@bachelor\else
     \ustc@make@declare
   \fi
   \cleardoublepage
-  \renewcommand*\thepage{\arabic{page}}%
   \pagestyle{main}%
-}
+}%
 %    \end{macrocode}
+%
 % \end{macro}
 %
-% \begin{macro}{\ustc@def@term}
-% 声明 ``专业'' 等项目的命令.
-%
-%    \begin{macrocode}
-\def\ustc@def@term#1{%
-  \expandafter\def\csname #1\endcsname##1{%
-    \expandafter\def\csname ustc@#1\endcsname{##1}%
-  }%
-  \csname #1\endcsname{}%
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% 声明 ``专业'' 等项目.
-%
-% \changes{v1.0.1}{2017/04/16}{修改日期的宏名}
-% \changes{v1.0.5}{2017/05/23}{改回日期的宏名, 并初始化日期为当前日期}
-% \changes{v1.0.5}{2017/05/23}{更改导师的宏名}
-%
-%    \begin{macrocode}
-\ustc@def@term{major}
-\ustc@def@term{supervisor}
-\ustc@def@term{cosupervisor}
-\ustc@def@term{secrettext}
-\ustc@def@term{entitle}
-\ustc@def@term{enauthor}
-\ustc@def@term{enmajor}
-\ustc@def@term{ensupervisor}
-\ustc@def@term{encosupervisor}
-\ustc@def@term{endate}
-\ustc@def@term{ensecrettext}
-\date{\ctexset{today=big}\today}
-\endate{\ctexset{today=old}\today}
-%    \end{macrocode}
-%
-% \begin{macro}{\ustc@make@title}
-% 制作中文扉页. 这里 |\nointerlineskip| 命令的使用是重要的. 这个命令使得接下来
-% 的文本紧贴着上一行文本的下缘排版, 忽略行间距.
-%
-% 另外, 个人觉得研究生学位论文规范里要求的 ``博士学位论文'' 几个字的上边距要求
-% 不合理. 排版出来之后不好看. 因此参照规范里的范例, 把这几个字的上边距从
-% 8.5\,mm 修改为 7.5\,mm. 校徽的尺寸与英文标题页的尺寸保持一致. 稍微调整了标题
-% 的对齐格式. 个人信息区的竖直对齐方式也修改为居中. 这里的修改纯属个人喜好.
-%
-%    \begin{macrocode}
-\newcommand\ustc@make@title{%
-  \cleardoublepage
-  \begin{center}
-    \vspace*{-\topskip}\vspace*{14.6mm}%
-    \nointerlineskip
-    \normalfont
-    \parbox[t][12mm][t]{\textwidth}{%
-      \raggedleft\fangsong
-      \fontsize{14bp}{21bp}\selectfont
-      \ustc@secrettext
-    }%
-    \par\nointerlineskip
-    \sffamily
-    \parbox[t][23mm][t]{\textwidth}
-      {\centering\includegraphics[height=36bp]{logo/ustc_logo_text}}%
-    \par\nointerlineskip
-    \parbox[t][30mm][t]{\textwidth}
-      {\centering\fontsize{56bp}{84bp}\selectfont\ustc@thesisname}%
-    \par\nointerlineskip
-    \parbox[t][53mm][c]{\textwidth}
-      {\centering\includegraphics[height=48mm]{logo/ustc_logo_fig}}%
-    \par\nointerlineskip
-    \parbox[t][47mm][c]{\textwidth}
-      {\centering\fontsize{26bp}{39bp}\selectfont\@title}%
-    \par\nointerlineskip
-    \parbox[t][42mm][c]{\textwidth}{%
-      \fontsize{16bp}{30bp}\selectfont
-      \begin{tabular}{@{\hspace*{28.3mm}}lc}
-        作者姓名: &\textrm{\@author}\\
-        学科专业: &\textrm{\ustc@major}\\
-        导师姓名: &\textrm{\ustc@supervisor}\\
-        \ifx\@empty\ustc@cosupervisor
-        \else
-          &\textrm{\ustc@cosupervisor}\\
-        \fi
-        完成时间: &\textrm{\@date}
-      \end{tabular}
-    }%
-  \end{center}
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\ustc@make@entitle}
-% 制作英文扉页. 由于校徽在 42\,mm $\times$ 42\,mm 尺寸下, 图片四周各有 3\,mm
-% 的空白, 所以这里图片的总高度变成了 48\,mm. 另外, 规范里英文标题的行间距略小.
-% 这里适当的加大了行间距.
-%
-% \changes{v1.0.4}{2017/05/19}{修改英文导师标题}
-%
-%    \begin{macrocode}
-\newcommand\ustc@make@entitle{%
-  \cleardoublepage
-  \begin{center}
-    \vspace*{-\topskip}\vspace*{14.6mm}%
-    \nointerlineskip
-    \normalfont
-    \parbox[t][10mm][t]{\textwidth}{%
-      \raggedleft\normalfont
-      \fontsize{14bp}{21bp}\selectfont
-      \ustc@ensecrettext
-    }%
-    \par\nointerlineskip
-    \sffamily
-    \parbox[t][10mm][t]{\textwidth}
-      {\centering\fontsize{20bp}{30bp}\selectfont
-        University of Science and Technology of China}%
-    \par\nointerlineskip
-    \parbox[t][19mm][t]{\textwidth}
-      {\centering\fontsize{26bp}{39bp}\selectfont\ustc@enthesisname}%
-    \par\nointerlineskip
-    \includegraphics[height=48mm]{logo/ustc_logo_fig}%
-    \par\nointerlineskip
-    \parbox[t][78mm][c]{\textwidth}
-      {\centering\fontsize{26bp}{39bp}\selectfont\ustc@entitle}%
-    \par\nointerlineskip
-    \parbox[t][42mm][c]{\textwidth}{%
-      \fontsize{16bp}{30bp}\selectfont\rmfamily
-      \begin{tabular}{@{\hspace*{28.3mm}}lc}
-        Author:     &\textrm{\ustc@enauthor}\\
-        Speciality: &\textrm{\ustc@enmajor}\\
-        Supervisor: &\textrm{\ustc@ensupervisor}\\
-        \ifx\@empty\ustc@encosupervisor
-        \else
-          &\textrm{\ustc@encosupervisor}\\
-        \fi
-        Date:       &\textrm{\ustc@endate}
-      \end{tabular}
-    }%
-  \end{center}
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% \subsection{原创性声明}
-%
-% \begin{macro}{\ustc@origindeclare}
-% 原创性声明文本.
-%
-%    \begin{macrocode}
-\newcommand\ustc@origindeclare{
-本人声明所呈交的学位论文，是本人在导师指导下进行研究工作所取得的成果。
-除已特别加以标注和致谢的地方外，论文中不包含任何他人已经发表或撰写过
-的研究成果。与我一同工作的同志对本研究所做的贡献均已在论文中作了明确
-的说明。
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\ustc@authorization}
-% 作者授权文本.
-%
-%    \begin{macrocode}
-\newcommand\ustc@authorization{
-作为申请学位的条件之一，学位论文著作权拥有者授权中国科学技术大学拥有
-学位论文的部分使用权，即：学校有权按有关规定向国家有关部门或机构送交
-论文的复印件和电子版，允许论文被查阅和借阅，可以将学位论文编入《中国
-学位论文全文数据库》等有关数据库进行检索，可以采用影印、缩印或扫描等
-复制手段保存、汇编学位论文。本人提交的电子文档的内容和纸质论文的内容
-相一致。\par 保密的学位论文在解密后也遵守此规定。
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\ustc@make@declare}
-% 制作原创性声明页.
-%
-% \changes{v1.0.1}{2017/04/16}
-%   {在开始处添加命令 \texttt{\textbackslash normalsize}}
-%
-%    \begin{macrocode}
-\newcommand\ustc@make@declare{
-  \cleardoublepage
-  \begingroup
-    \normalsize\normalfont
-    \vspace*{0.5em}
-    \begin{center}
-      \sffamily\fontsize{16bp}{24bp}\selectfont
-      中国科学技术大学学位论文原创性声明
-    \end{center}
-    \par\medskip
-    \ustc@origindeclare
-    \par\vskip 1.5em
-    作者签名：\underline{\hspace{8em}}\hfill
-    签字日期：\underline{\hspace{8em}}\hspace*{2em}
-    \par\vskip 7em
-    \begin{center}
-      \sffamily\fontsize{16bp}{24bp}\selectfont
-      中国科学技术大学学位论文授权使用声明
-    \end{center}
-    \par\medskip
-    \ustc@authorization
-    \par\vskip 1.5em
-    \setlength{\fboxsep}{0.05em}
-    \fbox{\rule[0.683em]{0.683em}{0em}} 公开\qquad
-    \fbox{\rule[0.683em]{0.683em}{0em}} 保密
-    （\underline{\qquad}年）
-    \par\vskip 1.5em
-    作者签名：\underline{\hspace{8em}}\hfill
-    导师签名：\underline{\hspace{8em}}\hspace*{2em}
-    \par\vskip 1.5em
-    签字日期：\underline{\hspace{8em}}\hfill
-    签字日期：\underline{\hspace{8em}}\hspace*{2em}
-  \endgroup
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% \subsection{目录}
+% \subsection{目录和图、表}
 %
 % \begin{macro}{\tableofcontents}
-% 重定义 |\tableofcontents| 来为目录页添加 PDF 书签. 这里使用了 |hyperref| 宏包
-% 提供的 |\pdfbookmark| 命令. 它的可选参数 |0| 表示添加的书签跟章的书签同级.
-% 需要注意的是, 该命令要在 |\ustc@save@tableofcontents| 之前运行
-% (否则书签链接到的就是目录的最后一页), 并且在运行之前应该 |\clearpage|.
-%
-% 基础文档类 |book| 在选项 |twoside| 和 |openany| 下, 命令 |\maketitle|,
-% |\frontmatter| 和 |\mainmatter| 依然会在奇数页开始, 而命令 |\appendix| 和
-% |\backmatter| 则允许在偶数页开始. 此时章一级的命令或者环境 |\chapter|,
-% |\tableofcontents| 和 |thebibliography| 都允许在偶数页开始. 另外, 在文档
-% |oneside| 选项下, 命令 |\cleardoublepage| 和 |\clearpage| 效果相同.
 %
 % \changes{v1.0.2}{2017/04/23}{目录从奇数页开始}
+%
+% \begin{macro}{\listoffigures}
+% \begin{macro}{\listoftables}
+%
+% \changes{v1.1}{2019/02/04}{插图和表格索引也添加 PDF 书签}
+%
+% 本科论文要求页码从目录页开始, 需要重定义 |\tableofcontents|.
+% 其他的重定义只是为了给目录、插图和表格索引添加 PDF 书签.
 %
 %    \begin{macrocode}
 \let\ustc@save@tableofcontents\tableofcontents
 \let\ustc@save@listoffigures\listoffigures
 \let\ustc@save@listoftables\listoftables
-\renewcommand\tableofcontents{%
-  \cleardoublepage
-  \pdfbookmark[0]{\contentsname}{contents}%
-  \ustc@save@tableofcontents
-}
-\renewcommand\listoffigures
-  {\cleardoublepage\ustc@save@listoffigures}
-\renewcommand\listoftables
-  {\cleardoublepage\ustc@save@listoftables}
+\if@ustc@bachelor
+  \renewcommand\tableofcontents{%
+    \cleardoublepage
+    \pagenumbering{arabic}%
+    \renewcommand\ustc@head@footer{\thepage}%
+    \pdfbookmark[0]{\contentsname}{contents}%
+    \ustc@save@tableofcontents
+  }
+  \renewcommand\listoffigures{%
+    \if@openright\cleardoublepage\else\clearpage\fi
+    \pdfbookmark[0]{\listfigurename}{listoffigures}%
+    \ustc@save@listoffigures
+  }
+  \renewcommand\listoftables{%
+    \if@openright\cleardoublepage\else\clearpage\fi
+    \pdfbookmark[0]{\listtablename}{listoftables}%
+    \ustc@save@listoftables
+  }
+\else
+  \renewcommand\tableofcontents{%
+    \cleardoublepage
+    \pdfbookmark[0]{\contentsname}{contents}%
+    \ustc@save@tableofcontents
+  }
+  \renewcommand\listoffigures{%
+    \cleardoublepage
+    \pdfbookmark[0]{\listfigurename}{listoffigures}%
+    \ustc@save@listoffigures
+  }
+  \renewcommand\listoftables{%
+      \cleardoublepage
+      \pdfbookmark[0]{\listtablename}{listoftables}%
+      \ustc@save@listoftables
+  }
+\fi
 %    \end{macrocode}
+%
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\chapter}
+% \begin{macro}{\appendix}
+% \begin{macro}{\mainmatter}
+%
+% 本科论文要求目录中的正文章标题前空一行.
+%
+% 这里通过重定义 |\chapter| 来实现.
+% 通过判断 |\if@mainmatter| 的真假来确定是否为正文章节.
+% 由于 |\appendix| 不改变 |\if@mainmatter| 的值,
+% 需要在命令中改回 |\chapter| 原始值.
+%
+%    \begin{macrocode}
+\if@ustc@bachelor
+  \let\ustc@save@chapter\chapter
+  \let\ustc@save@appendix\appendix
+  \renewcommand\chapter{%
+    \if@mainmatter
+      \addtocontents{toc}{\protect\addvspace{22bp}}%
+    \fi
+    \ustc@save@chapter
+  }
+  \renewcommand\mainmatter{%
+    \clearpage
+    \@mainmattertrue
+    \renewcommand\ustc@head@footer{\thepage}%
+  }
+  \renewcommand\appendix{%
+    \ustc@save@appendix
+    \renewcommand\chapter{\ustc@save@chapter}%
+  }
+\fi
+%    \end{macrocode}
+%
+% \end{macro}
+% \end{macro}
 % \end{macro}
 %
 % 通过宏包 |titletoc| 来设置目录格式.
@@ -1595,8 +2086,7 @@ LaTeX version 2005/12/01 or later.
     {\addvspace{6bp}\fontsize{14bp}{21bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\fontsize{12bp}{21bp}\selectfont
-      \titlerule*[12bp]{$\cdot$}\contentspage
-    }
+      \titlerule*[12bp]{$\cdot$}\contentspage}
   \titlecontents{section}[1em]
     {\addvspace{6bp}\fontsize{12bp}{20bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
@@ -1605,8 +2095,7 @@ LaTeX version 2005/12/01 or later.
     {\addvspace{6bp}\fontsize{10.5bp}{16bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\fontsize{12bp}{16bp}\selectfont
-      \titlerule*[12bp]{$\cdot$}\contentspage
-    }
+      \titlerule*[12bp]{$\cdot$}\contentspage}
 \fi
 %    \end{macrocode}
 %
@@ -1640,119 +2129,143 @@ LaTeX version 2005/12/01 or later.
 %
 % \subsection{章节标题格式}
 %
-% 设置章节标题格式. 下面 |chapter| 的设置中, |pagestyle=main| 表示章标题的那一页
-% 的页眉页脚格式. |afterindent=true| 表示紧接着的第一段首行需要缩进 (使用 |ctex|
-% 宏包之后, 这个设置似乎是不必要的). 这里设置 |format| 之后需要清空 |nameformat|
-% 和 |titleformat| 的设置. 因为这两个选项是在 |format| 之后起作用, 他们的值会
-% 覆盖掉 |format| 的设置. 最新版的 |ctex| 似乎默认已经清空. 但如果直接使用
-% |ctexheading| 宏包的话, 还是需要手动清空.
+% 设置章节标题格式.
 %
-% \changes{v1.0.1}{2017/04/16}{小小节标题添加字体尺寸命令}
-% \changes{v1.0.2}{2017/04/23}{front matter 的页码修改为大写罗马数字}
+% 对 |chapter| 的设置中, |pagestyle=main| 表示章标题当前页的页眉页脚格式.
+% |ctex| 宏包会在中文模式下自动开启 |afterindent=true|,
+% 使标题后的第一段首行缩进.
+%
+% 这里设置 |format| 之后清空 |nameformat| 和 |titleformat| 的设置.
+% 这两个选项是在 |format| 之后起作用, 会覆盖掉 |format| 的设置.
+% 最新版的 |ctex| 默认已经清空.
+% 如果直接使用 |ctexheading| 宏包, 也需要手动清空.
+%
+% \changes{v1.1}{2019/02/06}
+%   {删除章节标题 \texttt{afterindent} 的设置}
+% \changes{v1.1}{2019/02/06}
+%   {章标题加粗}
 %
 %    \begin{macrocode}
 \setcounter{secnumdepth}{3}
 %\RequirePackage{ctexheading}
 \ctexset{
-  chapter={
-    pagestyle=main,
-%    name={第 , 章},
-    number=\arabic{chapter},
-    aftername=\quad,
-    afterindent=true,
-    beforeskip=24bp,
-    afterskip=18bp,
-    format=\centering\sffamily\fontsize{16bp}{24bp}\selectfont,
-    nameformat={},
-    titleformat={},
-  },
+  chapter = {
+    pagestyle   = main,
+    number      = \arabic{chapter},
+    aftername   = \quad,
+    beforeskip  = 24bp,
+    afterskip   = 18bp,
+    format      = \centering\sffamily\bfseries
+                  \fontsize{16bp}{24bp}\selectfont,
+    nameformat  = {},
+    titleformat = {},
+  }
+}
+%    \end{macrocode}
+%
+% 由于章标题一定是从页面的顶端开始排版,
+% 它的 |beforeskip| 会在设置值的基础上再加上 |\topskip| 和行间胶.
+% 它的 |afterskip| 也会加上行间胶.
+%
+% 修正的首选方案是设置 |fixskip=true|. 该选项于 2016/06/03 引入.
+%
+% 替代方案的处理方式可参见\\
+% \url{https://github.com/CTeX-org/ctex-kit/issues/248}\\
+% \url{https://github.com/CTeX-org/ctex-kit/issues/207}
+%
+% 这里通过 |\@ifpackagelater| 判断 |ctex| 宏包的版本.
+% 进而可分别采用不同的修正方案.
+%
+% \changes{v1.1}{2019/02/06}
+%   {修正章标题前后空白}
+%
+%    \begin{macrocode}
+\@ifpackagelater{ctex}{2016/06/03}
+  {\ctexset{chapter/fixskip=true}}
+  {
+    \ctexset{
+      chapter = {
+        beforeskip  = 24bp-\topskip,
+        format     += \nointerlineskip,
+        aftertitle += \nointerlineskip,
+      }
+    }
+  }
+%    \end{macrocode}
+%
+% 设置节和小节的标题格式.
+% |\ccwd| 是 |ctex| 中汉字之间的距离, 类似于 1em.
+%
+% \changes{v1.1}{2019/02/07}
+%   {小节标题左缩进两字符}
+%
+%    \begin{macrocode}
+\ctexset{
   section={
-    afterindent=true,
-    beforeskip=24bp,
-    afterskip=6bp,
-    format=\sffamily\fontsize{14bp}{21bp}\selectfont,
-  },
+    beforeskip = 24bp,
+    afterskip  = 6bp,
+    format     = \sffamily\fontsize{14bp}{21bp}\selectfont,
+  }
+}
+\ctexset{
   subsection={
-    afterindent=true,
-    beforeskip=12bp,
-    afterskip=6bp,
-    format=\sffamily\fontsize{13bp}{20bp}\selectfont,
-  },
+    indent     = 2\ccwd,
+    beforeskip = 12bp,
+    afterskip  = 6bp,
+    format     = \sffamily\fontsize{13bp}{20bp}\selectfont,
+  }
+}
+%    \end{macrocode}
+%
+% 小小节的格式没有明确要求, 参照 Word 模板设置.
+%
+% \changes{v1.0.1}{2017/04/16}
+%   {小小节标题添加字体尺寸命令}
+%
+% \changes{v1.1}{2019/02/07}
+%   {小小节更改编号形式, 左缩进两字符}
+%
+%    \begin{macrocode}
+\ctexset{
   subsubsection={
-    afterindent=true,
-    beforeskip=12bp,
-    afterskip=6bp,
-    format=\sffamily\fontsize{12bp}{20bp}\selectfont,
-  },
+    indent     = 2\ccwd,
+    number     = \arabic{subsubsection},
+    aftername   = .\space,
+    beforeskip = 12bp,
+    afterskip  = 6bp,
+    format     = \sffamily\fontsize{12bp}{20bp}\selectfont,
+  }
 }
-\renewcommand\frontmatter{%
-  \cleardoublepage
-  \@mainmatterfalse
-  \pagenumbering{Roman}%
-  \if@ustc@bachelor
-    \renewcommand\ustc@header@foot{}%
-  \fi
-}
+%    \end{macrocode}
+%
+% 本科论文章标题不加粗, 正文中的章标题字体大小与研究生相同,
+% 其他的章标题, 包括参考文献部分, 都要求是小二号黑体.
+% 恰好, 下面设置参考文献格式时, 会局部地把 |\if@mainmatter|
+% 设为假. 因此, 这里可以通过判断是否为 main matter 来区分.
+%
+% 本科论文的节、小节、小小节标题字体大小或行距的要求有所不同,
+% 也予以修正.
+%
+%    \begin{macrocode}
 \if@ustc@bachelor
   \ctexset{
-    section/format+=\centering\fontsize{15bp}{22bp}\selectfont,
-    subsection/format+=\fontsize{14bp}{22bp}\selectfont,
-    subsubsection/format+=\fontsize{12bp}{22bp}\selectfont,
+    chapter/format       += \mdseries
+                            \if@mainmatter\else
+                              \fontsize{18bp}{27bp}\selectfont
+                            \fi,
+    section/format       += \centering
+                            \fontsize{15bp}{22bp}\selectfont,
+    subsection/format    += \fontsize{14bp}{22bp}\selectfont,
+    subsubsection/format += \fontsize{12bp}{22bp}\selectfont,
   }
 \fi
 %    \end{macrocode}
 %
-% \begin{macro}{\cleardoublepage}
-% 重定义 |\cleardoublepage| 以解决章标题前的空白页的页眉页脚问题.
-% 这里也可以直接使用 |emptypage| 宏包来实现.
-%
-%    \begin{macrocode}
-\let\ustc@save@cleardoublepage\cleardoublepage
-\renewcommand\cleardoublepage
-  {\clearpage{\pagestyle{empty}\ustc@save@cleardoublepage}}
-%    \end{macrocode}
-% \end{macro}
-%
-% \subsection{本科论文页码和目录的特殊设置}
-%
-% 本科论文要求页码从目录页开始, 并且要求目录中章标题前空一行. 这里通过重定义
-% 几个命令来实现.
-%
-%    \begin{macrocode}
-\if@ustc@bachelor
-  \let\ustc@save@chapter\chapter
-  \let\ustc@save@appendix\appendix
-  \renewcommand\chapter{%
-    \if@mainmatter
-      \addtocontents{toc}{\protect\addvspace{22bp}}%
-    \fi
-    \ustc@save@chapter
-  }
-  \renewcommand\tableofcontents{%
-    \cleardoublepage
-    \pagenumbering{arabic}%
-    \renewcommand\ustc@header@foot{\thepage}%
-    \pdfbookmark[0]{\contentsname}{contents}%
-    \begingroup
-      \ctexset{chapter/format+=\fontsize{18bp}{27bp}\selectfont}%
-      \ustc@save@tableofcontents
-    \endgroup
-  }
-  \renewcommand\mainmatter{%
-    \cleardoublepage
-    \@mainmattertrue
-    \renewcommand\ustc@header@foot{\thepage}%
-  }
-  \renewcommand\appendix{%
-    \ustc@save@appendix
-    \renewcommand\chapter{\ustc@save@chapter}%
-  }
-\fi
-%    \end{macrocode}
-%
-% \subsection{浮动表格和图片的格式}
+% \subsection{浮动环境}
 %
 % 设置表序和图序的格式.
+% 需要注意的是, |\caption| 命令并不能控制在浮动环境中的位置,
+% 作者应该把该命令写在需要的地方.
 %
 % \changes{v1.0.1}{2017/04/16}{调整表序和图序的上下距离设置}
 % \changes{v1.0.2}{2017/04/23}{图题加粗}
@@ -1764,102 +2277,122 @@ LaTeX version 2005/12/01 or later.
     {\fontsize{12bp}{22bp}\selectfont}
 \else
   \DeclareCaptionFont{captionfont}
-    {\bfseries\fontsize{10.5bp}{16bp}\selectfont}
+    {\fontsize{10.5bp}{16bp}\selectfont\bfseries}
 \fi
 \captionsetup{
-  format = hang,
+  format   = hang,
   labelsep = quad,
-  font = captionfont,
-  skip = 6bp,
+  font     = captionfont,
+  skip     = 6bp,
 }
-% \captionsetup[figure]{
-%   position = bottom,
-%   aboveskip = 6bp,
-%   belowskip = 12bp,
-% }
-% \captionsetup[table]{
-%   position = top,
-%   aboveskip = 6bp,
-%   belowskip = 6bp,
-% }
+\captionsetup[figure]{
+  aboveskip = 6bp,
+  belowskip = 12bp,
+}
+\captionsetup[table]{
+  aboveskip = 6bp,
+  belowskip = 6bp,
+}
+%    \end{macrocode}
+%
+% 设置浮动环境默认位置选项为 |!htb|。
+%    \begin{macrocode}
+% \def\fps@figure{!htb}
+% \def\fps@table{!htb}
 %    \end{macrocode}
 %
 % \begin{macro}{\captionnote}
-% 为图和表格添加注解. 该命令需要写在 |figure| 或 |table| 环境中.
+%
+% 为图和表格添加注解, 用在浮动环境中.
+% 请自行把它写在要求的位置.
 %
 %    \begin{macrocode}
-\newcommand\captionnote[1]{%
-  \captionsetup{position = bottom}%
-  \caption*{\hangindent=2em\captionnotename\ \textmd{#1}}%
-}
+\newcommand\captionnote[1]
+  {\caption*{\hangindent=2\ccwd\captionnotename\textnormal{#1}}}
 %    \end{macrocode}
+%
 % \end{macro}
 %
 % \subsection{符号说明}
 %
 % \begin{environment}{notation}
-% 规范中的符号说明章标题格式与普通章节的标题格式不同, 且该部分字体稍小. 因此
-% 这里定义了一个符号说明的环境. 如果不严格要求标题格式的话, 直接用
-% |\chapter{符号说明}| 来搞定也是可以的.
 %
-% \changes{v1.0.2}{2017/04/23}{更改 ``符号说明'' 环境标题和正文格式}
-% \changes{v1.0.4}{2017/05/02}{更改 ``符号说明'' 页码, 不放入目录}
+% 定义符号说明环境.
+%
+% 研究生论文撰写手册中对符号说明的标题与内容格式的要求前后矛盾.
+% 这里使其格式等同于普通章节, 页面不打印页码.
+%
+% \changes{v1.0.2}{2017/04/23}{更改符号说明环境的标题和正文格式}
+% \changes{v1.0.4}{2017/05/02}{更改符号说明的页码, 不放入目录}
+% \changes{v1.1}{2019/02/04}{符号说明添加 PDF 书签}
 %
 %    \begin{macrocode}
-\newenvironment{notation}{%
-  \cleardoublepage
-  \chapter*{\notationname}%
-  \renewcommand{\ustc@header@head}{\notationname}%
-  \renewcommand{\ustc@header@foot}{}%
-}{\clearpage}
+\if@ustc@bachelor
+  \newenvironment{notation}{%
+    \if@openright\cleardoublepage\else\clearpage\fi
+    \pdfbookmark[0]{\notationname}{notation}%
+    \chapter*{\notationname}%
+  }{}
+\else
+  \newenvironment{notation}{%
+    \cleardoublepage
+    \pdfbookmark[0]{\notationname}{notation}%
+    \chapter*{\notationname}%
+    \renewcommand\ustc@head@header{\notationname}%
+    \renewcommand\ustc@head@footer{}%
+  }{\clearpage}
+\fi
 %    \end{macrocode}
+%
 % \end{environment}
 %
 % \subsection{参考文献}
 %
-% 参考文献引用部分使用了 |natbib| 宏包. 载入该宏包会默认进入 author-year 模式.
-% 这里使用宏包选项 |numbers| 使文档回到数字编号模式. 宏包选项 |sort| 在一次引用
-% 多个文献时会进行排序. 如果使用 |sort&compress| 选项, 还会对进行一些缩写. 例如
-% 会把 [1,2,3,4] 缩写为 [1--4].
+% 使用 |natbib| 宏包设置参考文献.
+% 宏包选项 |numbers| 表示进入 numerical 引用模式.
+% |square| 表示使用方括号作为定界符.
+% |sort&compress| 表示在多文献引用时先进行排序 (|sort|),
+% 再尽可能的缩写 (|compress|). 如 [1,2,3,4] 会缩写为 [1--4].
+%
+% 这里使用 |numbers| 选项是考虑到一些标准的 |.bst| 文件
+% (如 |plain.bst|) 只支持 numerical 模式.
+% 在 author-year 模式下使用这些文件格式可能会出错.
 %
 %    \begin{macrocode}
-\RequirePackage[numbers,sort]{natbib}
-\if@ustc@bachelor
-\else
-  \renewcommand\bibfont{\fontsize{10.5bp}{16bp}\selectfont}
+\RequirePackage[numbers,square,sort&compress]{natbib}%
+\if@ustc@bachelor\else
+  \renewcommand\bibfont{\fontsize{10.5bp}{16bp}\selectfont}%
 \fi
 %    \end{macrocode}
 %
 % \changes{v1.0.3}{2017/04/26}{修改本科论文参考文献正文字号}
 %
-% 在行文中可以通过命令 |\setcitestyle{authoryear}| 进入 author-year 模式. 另外,
-% 一些标准的 |.bst| 文件格式 (比如 |plain.bst|) 只能支持数字模式. 因此在
-% author-year 模式下使用这些文件格式可能会遇到下述的错误信息.\\
-% |Bibliography not compatible with author-year citations.|\\
-% 因此这种情况下只能进入 |numbers| 模式.
-%
 % \begin{environment}{thebibliography}
-% 这里重定义了 |thebibliography| 环境. 主要是为了把参考文献添加进目录. 顺便也
-% 保证了页眉中不会出现 |\CTEXthechapter| 前缀. 要注意的是, 由于 |natbib| 宏包
-% 也会重定义该环境, 因此重定义需要在载入该宏包之后进行.
 %
-% 这里用命令 |\addcontentsline{toc}{chapter}{\bibname}| 把参考文献加到目录中.
-% 注意到页眉页脚格式 |main| 的定义, 在参考文献环境中把 |\if@mainmatter| 置为假
-% 即可保证页眉中不会出现 |\CTEXthechapter| 前缀. 这里也可以通过重定义命令
-% |\ustc@header@head| 来实现.
+% 重定义 |thebibliography| 环境.
+% 主要目的是把参考文献列入目录.
+% 由于 |natbib| 宏包也会重定义该环境,
+% 这里需要在载入该宏包之后进行.
+%
+% 注意到页眉页脚格式 |main| 的定义, 把 |\if@mainmatter| 置为假
+% 即可保证页眉中不会出现 |\CTEXthechapter| 前缀.
+% 该设置仅在参考文献环境中生效.
+% 这也可以通过重定义 |\ustc@head@header| 实现.
 %
 %    \begin{macrocode}
 \let\ustc@save@thebibliography\thebibliography
 \let\ustc@save@endthebibliography\endthebibliography
 \renewenvironment{thebibliography}[1]{%
-  \if@openright\cleardoublepage\else\clearpage\fi
+  \clearpage
   \@mainmatterfalse
   \ustc@save@thebibliography{#1}%
   \addcontentsline{toc}{chapter}{\bibname}%
-}{\ustc@save@endthebibliography\clearpage}
+}{\ustc@save@endthebibliography\clearpage}%
 %    \end{macrocode}
-% 这里需要注意的是, 退出环境时需要 |\clearpage|. 否则最后一页可能会使用后面
+%
+% 退出环境时的命令 |\clearpage| 是必要的. 否则最后一页可能会使用后面
 % 章节的页眉页脚格式, 导致页眉中又出现 |\CTEXthechapter| 前缀.
+%
 % \end{environment}
 %
 % \subsection{附加设置}
@@ -1887,114 +2420,126 @@ LaTeX version 2005/12/01 or later.
 \fi
 %    \end{macrocode}
 %
-% 另外, 在数学中各种定理环境经常共用一个计数器. 此时这些定理环境对应的自动引用
-% 也共享同样的前缀. 若要对不同定理环境区分前缀, 可通过宏包 |aliascnt| 对
-% |hyperref| 宏包做一些修正. 具体用法参见这两个宏包的文档.
-%
 % \subsubsection{摘要}
+%
 % \begin{environment}{abstract}
-% 我们知道 |article| 文档类有 |abstract| 环境. 这里定义中文 |abstract| 环境.
+%
+% 中文 |abstract| 环境.
+%
+% 本科论文在 front matter 部分, 列入目录. 可直接使用 |\chapter| 命令.
+%
+% 研究生论文不列入目录. 可使用 |\chapter*| 命令.
+% 需要修改页眉, 退出环境时需要 |\clearpage|.
+% 这里还添加了 PDF 书签.
 %
 % \changes{v1.0.2}{2017/04/23}{摘要从奇数页开始}
 % \changes{v1.0.4}{2017/05/02}{研究生摘要不放入目录}
+% \changes{v1.1}{2019/02/04}{摘要添加 PDF 书签}
 %
 %    \begin{macrocode}
-\newenvironment{abstract}{%
-  \if@ustc@bachelor
-    \ctexset{chapter/format+=\fontsize{18bp}{27bp}\selectfont}
-    \chapter{\abstractname}%
-  \else
-    \cleardoublepage
-    \chapter*{\abstractname}%
-    \renewcommand{\ustc@header@head}{\abstractname}%
-  \fi
-}{\clearpage}
+\if@ustc@bachelor
+  \newenvironment{abstract}{\chapter{中文内容摘要}}{}
+\else
+  \newenvironment{abstract}{%
+    \if@openright\cleardoublepage\else\clearpage\fi
+    \pdfbookmark[0]{摘要}{abstract}%
+    \chapter*{摘要}%
+    \renewcommand{\ustc@head@header}{摘要}%
+  }{\clearpage}
+\fi
 %    \end{macrocode}
+%
 % \end{environment}
 %
-% \begin{macro}{\abstractname}
-% 环境 |abstract| 的名字.
-%
-%    \begin{macrocode}
-\def\abstractname{摘要}
-%    \end{macrocode}
-% \end{macro}
-%
 % \begin{macro}{\keywords}
-% 中文关键词. 该命令应该用在 |abstract| 环境中.
+%
+% 中文关键词, 用在 |abstract| 环境中.
 %
 %    \begin{macrocode}
-\def\keywords#1
-  {\par\vskip\baselineskip\noindent\textbf{关键词: }#1}
+\newcommand\keywords[1]
+  {\par\vspace{\baselineskip}\noindent\textbf{关键词：}#1}
 %    \end{macrocode}
+%
 % \end{macro}
 %
 % \begin{environment}{enabstract}
-% 英文的 |enabstract| 环境以及英文的 |\enkeywords| 命令.
+%
+% 英文 |enabstract| 环境.
+%
+% \changes{v1.1}{2019/02/04}{英文摘要添加 PDF 书签}
 %
 %    \begin{macrocode}
-\newenvironment{enabstract}{%
-  \if@ustc@bachelor
-    \ctexset{chapter/format+=\fontsize{18bp}{27bp}\selectfont}
-    \chapter{\enabstractname}%
-  \else
-    \cleardoublepage
-    \chapter*{\enabstractname}%
-    \renewcommand{\ustc@header@head}{\enabstractname}%
-  \fi
-}{\clearpage}
+\if@ustc@bachelor
+  \newenvironment{enabstract}
+    {\chapter[英文内容摘要]{Abstract}}{}
+\else
+  \newenvironment{enabstract}{%
+    \if@openright\cleardoublepage\else\clearpage\fi
+    \pdfbookmark[0]{Abstract}{enabstract}%
+    \chapter*{Abstract}%
+    \renewcommand{\ustc@head@header}{Abstract}%
+  }{\clearpage}
+\fi
 %    \end{macrocode}
+%
 % \end{environment}
 %
-% \begin{macro}{\enabstractname}
-% 环境 |enabstract| 的名字.
-%
-%    \begin{macrocode}
-\def\enabstractname{Abstract}
-%    \end{macrocode}
-% \end{macro}
-%
 % \begin{macro}{\enkeywords}
-% 英文关键词. 该命令应该用在 |enabstract| 环境中.
+%
+% 英文关键词, 用在 |enabstract| 环境中.
 %
 % \changes{v1.0.5}{2017/05/30}{修正英文关键词标题}
 %
 %    \begin{macrocode}
-\def\enkeywords#1
-  {\par\vskip\baselineskip\noindent\textbf{Key Words: }#1}
+\newcommand\enkeywords[1]
+  {\par\vspace{\baselineskip}\noindent\textbf{Key Words:}\space#1}%
 %    \end{macrocode}
+%
 % \end{macro}
 %
 % \subsubsection{致谢}
 %
 % \begin{environment}{acknowledgements}
-% 本科论文的致谢要求放在目录页的前面, 并且要求不打印页码. 这在 |\frontmatter|
-% 与目录之间使用 |\chapter*{致谢}| 即可实现. 研究生论文的致谢是放在
-% back matter 部分中的. 使用命令 |\chapter{致谢}| 即可. 但这里还是提供了一个
-% 致谢环境. 随便选用吧.
+%
+% 致谢环境.
+%
+% 本科论文的致谢在 front matter 部分, 在目录之前, 不列入目录, 不打印页码.
+% 其中, 不打印页码已在 |\frontmatter| 中设置, 可直接使用 |\chapter*| 命令.
+% 这里设置添加了 PDF 书签.
+%
+% 研究生论文的致谢在 back matter 部分, 列入目录. 可直接使用 |\chapter| 命令.
+%
+% \changes{v1.1}{2019/02/04}{本科论文的致谢添加 PDF 书签}
 %
 %    \begin{macrocode}
-\newenvironment{acknowledgements}{%
-  \if@ustc@bachelor
-    \ctexset{chapter/format+=\fontsize{18bp}{27bp}\selectfont}
+\if@ustc@bachelor
+  \newenvironment{acknowledgements}{%
+    \if@openright\cleardoublepage\else\clearpage\fi
+    \pdfbookmark[0]{\acknowledgementsname}{acknowledgements}%
     \chapter*{\acknowledgementsname}%
-    \renewcommand\ustc@header@foot{}%
-  \else
-    \chapter{\acknowledgementsname}%
-  \fi
-}{}
+    \renewcommand\ustc@head@footer{}%
+  }{\clearpage}
+\else
+  \newenvironment{acknowledgements}
+    {\chapter{\acknowledgementsname}}{}
+\fi
 %    \end{macrocode}
+%
 % \end{environment}
 %
 % \subsubsection{在读期间发表的学术论文与取得的研究成果}
 %
 % \begin{environment}{publications}
-% 同样的, 发表成果部分也只需要使用一个 |\chapter| 命令即可. 不过这个章标题
-% 有点长. 要是哪个同学写错或者漏了字就不好了. 所以这里还是提供了一个环境.
+%
+% 研究成果环境.
+%
+% 在 back matter 部分, 列入目录. 可直接使用 |\chapter| 命令.
+% 不过这个章标题有点长, 比较容易出错. 所以这里还是提供了一个环境.
 %
 %    \begin{macrocode}
 \newenvironment{publications}{\chapter{\publicationsname}}{}
 %    \end{macrocode}
+%
 % \end{environment}
 %
 %    \begin{macrocode}
