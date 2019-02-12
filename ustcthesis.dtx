@@ -163,24 +163,32 @@ LaTeX version 2005/12/01 or later.
 %
 % \DoNotIndex{\makebox,\fbox,\fboxsep,\parbox,\cdot,\underline,\rule}
 % \DoNotIndex{\clearpage,\protect}
+% \DoNotIndex{\setmainfont,\setsansfont,\setmonofont}
 % \DoNotIndex{\setCJKmainfont,\setCJKsansfont,\CJKfontspec}
-% \DoNotIndex{\quad,\qquad,\textwidth,\par,\parskip,\bigskip,\medskip,\\}
-% \DoNotIndex{\hfil,\hspace,\vspace,\hskip,\vskip,\addvspace}
-% \DoNotIndex{\noindent,\parindent,\null,\baselineskip,\hfill,\topskip}
-% \DoNotIndex{\setlength,\setcounter,\setmainfont,\setsansfont}
-% \DoNotIndex{\fontsize,\selectfont,\normalsize}
-% \DoNotIndex{\normalfont,\bfseries,\itshape,\sffamily,\rmfamily}
-% \DoNotIndex{\mdseries,\space,\ttfamily,\textnormal}
-% \DoNotIndex{\textbf,\textrm,\fangsong,\lishu,\ccwd,}
-% \DoNotIndex{\thepage,\arabic,\Roman,\Alph,\pagestyle,\pagenumbering}
+% \DoNotIndex{\fangsong,\lishu,\ccwd,\ziju,\zihao}
+% \DoNotIndex{\space,\quad,\qquad,\hfil,\hfill,\textwidth,\\,\par}
+% \DoNotIndex{\hspace,\vspace,\addvspace,\hskip,\vskip}
+% \DoNotIndex{\baselineskip,\topskip,\parskip,\bigskip,\medskip,\smallskip}
+% \DoNotIndex{\noindent,\indent,\parindent,\null}
+% \DoNotIndex{\setlength,\setcounter,\addtolength,\addtocounter}
+% \DoNotIndex{\arabic,\Roman,\roman,\Alph,\alph}
+% \DoNotIndex{\mdseries,\bfseries,\rmfamily,\sffamily,\ttfamily}
+% \DoNotIndex{\normalfont,\upshape,\slshape,\itshape,\scshape}
+% \DoNotIndex{\textmd,\textbf,\textrm,\textsf,\texttt}
+% \DoNotIndex{\textnormal,\textup,\textsl,\textit,\textsc}
+% \DoNotIndex{\normalsize,\small,\footnotesize,\scriptsize,\tiny}
+% \DoNotIndex{\large,\Large,\LARGE,\huge,\Huge,\fontsize,\selectfont}
+% \DoNotIndex{\thepage,\pagestyle,\pagenumbering}
 % \DoNotIndex{\centering,\raggedleft,\raggedright}
 % \DoNotIndex{\if,\ifx,\ifdim,\ifnum,\ifcase,\else,\or,\fi,\relax,\@empty}
-% \DoNotIndex{\let,\def,\edef,\newcommand,\renewcommand,\providecommand}
+% \DoNotIndex{\def,\edef,\let,\newcommand,\renewcommand,\providecommand}
 % \DoNotIndex{\newenvironment,\renewenvironment,\newif,\expandafter}
 % \DoNotIndex{\begin,\end,\begingroup,\endgroup,\csname,\endcsname}
-% \DoNotIndex{\usepackage,\RequirePackage,\LoadClass,\DeclareOperation}
-% \DoNotIndex{\ProcessOptions,\PassOptionsToClass,\PassOptionsToPackage}
-% \DoNotIndex{\CurrentOption,\AtBeginDocument,\AtEndDocument}
+% \DoNotIndex{\title,\author,\date,\today}
+% \DoNotIndex{\usepackage,\RequirePackage,\LoadClass}
+% \DoNotIndex{\DeclareOption,\CurrentOption,\ExecuteOptions}
+% \DoNotIndex{\PassOptionsToClass,\PassOptionsToPackage,\ProcessOptions}
+% \DoNotIndex{\AtBeginDocument,\AtEndDocument}
 %
 % \title{文档类 \textsf{ustcthesis} 使用说明}
 % \author{jiaopjie\thanks{jiaopjie@mail.ustc.edu.cn}}
@@ -487,8 +495,8 @@ LaTeX version 2005/12/01 or later.
 %\begin{verbatim}
 %\makeatletter
 %\renewpagestyle{main}[\ustc@head@font]{%
-%  \sethead{}{\ustc@head@header}{}%
-%  \setfoot[\ustc@head@footer][][]{}{}{\ustc@head@footer}%
+%  \sethead{}{\ustc@head}{}%
+%  \setfoot[\ustc@foot][][]{}{}{\ustc@foot}%
 %  \headrule
 %}%
 %\makeatother
@@ -1405,8 +1413,8 @@ LaTeX version 2005/12/01 or later.
 %    \end{macrocode}
 %
 % \begin{macro}{\ustc@head@font}
-% \begin{macro}{\ustc@head@header}
-% \begin{macro}{\ustc@head@footer}
+% \begin{macro}{\ustc@head}
+% \begin{macro}{\ustc@foot}
 %
 % 设置页眉页脚.
 %
@@ -1429,16 +1437,16 @@ LaTeX version 2005/12/01 or later.
 \RequirePackage{titleps}
 \if@ustc@bachelor
   \newcommand\ustc@head@font{\fontsize{9bp}{14bp}\selectfont}
-  \newcommand\ustc@head@header{中国科学技术大学本科毕业论文}
+  \newcommand\ustc@head{中国科学技术大学本科毕业论文}
 \else
   \newcommand\ustc@head@font{\fontsize{10.5bp}{16bp}\selectfont}
-  \newcommand\ustc@head@header
+  \newcommand\ustc@head
     {\if@mainmatter\CTEXthechapter\quad\fi\chaptertitle}
 \fi
-\newcommand\ustc@head@footer{\thepage}
+\newcommand\ustc@foot{\thepage}
 \newpagestyle{main}[\ustc@head@font]{%
-  \sethead{}{\ustc@head@header}{}%
-  \setfoot{}{\ustc@head@footer}{}%
+  \sethead{}{\ustc@head}{}%
+  \setfoot{}{\ustc@foot}{}%
   \headrule
 }
 \pagestyle{main}
@@ -1463,7 +1471,7 @@ LaTeX version 2005/12/01 or later.
   \@mainmatterfalse
   \pagenumbering{Roman}%
   \if@ustc@bachelor
-    \renewcommand\ustc@head@footer{}%
+    \renewcommand\ustc@foot{}%
   \fi
 }
 %    \end{macrocode}
@@ -1947,6 +1955,7 @@ LaTeX version 2005/12/01 or later.
     \fi
     \cleardoublepage
   \end{titlepage}%
+  \renewcommand*\thepage{\arabic{page}}%
 }%
 %    \end{macrocode}
 %
@@ -1974,7 +1983,7 @@ LaTeX version 2005/12/01 or later.
   \renewcommand\tableofcontents{%
     \cleardoublepage
     \pagenumbering{arabic}%
-    \renewcommand\ustc@head@footer{\thepage}%
+    \renewcommand\ustc@foot{\thepage}%
     \pdfbookmark[0]{\contentsname}{contents}%
     \ustc@save@tableofcontents
   }
@@ -2035,7 +2044,7 @@ LaTeX version 2005/12/01 or later.
   \renewcommand\mainmatter{%
     \clearpage
     \@mainmattertrue
-    \renewcommand\ustc@head@footer{\thepage}%
+    \renewcommand\ustc@foot{\thepage}%
   }
   \renewcommand\appendix{%
     \ustc@save@appendix
@@ -2329,8 +2338,8 @@ LaTeX version 2005/12/01 or later.
     \cleardoublepage
     \pdfbookmark[0]{\notationname}{notation}%
     \chapter*{\notationname}%
-    \renewcommand\ustc@head@header{\notationname}%
-    \renewcommand\ustc@head@footer{}%
+    \renewcommand\ustc@head{\notationname}%
+    \renewcommand\ustc@foot{}%
   }{\clearpage}
 \fi
 %    \end{macrocode}
@@ -2368,7 +2377,7 @@ LaTeX version 2005/12/01 or later.
 % 注意到页眉页脚格式 |main| 的定义, 把 |\if@mainmatter| 置为假
 % 即可保证页眉中不会出现 |\CTEXthechapter| 前缀.
 % 该设置仅在参考文献环境中生效.
-% 这也可以通过重定义 |\ustc@head@header| 实现.
+% 这也可以通过重定义 |\ustc@head| 实现.
 %
 %    \begin{macrocode}
 \let\ustc@save@thebibliography\thebibliography
@@ -2435,7 +2444,7 @@ LaTeX version 2005/12/01 or later.
     \if@openright\cleardoublepage\else\clearpage\fi
     \pdfbookmark[0]{摘要}{abstract}%
     \chapter*{摘要}%
-    \renewcommand{\ustc@head@header}{摘要}%
+    \renewcommand{\ustc@head}{摘要}%
   }{\clearpage}
 \fi
 %    \end{macrocode}
@@ -2468,7 +2477,7 @@ LaTeX version 2005/12/01 or later.
     \if@openright\cleardoublepage\else\clearpage\fi
     \pdfbookmark[0]{Abstract}{enabstract}%
     \chapter*{Abstract}%
-    \renewcommand{\ustc@head@header}{Abstract}%
+    \renewcommand{\ustc@head}{Abstract}%
   }{\clearpage}
 \fi
 %    \end{macrocode}
@@ -2508,7 +2517,7 @@ LaTeX version 2005/12/01 or later.
     \if@openright\cleardoublepage\else\clearpage\fi
     \pdfbookmark[0]{\acknowledgementsname}{acknowledgements}%
     \chapter*{\acknowledgementsname}%
-    \renewcommand\ustc@head@footer{}%
+    \renewcommand\ustc@foot{}%
   }{\clearpage}
 \else
   \newenvironment{acknowledgements}

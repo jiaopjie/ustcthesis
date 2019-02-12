@@ -100,16 +100,16 @@
 \RequirePackage{titleps}
 \if@ustc@bachelor
   \newcommand\ustc@head@font{\fontsize{9bp}{14bp}\selectfont}
-  \newcommand\ustc@head@header{中国科学技术大学本科毕业论文}
+  \newcommand\ustc@head{中国科学技术大学本科毕业论文}
 \else
   \newcommand\ustc@head@font{\fontsize{10.5bp}{16bp}\selectfont}
-  \newcommand\ustc@head@header
+  \newcommand\ustc@head
     {\if@mainmatter\CTEXthechapter\quad\fi\chaptertitle}
 \fi
-\newcommand\ustc@head@footer{\thepage}
+\newcommand\ustc@foot{\thepage}
 \newpagestyle{main}[\ustc@head@font]{%
-  \sethead{}{\ustc@head@header}{}%
-  \setfoot{}{\ustc@head@footer}{}%
+  \sethead{}{\ustc@head}{}%
+  \setfoot{}{\ustc@foot}{}%
   \headrule
 }
 \pagestyle{main}
@@ -118,7 +118,7 @@
   \@mainmatterfalse
   \pagenumbering{Roman}%
   \if@ustc@bachelor
-    \renewcommand\ustc@head@footer{}%
+    \renewcommand\ustc@foot{}%
   \fi
 }
 \let\ustc@save@cleardoublepage\cleardoublepage
@@ -313,6 +313,7 @@
     \fi
     \cleardoublepage
   \end{titlepage}%
+  \renewcommand*\thepage{\arabic{page}}%
 }%
 \let\ustc@save@tableofcontents\tableofcontents
 \let\ustc@save@listoffigures\listoffigures
@@ -321,7 +322,7 @@
   \renewcommand\tableofcontents{%
     \cleardoublepage
     \pagenumbering{arabic}%
-    \renewcommand\ustc@head@footer{\thepage}%
+    \renewcommand\ustc@foot{\thepage}%
     \pdfbookmark[0]{\contentsname}{contents}%
     \ustc@save@tableofcontents
   }
@@ -364,7 +365,7 @@
   \renewcommand\mainmatter{%
     \clearpage
     \@mainmattertrue
-    \renewcommand\ustc@head@footer{\thepage}%
+    \renewcommand\ustc@foot{\thepage}%
   }
   \renewcommand\appendix{%
     \ustc@save@appendix
@@ -517,8 +518,8 @@
     \cleardoublepage
     \pdfbookmark[0]{\notationname}{notation}%
     \chapter*{\notationname}%
-    \renewcommand\ustc@head@header{\notationname}%
-    \renewcommand\ustc@head@footer{}%
+    \renewcommand\ustc@head{\notationname}%
+    \renewcommand\ustc@foot{}%
   }{\clearpage}
 \fi
 \RequirePackage[numbers,square,sort&compress]{natbib}%
@@ -551,7 +552,7 @@
     \if@openright\cleardoublepage\else\clearpage\fi
     \pdfbookmark[0]{摘要}{abstract}%
     \chapter*{摘要}%
-    \renewcommand{\ustc@head@header}{摘要}%
+    \renewcommand{\ustc@head}{摘要}%
   }{\clearpage}
 \fi
 \newcommand\keywords[1]
@@ -564,7 +565,7 @@
     \if@openright\cleardoublepage\else\clearpage\fi
     \pdfbookmark[0]{Abstract}{enabstract}%
     \chapter*{Abstract}%
-    \renewcommand{\ustc@head@header}{Abstract}%
+    \renewcommand{\ustc@head}{Abstract}%
   }{\clearpage}
 \fi
 \newcommand\enkeywords[1]
@@ -574,7 +575,7 @@
     \if@openright\cleardoublepage\else\clearpage\fi
     \pdfbookmark[0]{\acknowledgementsname}{acknowledgements}%
     \chapter*{\acknowledgementsname}%
-    \renewcommand\ustc@head@footer{}%
+    \renewcommand\ustc@foot{}%
   }{\clearpage}
 \else
   \newenvironment{acknowledgements}
