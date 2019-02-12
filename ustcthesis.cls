@@ -20,7 +20,7 @@
 %% 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{ustcthesis}
-  [2019/02/11 v1.1 USTC thesis template]
+  [2019/02/12 v1.1 USTC thesis template]
 \newif\if@ustc@bachelor
 \newif\if@ustc@chinese
 \newif\if@ustc@professional
@@ -125,8 +125,8 @@
 \renewcommand\cleardoublepage{%
   \clearpage
   \begingroup
-  \pagestyle{empty}%
-  \ustc@save@cleardoublepage
+    \pagestyle{empty}%
+    \ustc@save@cleardoublepage
   \endgroup
 }
 \RequirePackage{hyperref}
@@ -168,91 +168,91 @@
   {\begin{tabular}[t]{@{}#1@{}}#2\end{tabular}}
 \RequirePackage{graphicx}
 \newcommand\ustc@make@title{%
-  \cleardoublepage
-  \begin{center}%
+  \begingroup
+    \cleardoublepage
     \vspace*{-\topskip}\vspace*{4.6mm}%
-    \normalfont\nointerlineskip
+    \centering\nointerlineskip
     \parbox[t][10mm][t]{\textwidth}
       {\raggedleft\fontsize{14bp}{21bp}\selectfont
-      \fangsong\ustc@secrettext}%
-    \par\sffamily\nointerlineskip
-    \includegraphics[height=36bp]{logo/ustc_logo_text}%
-    \par\vspace{-36bp}\vspace{23mm}\nointerlineskip
+      \fangsong\ustc@secrettext}\par
+    \sffamily\nointerlineskip
+    \includegraphics[height=36bp]{logo/ustc_logo_text}\par
+    \vspace{-36bp}\vspace{23mm}\nointerlineskip
     \parbox[t][27mm][t]{\textwidth}
       {\centering\fontsize{56bp}{84bp}\selectfont
-      \makebox[\textwidth][c]{\ustc@thesisname}}%
-    \par\nointerlineskip
+      \makebox[\textwidth][c]{\ustc@thesisname}}\par
+    \nointerlineskip
     \if@ustc@professional
       \parbox[t][18mm][t]{\textwidth}
         {\centering\lishu\fontsize{26bp}{39bp}\selectfont
-        （\ustc@professionaltype）}%
-      \par\nointerlineskip
-      \includegraphics[height=42mm]{logo/ustc_logo_fig}%
-      \par\nointerlineskip
+        （\ustc@professionaltype）}\par
+      \nointerlineskip
+      \includegraphics[height=42mm]{logo/ustc_logo_fig}\par
+      \nointerlineskip
       \parbox[t][55mm][c]{\textwidth}
         {\centering\fontsize{26bp}{39bp}\selectfont
-        \bfseries\@title}%
+        \bfseries\@title}\par
     \else
       \vspace{12mm}%
-      \includegraphics[height=42mm]{logo/ustc_logo_fig}%
-      \par\nointerlineskip
+      \includegraphics[height=42mm]{logo/ustc_logo_fig}\par
+      \nointerlineskip
       \parbox[t][61mm][c]{\textwidth}
         {\centering\fontsize{26bp}{39bp}\selectfont
-        \bfseries\@title}%
+        \bfseries\@title}\par
     \fi
-    \par\fontsize{16bp}{30bp}\selectfont\nointerlineskip
+    \nointerlineskip\fontsize{16bp}{30bp}\selectfont
     \begin{tabular}{@{}lc@{}}%
       作者姓名：&\rmfamily\ustc@tabularcell{\@author}\\
       \if@ustc@professional 专业领域：\else 学科专业：\fi
                 &\rmfamily\ustc@tabularcell{\ustc@major}\\
       导师姓名：&\rmfamily\ustc@tabularcell{\ustc@supervisor}\\
       完成时间：&\rmfamily\ustc@tabularcell{\@date}\\
-    \end{tabular}%
-  \end{center}%
+    \end{tabular}\par
+  \endgroup
 }
 \newcommand\ustc@make@entitle{%
-  \cleardoublepage
-  \begin{center}%
+  \begingroup
+    \cleardoublepage
     \vspace*{-\topskip}\vspace*{4.6mm}%
-    \normalfont\nointerlineskip
+    \centering\nointerlineskip
     \parbox[t][10mm][t]{\textwidth}
       {\raggedleft\fontsize{14bp}{21bp}\selectfont
-      \ustc@ensecrettext}%
-    \par\nointerlineskip
+      \ustc@ensecrettext}\par
+    \nointerlineskip
     \parbox[t][10mm][t]{\textwidth}
       {\centering\sffamily\fontsize{20bp}{30bp}\selectfont
-      University of Science and Technology of China}%
-    \par\nointerlineskip
+      University of Science and Technology of China}\par
+    \nointerlineskip
     \parbox[t][13mm][t]{\textwidth}
       {\centering\sffamily\fontsize{26bp}{39bp}\selectfont
-      \ustc@enthesisname}%
-    \par\nointerlineskip
+      \ustc@enthesisname}\par
+    \nointerlineskip
     \if@ustc@professional
       \parbox[t][25mm][t]{\textwidth}
         {\centering\fontsize{16bp}{24bp}\selectfont
-        (\ustc@enprofessionaltype)}%
-      \par\nointerlineskip
-      \includegraphics[height=42mm]{logo/ustc_logo_fig}%
-      \par\nointerlineskip
+        (\ustc@enprofessionaltype)}\par
+      \nointerlineskip
+      \includegraphics[height=42mm]{logo/ustc_logo_fig}\par
+      \nointerlineskip
       \parbox[t][75mm][c]{\textwidth}
         {\centering\fontsize{26bp}{39bp}\selectfont
-        \sffamily\bfseries\ustc@entitle}%
+        \sffamily\bfseries\ustc@entitle}\par
     \else
       \vspace{19mm}%
-      \includegraphics[height=42mm]{logo/ustc_logo_fig}%
-      \par\nointerlineskip
+      \includegraphics[height=42mm]{logo/ustc_logo_fig}\par
+      \nointerlineskip
       \parbox[t][81mm][c]{\textwidth}
         {\centering\fontsize{26bp}{39bp}\selectfont
-        \sffamily\bfseries\ustc@entitle}%
+        \sffamily\bfseries\ustc@entitle}\par
     \fi
-    \par\fontsize{16bp}{30bp}\selectfont\nointerlineskip
+    \nointerlineskip\fontsize{16bp}{30bp}\selectfont
     \begin{tabular}{@{}lc@{}}%
       Author:      &\ustc@tabularcell{\ustc@enauthor}\\
       Speciality:  &\ustc@tabularcell{\ustc@enmajor}\\
       Supervisors: &\ustc@tabularcell{\ustc@ensupervisor}\\
       Date:        &\ustc@tabularcell{\ustc@endate}\\
-    \end{tabular}%
-  \end{center}%
+    \end{tabular}\par
+  \endgroup
 }
 \newcommand\ustc@origindeclare{%
 本人声明所呈交的学位论文，是本人在导师指导下进行研究工作所取得的成果。%
@@ -270,48 +270,49 @@
 保密的学位论文在解密后也遵守此规定。%
 }
 \newcommand\ustc@make@declare{%
+  \cleardoublepage
+  \vspace*{7mm}%
   \begingroup
-    \cleardoublepage
-    \vspace*{7mm}\normalfont\normalsize\parindent2em\relax
-    \begingroup
-      \centering\sffamily\fontsize{16bp}{24bp}\selectfont
-      中国科学技术大学学位论文原创性声明\par
-    \endgroup
-    \par\vspace{7mm}\ustc@origindeclare
-    \par\vspace{7mm}%
-    作者签名：\underline{\hspace{8em}}\hfill
-    签字日期：\underline{\hspace{8em}}\hspace*{2em}%
-    \par\vspace{28mm}%
-    \begingroup
-      \centering\sffamily\fontsize{16bp}{24bp}\selectfont
-      中国科学技术大学学位论文授权使用声明\par
-    \endgroup
-    \par\vspace{7mm}\ustc@authorization
-    \par\vspace{7mm}%
-    \setlength{\fboxsep}{0.05em}%
-    \fbox{\rule[0.683em]{0.683em}{0em}} 公开\qquad
-    \fbox{\rule[0.683em]{0.683em}{0em}} 保密%
-    （\underline{\qquad}年）%
-    \par\vspace{7mm}%
-    作者签名：\underline{\hspace{8em}}\hfill
-    导师签名：\underline{\hspace{8em}}\hspace*{2em}%
-    \par\vspace{7mm}%
-    签字日期：\underline{\hspace{8em}}\hfill
-    签字日期：\underline{\hspace{8em}}\hspace*{2em}\par
+    \centering\sffamily\fontsize{16bp}{24bp}\selectfont
+    中国科学技术大学学位论文原创性声明\par
   \endgroup
+  \vspace{7mm}%
+  \ustc@origindeclare\par
+  \vspace{7mm}%
+  作者签名：\underline{\hspace{8em}}\hfill
+  签字日期：\underline{\hspace{8em}}\hspace*{2em}\par
+  \vspace{28mm}%
+  \begingroup
+    \centering\sffamily\fontsize{16bp}{24bp}\selectfont
+    中国科学技术大学学位论文授权使用声明\par
+  \endgroup
+  \vspace{7mm}%
+  \ustc@authorization\par
+  \vspace{7mm}%
+  \setlength{\fboxsep}{0.05em}%
+  \fbox{\rule[0.683em]{0.683em}{0em}} 公开\qquad
+  \fbox{\rule[0.683em]{0.683em}{0em}} 保密%
+  （\underline{\qquad}年）\par
+  \vspace{7mm}%
+  作者签名：\underline{\hspace{8em}}\hfill
+  导师签名：\underline{\hspace{8em}}\hspace*{2em}\par
+  \vspace{7mm}%
+  签字日期：\underline{\hspace{8em}}\hfill
+  签字日期：\underline{\hspace{8em}}\hspace*{2em}\par
 }
 \renewcommand\maketitle{%
-  \cleardoublepage
-  \pagenumbering{Alph}%
-  \pagestyle{empty}%
-  \pdfbookmark[-1]{\@title}{title}%
-  \ustc@make@title
-  \ustc@make@entitle
-  \if@ustc@bachelor\else
-    \ustc@make@declare
-  \fi
-  \cleardoublepage
-  \pagestyle{main}%
+  \begin{titlepage}%
+    \pagenumbering{Alph}%
+    \pagestyle{empty}%
+    \normalfont\normalsize\parindent2em\relax
+    \pdfbookmark[-1]{\@title}{title}%
+    \ustc@make@title
+    \ustc@make@entitle
+    \if@ustc@bachelor\else
+      \ustc@make@declare
+    \fi
+    \cleardoublepage
+  \end{titlepage}%
 }%
 \let\ustc@save@tableofcontents\tableofcontents
 \let\ustc@save@listoffigures\listoffigures
@@ -373,49 +374,49 @@
 \RequirePackage{titletoc}
 \if@ustc@bachelor
   \titlecontents{chapter}[0em]
-    {\fontsize{12bp}{22bp}\selectfont}
+    {\normalfont\fontsize{12bp}{22bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
   \titlecontents{section}[1em]
-    {\fontsize{12bp}{22bp}\selectfont}
+    {\normalfont\fontsize{12bp}{22bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
   \titlecontents{subsection}[2em]
-    {\fontsize{12bp}{22bp}\selectfont}
+    {\normalfont\fontsize{12bp}{22bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
 \else
   \titlecontents{chapter}[0em]
-    {\addvspace{6bp}\fontsize{14bp}{21bp}\selectfont}
+    {\addvspace{6bp}\normalfont\fontsize{14bp}{21bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\fontsize{12bp}{21bp}\selectfont
       \titlerule*[12bp]{$\cdot$}\contentspage}
   \titlecontents{section}[1em]
-    {\addvspace{6bp}\fontsize{12bp}{20bp}\selectfont}
+    {\addvspace{6bp}\normalfont\fontsize{12bp}{20bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
   \titlecontents{subsection}[2em]
-    {\addvspace{6bp}\fontsize{10.5bp}{16bp}\selectfont}
+    {\addvspace{6bp}\normalfont\fontsize{10.5bp}{16bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\fontsize{12bp}{16bp}\selectfont
       \titlerule*[12bp]{$\cdot$}\contentspage}
 \fi
 \if@ustc@bachelor
   \titlecontents{figure}[1em]
-    {\fontsize{12bp}{22bp}\selectfont}
+    {\normalfont\fontsize{12bp}{22bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
   \titlecontents{table}[1em]
-    {\fontsize{12bp}{22bp}\selectfont}
+    {\normalfont\fontsize{12bp}{22bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
 \else
   \titlecontents{figure}[1em]
-    {\addvspace{6bp}\fontsize{12bp}{20bp}\selectfont}
+    {\addvspace{6bp}\normalfont\fontsize{12bp}{20bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
   \titlecontents{table}[1em]
-    {\addvspace{6bp}\fontsize{12bp}{20bp}\selectfont}
+    {\addvspace{6bp}\normalfont\fontsize{12bp}{20bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
 \fi

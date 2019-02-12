@@ -100,7 +100,7 @@ LaTeX version 2005/12/01 or later.
 %<class>\NeedsTeXFormat{LaTeX2e}
 %<class>\ProvidesClass{ustcthesis}
 %<*class>
-  [2019/02/11 v1.1 USTC thesis template]
+  [2019/02/12 v1.1 USTC thesis template]
 %</class>
 %
 %<*driver>
@@ -1500,8 +1500,8 @@ LaTeX version 2005/12/01 or later.
 \renewcommand\cleardoublepage{%
   \clearpage
   \begingroup
-  \pagestyle{empty}%
-  \ustc@save@cleardoublepage
+    \pagestyle{empty}%
+    \ustc@save@cleardoublepage
   \endgroup
 }
 %    \end{macrocode}
@@ -1695,47 +1695,47 @@ LaTeX version 2005/12/01 or later.
 %    \begin{macrocode}
 \RequirePackage{graphicx}
 \newcommand\ustc@make@title{%
-  \cleardoublepage
-  \begin{center}%
+  \begingroup
+    \cleardoublepage
     \vspace*{-\topskip}\vspace*{4.6mm}%
-    \normalfont\nointerlineskip
+    \centering\nointerlineskip
     \parbox[t][10mm][t]{\textwidth}
       {\raggedleft\fontsize{14bp}{21bp}\selectfont
-      \fangsong\ustc@secrettext}%
-    \par\sffamily\nointerlineskip
-    \includegraphics[height=36bp]{logo/ustc_logo_text}%
-    \par\vspace{-36bp}\vspace{23mm}\nointerlineskip
+      \fangsong\ustc@secrettext}\par
+    \sffamily\nointerlineskip
+    \includegraphics[height=36bp]{logo/ustc_logo_text}\par
+    \vspace{-36bp}\vspace{23mm}\nointerlineskip
     \parbox[t][27mm][t]{\textwidth}
       {\centering\fontsize{56bp}{84bp}\selectfont
-      \makebox[\textwidth][c]{\ustc@thesisname}}%
-    \par\nointerlineskip
+      \makebox[\textwidth][c]{\ustc@thesisname}}\par
+    \nointerlineskip
     \if@ustc@professional
       \parbox[t][18mm][t]{\textwidth}
         {\centering\lishu\fontsize{26bp}{39bp}\selectfont
-        （\ustc@professionaltype）}%
-      \par\nointerlineskip
-      \includegraphics[height=42mm]{logo/ustc_logo_fig}%
-      \par\nointerlineskip
+        （\ustc@professionaltype）}\par
+      \nointerlineskip
+      \includegraphics[height=42mm]{logo/ustc_logo_fig}\par
+      \nointerlineskip
       \parbox[t][55mm][c]{\textwidth}
         {\centering\fontsize{26bp}{39bp}\selectfont
-        \bfseries\@title}%
+        \bfseries\@title}\par
     \else
       \vspace{12mm}%
-      \includegraphics[height=42mm]{logo/ustc_logo_fig}%
-      \par\nointerlineskip
+      \includegraphics[height=42mm]{logo/ustc_logo_fig}\par
+      \nointerlineskip
       \parbox[t][61mm][c]{\textwidth}
         {\centering\fontsize{26bp}{39bp}\selectfont
-        \bfseries\@title}%
+        \bfseries\@title}\par
     \fi
-    \par\fontsize{16bp}{30bp}\selectfont\nointerlineskip
+    \nointerlineskip\fontsize{16bp}{30bp}\selectfont
     \begin{tabular}{@{}lc@{}}%
       作者姓名：&\rmfamily\ustc@tabularcell{\@author}\\
       \if@ustc@professional 专业领域：\else 学科专业：\fi
                 &\rmfamily\ustc@tabularcell{\ustc@major}\\
       导师姓名：&\rmfamily\ustc@tabularcell{\ustc@supervisor}\\
       完成时间：&\rmfamily\ustc@tabularcell{\@date}\\
-    \end{tabular}%
-  \end{center}%
+    \end{tabular}\par
+  \endgroup
 }
 %    \end{macrocode}
 %
@@ -1783,48 +1783,48 @@ LaTeX version 2005/12/01 or later.
 %
 %    \begin{macrocode}
 \newcommand\ustc@make@entitle{%
-  \cleardoublepage
-  \begin{center}%
+  \begingroup
+    \cleardoublepage
     \vspace*{-\topskip}\vspace*{4.6mm}%
-    \normalfont\nointerlineskip
+    \centering\nointerlineskip
     \parbox[t][10mm][t]{\textwidth}
       {\raggedleft\fontsize{14bp}{21bp}\selectfont
-      \ustc@ensecrettext}%
-    \par\nointerlineskip
+      \ustc@ensecrettext}\par
+    \nointerlineskip
     \parbox[t][10mm][t]{\textwidth}
       {\centering\sffamily\fontsize{20bp}{30bp}\selectfont
-      University of Science and Technology of China}%
-    \par\nointerlineskip
+      University of Science and Technology of China}\par
+    \nointerlineskip
     \parbox[t][13mm][t]{\textwidth}
       {\centering\sffamily\fontsize{26bp}{39bp}\selectfont
-      \ustc@enthesisname}%
-    \par\nointerlineskip
+      \ustc@enthesisname}\par
+    \nointerlineskip
     \if@ustc@professional
       \parbox[t][25mm][t]{\textwidth}
         {\centering\fontsize{16bp}{24bp}\selectfont
-        (\ustc@enprofessionaltype)}%
-      \par\nointerlineskip
-      \includegraphics[height=42mm]{logo/ustc_logo_fig}%
-      \par\nointerlineskip
+        (\ustc@enprofessionaltype)}\par
+      \nointerlineskip
+      \includegraphics[height=42mm]{logo/ustc_logo_fig}\par
+      \nointerlineskip
       \parbox[t][75mm][c]{\textwidth}
         {\centering\fontsize{26bp}{39bp}\selectfont
-        \sffamily\bfseries\ustc@entitle}%
+        \sffamily\bfseries\ustc@entitle}\par
     \else
       \vspace{19mm}%
-      \includegraphics[height=42mm]{logo/ustc_logo_fig}%
-      \par\nointerlineskip
+      \includegraphics[height=42mm]{logo/ustc_logo_fig}\par
+      \nointerlineskip
       \parbox[t][81mm][c]{\textwidth}
         {\centering\fontsize{26bp}{39bp}\selectfont
-        \sffamily\bfseries\ustc@entitle}%
+        \sffamily\bfseries\ustc@entitle}\par
     \fi
-    \par\fontsize{16bp}{30bp}\selectfont\nointerlineskip
+    \nointerlineskip\fontsize{16bp}{30bp}\selectfont
     \begin{tabular}{@{}lc@{}}%
       Author:      &\ustc@tabularcell{\ustc@enauthor}\\
       Speciality:  &\ustc@tabularcell{\ustc@enmajor}\\
       Supervisors: &\ustc@tabularcell{\ustc@ensupervisor}\\
       Date:        &\ustc@tabularcell{\ustc@endate}\\
-    \end{tabular}%
-  \end{center}%
+    \end{tabular}\par
+  \endgroup
 }
 %    \end{macrocode}
 %
@@ -1877,35 +1877,35 @@ LaTeX version 2005/12/01 or later.
 %
 %    \begin{macrocode}
 \newcommand\ustc@make@declare{%
+  \cleardoublepage
+  \vspace*{7mm}%
   \begingroup
-    \cleardoublepage
-    \vspace*{7mm}\normalfont\normalsize\parindent2em\relax
-    \begingroup
-      \centering\sffamily\fontsize{16bp}{24bp}\selectfont
-      中国科学技术大学学位论文原创性声明\par
-    \endgroup
-    \par\vspace{7mm}\ustc@origindeclare
-    \par\vspace{7mm}%
-    作者签名：\underline{\hspace{8em}}\hfill
-    签字日期：\underline{\hspace{8em}}\hspace*{2em}%
-    \par\vspace{28mm}%
-    \begingroup
-      \centering\sffamily\fontsize{16bp}{24bp}\selectfont
-      中国科学技术大学学位论文授权使用声明\par
-    \endgroup
-    \par\vspace{7mm}\ustc@authorization
-    \par\vspace{7mm}%
-    \setlength{\fboxsep}{0.05em}%
-    \fbox{\rule[0.683em]{0.683em}{0em}} 公开\qquad
-    \fbox{\rule[0.683em]{0.683em}{0em}} 保密%
-    （\underline{\qquad}年）%
-    \par\vspace{7mm}%
-    作者签名：\underline{\hspace{8em}}\hfill
-    导师签名：\underline{\hspace{8em}}\hspace*{2em}%
-    \par\vspace{7mm}%
-    签字日期：\underline{\hspace{8em}}\hfill
-    签字日期：\underline{\hspace{8em}}\hspace*{2em}\par
+    \centering\sffamily\fontsize{16bp}{24bp}\selectfont
+    中国科学技术大学学位论文原创性声明\par
   \endgroup
+  \vspace{7mm}%
+  \ustc@origindeclare\par
+  \vspace{7mm}%
+  作者签名：\underline{\hspace{8em}}\hfill
+  签字日期：\underline{\hspace{8em}}\hspace*{2em}\par
+  \vspace{28mm}%
+  \begingroup
+    \centering\sffamily\fontsize{16bp}{24bp}\selectfont
+    中国科学技术大学学位论文授权使用声明\par
+  \endgroup
+  \vspace{7mm}%
+  \ustc@authorization\par
+  \vspace{7mm}%
+  \setlength{\fboxsep}{0.05em}%
+  \fbox{\rule[0.683em]{0.683em}{0em}} 公开\qquad
+  \fbox{\rule[0.683em]{0.683em}{0em}} 保密%
+  （\underline{\qquad}年）\par
+  \vspace{7mm}%
+  作者签名：\underline{\hspace{8em}}\hfill
+  导师签名：\underline{\hspace{8em}}\hspace*{2em}\par
+  \vspace{7mm}%
+  签字日期：\underline{\hspace{8em}}\hfill
+  签字日期：\underline{\hspace{8em}}\hspace*{2em}\par
 }
 %    \end{macrocode}
 %
@@ -1935,6 +1935,12 @@ LaTeX version 2005/12/01 or later.
 % 注意到研究生院给出的研究生学位论文的 Word 模板与规范的要求不完全一致.
 % 这里参考了 Word 模板中的设置.
 %
+% 扉页放入 |titlepage| 环境.
+% 该环境自动运行 |\cleardoublepage| 和 |\pagenumbering| 命令,
+% 不受文档选项 |twocolumn| 的影响.
+%
+% \changes{v1.1}{2019/02/12}{扉页放入 \texttt{titlepage} 环境}
+%
 % 扉页以及原创性和授权声明页面的页码格式改为 |Alph| 的样式,
 % 用以和后面的正文的页码区分.
 % 由于 |hyperref| 宏包的作用, 这里的页码虽然不会打印在 PDF 页面上,
@@ -1949,17 +1955,18 @@ LaTeX version 2005/12/01 or later.
 %
 %    \begin{macrocode}
 \renewcommand\maketitle{%
-  \cleardoublepage
-  \pagenumbering{Alph}%
-  \pagestyle{empty}%
-  \pdfbookmark[-1]{\@title}{title}%
-  \ustc@make@title
-  \ustc@make@entitle
-  \if@ustc@bachelor\else
-    \ustc@make@declare
-  \fi
-  \cleardoublepage
-  \pagestyle{main}%
+  \begin{titlepage}%
+    \pagenumbering{Alph}%
+    \pagestyle{empty}%
+    \normalfont\normalsize\parindent2em\relax
+    \pdfbookmark[-1]{\@title}{title}%
+    \ustc@make@title
+    \ustc@make@entitle
+    \if@ustc@bachelor\else
+      \ustc@make@declare
+    \fi
+    \cleardoublepage
+  \end{titlepage}%
 }%
 %    \end{macrocode}
 %
@@ -2063,36 +2070,40 @@ LaTeX version 2005/12/01 or later.
 %
 % 通过宏包 |titletoc| 来设置目录格式.
 %
-% \changes{v1.0.1}{2017/04/16}{一级标题目录添加字体尺寸命令}
-% \changes{v1.0.3}{2017/04/26}{修改本科论文目录字体设置}
+% \changes{v1.0.1}{2017/04/16}
+%   {一级标题目录添加字体尺寸命令}
+% \changes{v1.0.3}{2017/04/26}
+%   {修改本科论文目录字体设置}
+% \changes{v1.1}{2019/02/12}
+%   {目录项添加 \texttt{\textbackslash normalfont}命令}
 %
 %    \begin{macrocode}
 \RequirePackage{titletoc}
 \if@ustc@bachelor
   \titlecontents{chapter}[0em]
-    {\fontsize{12bp}{22bp}\selectfont}
+    {\normalfont\fontsize{12bp}{22bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
   \titlecontents{section}[1em]
-    {\fontsize{12bp}{22bp}\selectfont}
+    {\normalfont\fontsize{12bp}{22bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
   \titlecontents{subsection}[2em]
-    {\fontsize{12bp}{22bp}\selectfont}
+    {\normalfont\fontsize{12bp}{22bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
 \else
   \titlecontents{chapter}[0em]
-    {\addvspace{6bp}\fontsize{14bp}{21bp}\selectfont}
+    {\addvspace{6bp}\normalfont\fontsize{14bp}{21bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\fontsize{12bp}{21bp}\selectfont
       \titlerule*[12bp]{$\cdot$}\contentspage}
   \titlecontents{section}[1em]
-    {\addvspace{6bp}\fontsize{12bp}{20bp}\selectfont}
+    {\addvspace{6bp}\normalfont\fontsize{12bp}{20bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
   \titlecontents{subsection}[2em]
-    {\addvspace{6bp}\fontsize{10.5bp}{16bp}\selectfont}
+    {\addvspace{6bp}\normalfont\fontsize{10.5bp}{16bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\fontsize{12bp}{16bp}\selectfont
       \titlerule*[12bp]{$\cdot$}\contentspage}
@@ -2108,20 +2119,20 @@ LaTeX version 2005/12/01 or later.
 %    \begin{macrocode}
 \if@ustc@bachelor
   \titlecontents{figure}[1em]
-    {\fontsize{12bp}{22bp}\selectfont}
+    {\normalfont\fontsize{12bp}{22bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
   \titlecontents{table}[1em]
-    {\fontsize{12bp}{22bp}\selectfont}
+    {\normalfont\fontsize{12bp}{22bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
 \else
   \titlecontents{figure}[1em]
-    {\addvspace{6bp}\fontsize{12bp}{20bp}\selectfont}
+    {\addvspace{6bp}\normalfont\fontsize{12bp}{20bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
   \titlecontents{table}[1em]
-    {\addvspace{6bp}\fontsize{12bp}{20bp}\selectfont}
+    {\addvspace{6bp}\normalfont\fontsize{12bp}{20bp}\selectfont}
     {\thecontentslabel\hspace{0.5em}}{}
     {\titlerule*[12bp]{$\cdot$}\contentspage}
 \fi
