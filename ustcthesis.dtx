@@ -100,7 +100,7 @@ LaTeX version 2005/12/01 or later.
 %<class>\NeedsTeXFormat{LaTeX2e}
 %<class>\ProvidesClass{ustcthesis}
 %<*class>
-  [2019/02/12 v1.1 USTC thesis template]
+  [2019/02/12 v1.1.1 USTC thesis template]
 %</class>
 %
 %<*driver>
@@ -170,14 +170,17 @@ LaTeX version 2005/12/01 or later.
 % \DoNotIndex{\setlength,\setcounter,\setmainfont,\setsansfont}
 % \DoNotIndex{\fontsize,\selectfont,\normalsize}
 % \DoNotIndex{\normalfont,\bfseries,\itshape,\sffamily,\rmfamily}
-% \DoNotIndex{\textbf,\textrm,\fangsong,\thepage,\arabic}
+% \DoNotIndex{\mdseries,\space,\ttfamily,\textnormal}
+% \DoNotIndex{\textbf,\textrm,\fangsong,\lishu,\ccwd,}
+% \DoNotIndex{\thepage,\arabic,\Roman,\Alph,\pagestyle,\pagenumbering}
 % \DoNotIndex{\centering,\raggedleft,\raggedright}
 % \DoNotIndex{\if,\ifx,\ifdim,\ifnum,\ifcase,\else,\or,\fi,\relax,\@empty}
-% \DoNotIndex{\let,\def,\newcommand,\renewcommand,\providecommand}
+% \DoNotIndex{\let,\def,\edef,\newcommand,\renewcommand,\providecommand}
 % \DoNotIndex{\newenvironment,\renewenvironment,\newif,\expandafter}
 % \DoNotIndex{\begin,\end,\begingroup,\endgroup,\csname,\endcsname}
 % \DoNotIndex{\usepackage,\RequirePackage,\LoadClass,\DeclareOperation}
-% \DoNotIndex{\AtBeginDocument,\AtEndDocument}
+% \DoNotIndex{\ProcessOptions,\PassOptionsToClass,\PassOptionsToPackage}
+% \DoNotIndex{\CurrentOption,\AtBeginDocument,\AtEndDocument}
 %
 % \title{文档类 \textsf{ustcthesis} 使用说明}
 % \author{jiaopjie\thanks{jiaopjie@mail.ustc.edu.cn}}
@@ -1158,17 +1161,8 @@ LaTeX version 2005/12/01 or later.
 %
 % 在选项 |oneside|下, 命令 |\cleardoublepage| 和 |\clearpage| 效果相同.
 %
-% \begin{macro}{doctor}
-% \begin{macro}{master}
-% \begin{macro}{bachelor}
-% \begin{macro}{chinese}
-% \begin{macro}{english}
-%
 % \changes{v1.0.2}{2017/04/23}
 %   {新增 \texttt{chinese} 与 \texttt{english} 文档选项以支持英文}
-%
-% \begin{macro}{academic}
-% \begin{macro}{professional}
 %
 % 模板设置了以下三组选项. 每组选项中的第一个为默认选项.
 % 这些选项不会被传递给 |book| 文档类.
@@ -1209,17 +1203,6 @@ LaTeX version 2005/12/01 or later.
 \DeclareOption{professional}{\@ustc@professionaltrue}
 %    \end{macrocode}
 %
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-%
-% \begin{macro}{openany}
-% \begin{macro}{openright}
-%
 % 设置 |openany| 和 |openright| 选项.
 %
 % 研究生论文要求默认激活 |openany| 选项.
@@ -1232,9 +1215,6 @@ LaTeX version 2005/12/01 or later.
 \DeclareOption{openany}{\@ustc@openrightfalse}
 \DeclareOption{openright}{\@ustc@openrighttrue}
 %    \end{macrocode}
-%
-% \end{macro}
-% \end{macro}
 %
 % 默认激活 |doctor|, |chinese| 和 |academic| 选项.
 % 把其他文档选项传递给 |book| 文档类.
@@ -1939,7 +1919,7 @@ LaTeX version 2005/12/01 or later.
 % 该环境自动运行 |\cleardoublepage| 和 |\pagenumbering| 命令,
 % 不受文档选项 |twocolumn| 的影响.
 %
-% \changes{v1.1}{2019/02/12}{扉页放入 \texttt{titlepage} 环境}
+% \changes{v1.1.1}{2019/02/12}{扉页放入 \texttt{titlepage} 环境}
 %
 % 扉页以及原创性和授权声明页面的页码格式改为 |Alph| 的样式,
 % 用以和后面的正文的页码区分.
@@ -2074,7 +2054,7 @@ LaTeX version 2005/12/01 or later.
 %   {一级标题目录添加字体尺寸命令}
 % \changes{v1.0.3}{2017/04/26}
 %   {修改本科论文目录字体设置}
-% \changes{v1.1}{2019/02/12}
+% \changes{v1.1.1}{2019/02/12}
 %   {目录项添加 \texttt{\textbackslash normalfont}命令}
 %
 %    \begin{macrocode}
